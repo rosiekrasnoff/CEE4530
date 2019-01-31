@@ -7,7 +7,6 @@
 5. create an equation
 6. add the graph to your document as a figure.
 
-See [Selecting Subsets of Data in Pandas](https://medium.com/dunder-data/selecting-subsets-of-data-in-pandas-6fcd0170be9c) for a good background on working with a pandas dafaframe.
 
   ```python
   from aguaclara.core.units import unit_registry as u
@@ -82,14 +81,5 @@ Displaying image in Markdown:
 Figure 1: Plot of concentration standards and measured voltage
 
 
-Equation:
+Equation of line in :
 $$ y=-0.1029 \times x+3.12 \frac{mg^2}{L^2} $$
-
-# Assignment
-1) Find a set of data that includes units (or make one up!) that could reasonably be fit with linear regression.
-2) Save the data to a tab delimited file in your atom project workspace.
-3) Load the data from the file into a Pandas dataframe.
-4) Plot the data and the linear regression line.
-5) Make sure to handle units carefully and to attach units to the linear regression line.
-6) Add a figure in Markdown showing the graph you produced.
-7) Show the linear regression equation that you obtained using latex.

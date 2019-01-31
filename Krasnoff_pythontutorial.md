@@ -1,22 +1,24 @@
 ## Objectives
 
 1. illustrate how to load data from a file
-1. learn about dataframes
-1. perform a linear regression
-1. create a well formatted graph
-1. create an equation
-1. add the graph to your document as a figure.
+2. learn about dataframes
+3. perform a linear regression
+4. create a well formatted graph
+5. create an equation
+6. add the graph to your document as a figure.
 
 See [Selecting Subsets of Data in Pandas](https://medium.com/dunder-data/selecting-subsets-of-data-in-pandas-6fcd0170be9c) for a good background on working with a pandas dafaframe.
 
-```python
+  ```python
   from aguaclara.core.units import unit_registry as u
   import numpy as np
   import matplotlib.pyplot as plt
   import pandas as pd
   from scipy import stats
   #The data file path is the raw data url on github. Happily python can read directly from a web page.
-  data_file_path = "https://raw.githubusercontent.com/monroews/CEE4530/master/linear_regression.tsv"
+  data_file_path = "https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/dataset_tutorial.tsv"
+
+  #data_file_path = 'dataset_tutorial.tsv'
 
   #Now we create a pandas dataframe with the data in the file
   df = pd.read_csv(data_file_path,delimiter='\t')
@@ -65,11 +67,11 @@ See [Selecting Subsets of Data in Pandas](https://medium.com/dunder-data/selecti
   ax.grid(True)
   # Here I save the file to my local harddrive. You will need to change this to work on your computer.
   # We don't need the file type (png) here.
-  plt.savefig('C:/Users/mw24/github/CEE4530/images/linear')
+  plt.savefig('/Users/Rosie/github/CEE4530/tutorialplot')
   plt.show()
 
 
-```
+  ```
 
 
 Now we will display our figure in Markdown. To have the figure show up for anyone who opens this markdown file we will push the figure to github and then link to it there. To find the link in github, go to the code tab and then browse to the image.
@@ -86,9 +88,9 @@ $$A=\log \left(\frac{P_{o} }{P} \right)$$
 # Assignment
 
 1) Find a set of data that includes units (or make one up!) that could reasonably be fit with linear regression.
-1) Save the data to a tab delimited file in your atom project workspace.
-1) Load the data from the file into a Pandas dataframe.
-1) Plot the data and the linear regression line.
-1) Make sure to handle units carefully and to attach units to the linear regression line.
-1) Add a figure in Markdown showing the graph you produced.
-1) Show the linear regression equation that you obtained using latex.
+2) Save the data to a tab delimited file in your atom project workspace.
+3) Load the data from the file into a Pandas dataframe.
+4) Plot the data and the linear regression line.
+5) Make sure to handle units carefully and to attach units to the linear regression line.
+6) Add a figure in Markdown showing the graph you produced.
+7) Show the linear regression equation that you obtained using latex.

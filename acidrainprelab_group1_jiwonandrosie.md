@@ -24,5 +24,4 @@ V = 4*u.L # volume of lake
 g = ANC_0*84*V*u.g # grams of NaHCO3
 print (g)
 
-
 ```

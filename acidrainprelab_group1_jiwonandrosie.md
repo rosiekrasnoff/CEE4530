@@ -12,7 +12,7 @@ pH=3
 ANC=10**(-pH)*u.eq/u.L
 ANC_out=50*10**-6 # eq/L
 
-hrt=3 #hydraulic residence time = t/θ
+hrt=3 # hydraulic residence time = t/θ
 
 
 # rearrange equation ANC_out=ANC_in⋅(1−e−t/θ)+ANC_0⋅e−t/θ
@@ -23,5 +23,6 @@ print (ANC_0)
 V = 4*u.L # volume of lake
 g = ANC_0*84*V*u.g # grams of NaHCO3
 print (g)
+
 
 ```

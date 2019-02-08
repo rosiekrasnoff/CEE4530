@@ -6,6 +6,7 @@
 **(see code below)
 We removed the data from the very high and low concentrations because they were at the limit of the instrument, meaning that the data was not linear.**
 ![absorbanceplot](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab1_plot.png?raw=true)
+
 Figure 1: Plot showing absorbance vs concentration of red dye #40 for standards. Data shows the expected linear relationship.
 3. What is the value of the extinction coefficient, ε?
 **ε = 0.002316 m^2/mg. The values of ε change for each different concentration and absorbance, so we used the slope from the equation to solve for epsilon. (see details in code comments)**

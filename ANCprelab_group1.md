@@ -21,27 +21,20 @@ ANC_WP_0 = 70*10**-6 *u.eq/u.L # initial ANC of Wolf pond
 ANC_CL = (ANC_rain*(.2) + ANC_CL_0*(.8))/1
 ANC_WP = (ANC_rain*(.2) + ANC_WP_0*(.8))/1
 
-# Calculate pH of Cayuga Lake
 def ANC_zeroed(pHguess, ANC):
   return ((epa.ANC_open(pHguess) - ANC).to(u.mol/u.L)).magnitude
 
 def pH_open(ANC):
   return optimize.brentq(ANC_zeroed, 0, 14,args=(ANC))
 
+# Calculate pH of Cayuga Lake
 print('The pH of Cayuga Lake after the rain is',pH_open(ANC_CL))
 
 #Calculate pH of Wolf Pond
-def ANC_zeroed(pHguess, ANC):
-  return ((epa.ANC_open(pHguess) - ANC).to(u.mol/u.L)).magnitude
-
-def pH_open(ANC):
-  return optimize.brentq(ANC_zeroed, 0, 14,args=(ANC))
-
 print('The pH of Wolf Pond after the rain is' ,pH_open(ANC_WP))
 
 ```
 **Solution: The pH of Cayuga Lake after the rain is 8.441 and the pH of Wolf Pond after the rain is 5.108.**
-
 
 
 2. What is the ANC of a water sample containing only carbonates and a strong acid that is at pH 3.2? This requires that you inspect all of the species in the ANC equation (Equation (33)) and determine which species are important.

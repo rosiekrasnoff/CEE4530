@@ -20,6 +20,8 @@ ANC_WP_0 = 70*10**-6 *u.eq/u.L # initial ANC of Wolf pond
 # Calculate ANC after rain event for each pond
 ANC_CL = (ANC_rain*(.2) + ANC_CL_0*(.8))/1
 ANC_WP = (ANC_rain*(.2) + ANC_WP_0*(.8))/1
+print(ANC_CL)
+print(ANC_WP)
 
 def ANC_zeroed(pHguess, ANC):
   return ((epa.ANC_open(pHguess) - ANC).to(u.mol/u.L)).magnitude

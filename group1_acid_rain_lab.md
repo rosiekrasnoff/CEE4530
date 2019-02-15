@@ -21,21 +21,24 @@ start=1
 #The pH data is in column 1
 column=1
 #help(epa.column_of_data)
-lakepH=epa.column_of_data(data_file_path,1, -1)
-v = 4*u.L #  volume of lake
-q = .267*u.L/u.min # flow of acid into lake
+lakepH=epa.column_of_data(data_file_path, start, 1, -1, units='dimensionless')
+v = 3.938*u.L #  volume of lake
+q = 5.15*.001*u.L/u.min # flow of acid into lake
 #extract the corresponding time data and convert to seconds
-time = epa.column_of_time(data_file_path,start).to(u.min)
+time = epa.column_of_time(data_file_path,start,-1).to(u.min)
 residencetime = v/q # hydraulic residence time t/θ
+time
 hrt = time/residencetime
+hrt
 #Now plot the graph
 fig, ax = plt.subplots()
-ax.plot(residencetime,lakepH,'r')
+ax.plot(hrt,lakepH,'r')
+lakepH
 plt.xlabel('time (min)')
 plt.ylabel('pH')
 #plt.yscale('log')
 
-plt.savefig('Examples/images/pHgraph')
+#plt.savefig('Examples/images/pHgraph')
 plt.show()
 
 ```

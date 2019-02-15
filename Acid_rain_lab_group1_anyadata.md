@@ -106,10 +106,10 @@ plt.show()
 # plotting all the ANCs together
 ANC_graph=np.linspace(0,1.6,40)
 fig, ax = plt.subplots()
-ax.plot(hrt, ANC_expected, 'r', hrt, ANC_closed, 'g', hrt, ANC_effluent, 'b')
+ax.plot(hrt, ANC_expected.to(u.meq/u.L), 'r', hrt, ANC_closed.to(u.meq/u.L), 'g', hrt, ANC_effluent.to(u.meq/u.L), 'b')
 plt.title('Comparing ANC calculations')
 plt.xlabel('hydraulic residence time (min)')
-plt.ylabel('ANC (eq/L)')
+plt.ylabel('ANC (meq/L)')
 plt.legend(['ANC conservative', 'ANC closed', 'ANC open'])
 plt.savefig('/Users/Rosie/github/CEE4530/lab2_pHgraph_anyaALL3.png')
 plt.show()
@@ -161,10 +161,10 @@ ANC_effluent2 = epa.ANC_open(lakepH2)
 # plotting all the ANCs together
 ANC_graph=np.linspace(0,1.6,40)
 fig, ax = plt.subplots()
-ax.plot(hrt, ANC_expected2, 'r', hrt, ANC_closed2, 'g', hrt, ANC_effluent2, 'b')
+ax.plot(hrt, ANC_expected2.to(u.meq/u.L), 'r', hrt, ANC_closed2.to(u.meq/u.L), 'g', hrt, ANC_effluent2.to(u.meq/u.L), 'b')
 plt.title('Comparing ANC calculations')
 plt.xlabel('hydraulic residence time (min)')
-plt.ylabel('ANC (eq/L)')
+plt.ylabel('ANC (meq/L)')
 plt.legend(['ANC conservative', 'ANC closed', 'ANC open'])
 plt.savefig('/Users/Rosie/github/CEE4530/lab2_pHgraph_2ndrun_comp.png')
 plt.show()
@@ -173,7 +173,8 @@ plt.show()
 ```
 # Questions
 1. What do you think would happen if enough NaHCO3 were added to the lake to maintain an ANC greater than 50μeq/L for 3 residence times with the stirrer turned off?
-**If an ANC greater than 50μeq/L were maintained, the solution will stay blue longer because it contains more bases that will react with the acid. And because the solution won't be stirred, we will need to add more NaHCO3. According to our prelab calculations, 6.75 grams of NaHCO3 would need to be added.**
+**If an ANC greater than 50μeq/L were maintained, the solution will stay blue longer because it contains more bases that will react with the acid. And because the solution won't be stirred, we will need to add more NaHCO3. According to our prelab calculations, 6.75 grams of NaHCO3 would need to be added.
+If the stirrer were turned off, it would cause the NAHCO3 to simply sink to the bottom of the lake since its density = 2.2g/cm3 is higher than that of the lake. As the added base reacts with the acidic solution, some of will dissolve**
 
 2. What are some of the complicating factors you might find in attempting to remediate a lake using CaCO3? Below is a list of issues to consider.
 a) extent of mixing

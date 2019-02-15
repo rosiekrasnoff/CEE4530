@@ -40,9 +40,9 @@ import pandas as pd
 
 #Number 1
 #push the data file to your github and then get the url of the raw file.
-data_file_path="https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab_2_Acid_Rain.xls"
+data_file_path="https://raw.githubusercontent.com/aks224/4530-aks224/master/Lab%202%20-%20Acid%20Rain.xls"
 # set the start index
-start=25
+start=419
 #The pH data is in column 1
 column=1
 #help(epa.column_of_data)
@@ -50,11 +50,7 @@ lakepH=epa.column_of_data(data_file_path, start, 1, -1)
 
 #extract the corresponding time data and convert to seconds
 time = epa.column_of_time(data_file_path,start,-1).to(u.min)
-v = 3.938*u.L #  volume of lake
-q = 5.15*u.mL/u.sec # flow of acid into lake
-q=q.to(u.L/u.min)
-residencetime = v/q
-residencetime
+residencetime=14.15*u.min
 # hydraulic residence time t/θ
 time
 hrt = time/residencetime
@@ -67,14 +63,14 @@ plt.xlabel('hydraulic residence time (min)')
 plt.ylabel('pH')
 plt.title('pH of lake')
 
-plt.savefig('/Users/Rosie/github/CEE4530/lab2_pHgraph_ourdata1.png')
+plt.savefig('/Users/Rosie/github/CEE4530/lab2_pHgraph_anya1.png')
 plt.show()
 
 #Number 2
 #ANC_expected=[ANC_out−ANC_in⋅(1−e^−t/θ)]e^t/θ
 #to find ANCo: they added .620 g of NaH2CO3
 
-ANC_0=(.628*u.g)/(84.01*u.g/u.mol)/(3.938*u.L)
+ANC_0=(.620*u.g)/(84.01*u.g/u.mol)/(4.246*u.L)
 ANC_expected=epa.ANC_open(3)*(1-(np.exp(-hrt)))+(ANC_0*(np.exp(-hrt)))
 
 #fig, ax = plt.subplots()
@@ -110,12 +106,12 @@ plt.show()
 # plotting all the ANCs together
 ANC_graph=np.linspace(0,1.6,40)
 fig, ax = plt.subplots()
-ax.plot(hrt, ANC_expected.to(u.meq/u.L), 'r', hrt, ANC_closed.to(u.meq/u.L), 'g', hrt, ANC_effluent.to(u.meq/u.L), 'b')
+ax.plot(hrt, ANC_expected, 'r', hrt, ANC_closed, 'g', hrt, ANC_effluent, 'b')
 plt.title('Comparing ANC calculations')
 plt.xlabel('hydraulic residence time (min)')
-plt.ylabel('ANC (meq/L)')
+plt.ylabel('ANC (eq/L)')
 plt.legend(['ANC conservative', 'ANC closed', 'ANC open'])
-plt.savefig('/Users/Rosie/github/CEE4530/lab2_pHgraph_ourdataALL3.png')
+plt.savefig('/Users/Rosie/github/CEE4530/lab2_pHgraph_anyaALL3.png')
 plt.show()
 
 
@@ -150,10 +146,9 @@ plt.show()
 
 #Number 5.2
 #ANC_expected=[ANC_out−ANC_in⋅(1−e^−t/θ)]e^t/θ
-#to find ANCo: added .317 g of NaH2CO3 the second time
+#to find ANCo: added .620 g of NaH2CO3
 ANC_02=(.317*u.g)/(84.01*u.g/u.mol)/(3.938*u.L)
-ANC_expected2=epa.ANC_open(3)*(1-(np.exp(-hrt)))+(ANC_02*(np.exp(-hrt)))
-
+ANC_expected2=epa.ANC_open(3)*(1-(np.exp(-hrt)))+(ANC_0*(np.exp(-hrt)))
 
 #Number 5.3
 carbs2=ANC_0
@@ -166,10 +161,10 @@ ANC_effluent2 = epa.ANC_open(lakepH2)
 # plotting all the ANCs together
 ANC_graph=np.linspace(0,1.6,40)
 fig, ax = plt.subplots()
-ax.plot(hrt, ANC_expected2.to(u.meq/u.L), 'r', hrt, ANC_closed2.to(u.meq/u.L), 'g', hrt, ANC_effluent2.to(u.meq/u.L), 'b')
+ax.plot(hrt, ANC_expected2, 'r', hrt, ANC_closed2, 'g', hrt, ANC_effluent2, 'b')
 plt.title('Comparing ANC calculations')
 plt.xlabel('hydraulic residence time (min)')
-plt.ylabel('ANC (meq/L)')
+plt.ylabel('ANC (eq/L)')
 plt.legend(['ANC conservative', 'ANC closed', 'ANC open'])
 plt.savefig('/Users/Rosie/github/CEE4530/lab2_pHgraph_2ndrun_comp.png')
 plt.show()
@@ -178,11 +173,12 @@ plt.show()
 ```
 # Questions
 1. What do you think would happen if enough NaHCO3 were added to the lake to maintain an ANC greater than 50μeq/L for 3 residence times with the stirrer turned off?
-**If the stirrer were turned off, it would cause the NAHCO3 to simply sink to the bottom of the lake since its density = 2.2g/cm3 is higher than that of the lake. As the added base reacts with the acidic solution, some of will dissolve and also sink to the bottom. Thus, the difference in densities on the top and bottom will cause the solution to acidify despite the increase of NAHCO3.**
+**If an ANC greater than 50μeq/L were maintained, the solution will stay blue longer because it contains more bases that will react with the acid. And because the solution won't be stirred, we will need to add more NaHCO3. According to our prelab calculations, 6.75 grams of NaHCO3 would need to be added.**
+
+
+density of NAHCO3 = 2.2g/cm3
 
 2. What are some of the complicating factors you might find in attempting to remediate a lake using CaCO3? Below is a list of issues to consider.
 a) extent of mixing
-**Lake isn't mixed so CaCO3 will just settle.**
 b) solubility of CaCO3 (find the solubility and compare with NaHCO3)
-**CaCO3 is not only more dense, but also  sink quicker and rate of dissoliving is slower than rate of sinking so will just sit on hte bottom**
 c) density of CaCO3 slurry (find the density of CaCO3)

@@ -172,19 +172,7 @@ plt.show()
 ```
 # Questions
 1. What do you think would happen if enough NaHCO3 were added to the lake to maintain an ANC greater than 50μeq/L for 3 residence times with the stirrer turned off?
-<<<<<<< HEAD:Acid_rain_lab_group1_anyadata.md
-**If an ANC greater than 50μeq/L were maintained, the solution will stay blue longer because it contains more bases that will react with the acid. And because the solution won't be stirred, we will need to add more NaHCO3. According to our prelab calculations, 6.75 grams of NaHCO3 would need to be added.**
-
-
-density of NAHCO3 = 2.2g/cm3
-
-2. What are some of the complicating factors you might find in attempting to remediate a lake using CaCO3? Below is a list of issues to consider.
-a) extent of mixing
-b) solubility of CaCO3 (find the solubility and compare with NaHCO3)
-c) density of CaCO3 slurry (find the density of CaCO3)
-=======
 **If the stirrer were turned off, it would cause the NaHCO3 to simply sink to the bottom of the lake since its density = 2.2g/cm3 is higher than that of the lake. Some of the NaHCO3 will dissolve as it sinks, but even dissolved into water, it makes a more dense solution so that solution will also sink to the bottom. So, there will be less ANC at the top of the lake, where the acid is then added. Thus, the solution will acidify at the top faster than we saw with the stirrer turned on because the ANC will not be evenly distributed and the top of the lake will be lacking.**
 
 2. What are some of the complicating factors you might find in attempting to remediate a lake using CaCO3?
 **The density of CaCO3 is 2.71 g/cm³, which is higher than that of NaHCO3 at 2.2g/cm³, so it sinks quicker. This will exacerbate the issues discussed in question 1 above, where there will be a gradient of ANC because of the higher density. This problem will be made worse if there is no mixing. The solubility of CaCO3 is also much lower than that of NaHCO3, so even if one calculated how much CaCO3 to add to get the same ANC as we got from NaHCO3, the particles would likely not all dissolve, and therefore the actual ANC of the solution would not be as high as expected.**
->>>>>>> ca24894fd1104752b67efc04918b1252e9df4c28:Acid_rain_lab2_group1.md

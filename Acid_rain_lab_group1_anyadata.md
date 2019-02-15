@@ -173,7 +173,7 @@ plt.show()
 ```
 # Questions
 1. What do you think would happen if enough NaHCO3 were added to the lake to maintain an ANC greater than 50μeq/L for 3 residence times with the stirrer turned off?
-**If an ANC greater than 50μeq/L were maintained, the solution will stay blue longer because it contains more bases that will react with the acid. And because the solution won't be stirred, we will need to add more NaHCO3. (According to our prelab calculations) 6.75 grams of NaHCO3 would need to be added.**
+**If an ANC greater than 50μeq/L were maintained, the solution will stay blue longer because it contains more bases that will react with the acid. And because the solution won't be stirred, we will need to add more NaHCO3. According to our prelab calculations, 6.75 grams of NaHCO3 would need to be added.**
 
 2. What are some of the complicating factors you might find in attempting to remediate a lake using CaCO3? Below is a list of issues to consider.
 a) extent of mixing

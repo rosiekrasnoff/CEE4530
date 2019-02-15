@@ -6,7 +6,7 @@ K1=10−6.3, K2=10−10.3, KH=10−1.5molLatm, PCO2=10−3.5atm, and Kw=10−14.
 
 1. Plot measured pH of the lake versus dimensionless hydraulic residence time (t/θ).
 
-![pHgraph](https://github.com/rosiekrasnoff/CEE4530/blob/master/lab2_pHgraph_anya.png?raw=true)
+![pHgraph](https://github.com/rosiekrasnoff/CEE4530/blob/master/lab2_pHgraph_ourdata1.png?raw=true)
 
 Figure 1: Plot of concentration pH of lake as acid rain was added over time.
 
@@ -14,7 +14,7 @@ Figure 1: Plot of concentration pH of lake as acid rain was added over time.
 3. If we assume that there are no carbonates exchanged with the atmosphere during the experiment, then we can calculate ANC in the lake effluent by using equation (14) describing the ANC of a closed system. Calculate the ANC under the assumption of a closed system and plot it on the same graph produced in answering question #3 with the plot labeled (in the legend) as closed ANC.
 4. If we assume that there is exchange with the atmosphere and that carbonates are at equilibrium with the atmosphere, then we can calculate ANC in the lake effluent by using equation (18) describing the ANC of an open system. Calculate the ANC under the assumption of an open system and plot it on the same graph produced in answering question #3 with the plot labeled (in the legend) as open ANC.
 
-![ANCgraphcomp](https://github.com/rosiekrasnoff/CEE4530/blob/master/lab2_pHgraph_anyaALL3.png?raw=true)
+![ANCgraphcomp](https://github.com/rosiekrasnoff/CEE4530/blob/master/lab2_pHgraph_ourdataALL3.png?raw=true)
 
 Figure 2: Plot of concentration calculated ANC over time from conservative, closed, and open calculations.
 
@@ -184,5 +184,5 @@ plt.show()
 a) extent of mixing
 **Lake isn't mixed so CaCO3 will just settle.**
 b) solubility of CaCO3 (find the solubility and compare with NaHCO3)
-**CaCO3 is not only more dense, but also  sink quicker and rate of dissoliving is slower than rate of sinking so will just sit on hte bottom**
+**CaCO3 is denser than NaHCO3, so it sinks quicker. Its rate of dissolving is slower than the rate of sinking so solid CaCO3 will just sit on the bottom of the lake.**
 c) density of CaCO3 slurry (find the density of CaCO3)

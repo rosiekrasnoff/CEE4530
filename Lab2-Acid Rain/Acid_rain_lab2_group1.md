@@ -14,7 +14,7 @@ Figure 1: Plot of concentration pH of lake as acid rain was added over time.
 3. If we assume that there are no carbonates exchanged with the atmosphere during the experiment, then we can calculate ANC in the lake effluent by using equation (14) describing the ANC of a closed system. Calculate the ANC under the assumption of a closed system and plot it on the same graph produced in answering question #3 with the plot labeled (in the legend) as closed ANC.
 4. If we assume that there is exchange with the atmosphere and that carbonates are at equilibrium with the atmosphere, then we can calculate ANC in the lake effluent by using equation (18) describing the ANC of an open system. Calculate the ANC under the assumption of an open system and plot it on the same graph produced in answering question #3 with the plot labeled (in the legend) as open ANC.
 
-![ANCgraphcomp](https://github.com/rosiekrasnoff/CEE4530/blob/master/lab2_pHgraph_ourdataALL3.png?raw=true)
+![ANCgraphcomp](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph_ourdataALL3.png?raw=true)
 
 Figure 2: Plot of concentration calculated ANC over time from conservative, closed, and open calculations.
 
@@ -23,11 +23,11 @@ Figure 2: Plot of concentration calculated ANC over time from conservative, clos
 
 In the second experiment, we added about half as much NaHCO3 as we added in the first experiment. Therefore, it had a lower ANC and so the lake was destroyed and unlivable in a shorter amount of time. The ANC worked the same way, it was just less, so less acid could be added from the rain before the pH fell drastically.
 
-![pHgraph](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph_ourdataALL3.png?raw=true)
+![pHgraph](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph_2ndrun.png?raw=true)
 
 Figure 3: Plot of concentration pH of lake as acid rain was added over time for second experiment with about half as much NaHCO3.
 
-![ANCgraphcomp](https://github.com/rosiekrasnoff/CEE4530/blob/master/lab2_pHgraph_2ndrun_comp.png?raw=true)
+![ANCgraphcomp](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph_2ndrun_comp.png?raw=true)
 
 Figure 4: Plot of concentration calculated ANC over time from conservative, closed, and open calculations for second experiment with about half as much NaHCO3.
 

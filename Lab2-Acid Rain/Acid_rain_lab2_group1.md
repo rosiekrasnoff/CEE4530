@@ -6,7 +6,7 @@ K1=10−6.3, K2=10−10.3, KH=10−1.5molLatm, PCO2=10−3.5atm, and Kw=10−14.
 
 1. Plot measured pH of the lake versus dimensionless hydraulic residence time (t/θ).
 
-![pHgraph](https://github.com/rosiekrasnoff/CEE4530/blob/master/lab2_pHgraph_ourdata1.png?raw=true)
+![pHgraph](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph_ourdata1.png?raw=true)
 
 Figure 1: Plot of concentration pH of lake as acid rain was added over time.
 
@@ -23,7 +23,7 @@ Figure 2: Plot of concentration calculated ANC over time from conservative, clos
 
 In the second experiment, we added about half as much NaHCO3 as we added in the first experiment. Therefore, it had a lower ANC and so the lake was destroyed and unlivable in a shorter amount of time. The ANC worked the same way, it was just less, so less acid could be added from the rain before the pH fell drastically.
 
-![pHgraph](https://github.com/rosiekrasnoff/CEE4530/blob/master/lab2_pHgraph_2ndrun.png?raw=true)
+![pHgraph](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph_ourdataALL3.png?raw=true)
 
 Figure 3: Plot of concentration pH of lake as acid rain was added over time for second experiment with about half as much NaHCO3.
 

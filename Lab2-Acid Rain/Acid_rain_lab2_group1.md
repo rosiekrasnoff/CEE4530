@@ -177,9 +177,9 @@ plt.show()
 2. What are some of the complicating factors you might find in attempting to remediate a lake using CaCO3?
 **The density of CaCO3 is 2.71 g/cm³, which is higher than that of NaHCO3 at 2.2g/cm³, so it sinks quicker. This will exacerbate the issues discussed in question 1 above, where there will be a gradient of ANC because of the higher density. This problem will be made worse if there is no mixing. The solubility of CaCO3 is also much lower than that of NaHCO3, so even if one calculated how much CaCO3 to add to get the same ANC as we got from NaHCO3, the particles would likely not all dissolve, and therefore the actual ANC of the solution would not be as high as expected.**
 
-##Conclusion
+## Conclusion
 
 In this lab, we replicated the effects of acid lake remediation in the form of sodium bicarbonate by adding enough to equal the negative ANC from the acid precipitation input plus the amount of ANC lost by outflow from the lake during the 15-minute design period. In this experiment, we saw that the ANC in all three cases (conservative, closed, and open) took an hydraulic residence time of approximately 1.1 to hit zero. The same pattern was observed when only half the amount of NaHCO3 was added - about 0.7 hydraulic residence time passed before the three ANCs approached 0.    
 
-##Suggestions/Comments
+## Suggestions/Comments
 We had complications with ProCoDa not saving our data properly, which then caused more problems because the data file could not be read easy when it was edited. Students should be warned to verify that data is saving properly before beginning experiments. Also, we had several leaks in our system because we weren't using the connectors properly (needed to twist and push to get a tighter fit). A warning about that would be helpful.  We would appreciate more clarity on what the expectations are for the lab report/postlab. What is the extent of "data analysis" that is expected and how should we be presenting it?

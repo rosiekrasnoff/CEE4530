@@ -3,7 +3,6 @@
 ### Group 1 - Jiwon Lee and Rosie Krasnoff
 ##### February 15th, 2019
 
-
 1. Plot measured pH of the lake versus dimensionless hydraulic residence time (t/θ).
 
 ![pHgraph1](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph1.png?raw=true)
@@ -170,7 +169,6 @@ plt.legend(['ANC conservative', 'ANC closed', 'ANC open'])
 plt.savefig('/Users/Rosie/github/CEE4530/Lab2-Acid Rain/lab2_ANC_comp2.png')
 plt.show()
 
-
 ```
 # Questions
 1. What do you think would happen if enough NaHCO3 were added to the lake to maintain an ANC greater than 50μeq/L for 3 residence times with the stirrer turned off?
@@ -181,7 +179,7 @@ plt.show()
 
 ##Conclusion
 
-In this lab, we replicated the effects of acid lake remediation in the form of sodium bicarbonate by adding enough to equal the negative ANC from the acid precipitation input plus the amount of ANC lost by outflow from the lake during the 15-minute design period. In this experiment, we saw that the ANC in all three cases (conservative, closed, and open) took an hydraulic residence time of approximately 1.1 to hit zero. The same pattern was observed when only half the amount of NaHCO3 was added - about 0.7 hydraulic residence time passed before the three ANCs approached 0.
+In this lab, we replicated the effects of acid lake remediation in the form of sodium bicarbonate by adding enough to equal the negative ANC from the acid precipitation input plus the amount of ANC lost by outflow from the lake during the 15-minute design period. In this experiment, we saw that the ANC in all three cases (conservative, closed, and open) took an hydraulic residence time of approximately 1.1 to hit zero. The same pattern was observed when only half the amount of NaHCO3 was added - about 0.7 hydraulic residence time passed before the three ANCs approached 0.    
 
-##Suggestions/comments
-Students should be warned to save their data properly!
+##Suggestions/Comments
+We had complications with ProCoDa not saving our data properly, which then caused more problems because the data file could not be read easy when it was edited. Students should be warned to verify that data is saving properly before beginning experiments. Also, we had several leaks in our system because we weren't using the connectors properly (needed to twist and push to get a tighter fit). A warning about that would be helpful.  We would appreciate more clarity on what the expectations are for the lab report/postlab. What is the extent of "data analysis" that is expected and how should we be presenting it?

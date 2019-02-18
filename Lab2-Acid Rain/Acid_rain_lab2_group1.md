@@ -6,7 +6,7 @@
 
 1. Plot measured pH of the lake versus dimensionless hydraulic residence time (t/θ).
 
-![pHgraph](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph_ourdata1.png?raw=true)
+![pHgraph1](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph1.png?raw=true)
 
 Figure 1: Plot of concentration pH of lake as acid rain was added over time.
 
@@ -14,7 +14,7 @@ Figure 1: Plot of concentration pH of lake as acid rain was added over time.
 3. If we assume that there are no carbonates exchanged with the atmosphere during the experiment, then we can calculate ANC in the lake effluent by using equation (14) describing the ANC of a closed system. Calculate the ANC under the assumption of a closed system and plot it on the same graph produced in answering question #3 with the plot labeled (in the legend) as closed ANC.
 4. If we assume that there is exchange with the atmosphere and that carbonates are at equilibrium with the atmosphere, then we can calculate ANC in the lake effluent by using equation (18) describing the ANC of an open system. Calculate the ANC under the assumption of an open system and plot it on the same graph produced in answering question #3 with the plot labeled (in the legend) as open ANC.
 
-![ANCgraphcomp](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph_ourdataALL3.png?raw=true)
+![ANCgraphcomp1](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_ANC_comp.png?raw=true)
 
 Figure 2: Plot of concentration calculated ANC over time from conservative, closed, and open calculations.
 
@@ -23,11 +23,11 @@ Figure 2: Plot of concentration calculated ANC over time from conservative, clos
 
 In the second experiment, we added about half as much NaHCO3 as we added in the first experiment. Therefore, it had a lower ANC and so the lake was destroyed and unlivable in a shorter amount of time. The ANC worked the same way, it was just less, so less acid could be added from the rain before the pH fell drastically.
 
-![pHgraph](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph_2ndrun.png?raw=true)
+![pHgraph2](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph2.png?raw=true)
 
 Figure 3: Plot of concentration pH of lake as acid rain was added over time for second experiment with about half as much NaHCO3.
 
-![ANCgraphcomp](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph_2ndrun_comp.png?raw=true)
+![ANCgraphcomp2](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_ANC_comp2.png?raw=true)
 
 Figure 4: Plot of concentration calculated ANC over time from conservative, closed, and open calculations for second experiment with about half as much NaHCO3.
 
@@ -181,7 +181,7 @@ plt.show()
 
 ##Conclusion
 
-In this lab, we replicated the effects of acid lake remediation in the form of sodium bicarbonate by adding enough to equal the negative ANC from the acid precipitation input plus the amount of ANC lost by outflow from the lake during the 15-minute design period. In this experiment, we saw that the ANC in all three cases (conservative, closed, and open) took an hydraulic residence time of approximately 1.1 to hit zero. The same pattern was observed when only half the amount of NaHCO3 was added - about 0.7 hydraulic residence time passed before the three ANC's
+In this lab, we replicated the effects of acid lake remediation in the form of sodium bicarbonate by adding enough to equal the negative ANC from the acid precipitation input plus the amount of ANC lost by outflow from the lake during the 15-minute design period. In this experiment, we saw that the ANC in all three cases (conservative, closed, and open) took an hydraulic residence time of approximately 1.1 to hit zero. The same pattern was observed when only half the amount of NaHCO3 was added - about 0.7 hydraulic residence time passed before the three ANCs approached 0.
 
 ##Suggestions/comments
 Students should be warned to save their data properly!

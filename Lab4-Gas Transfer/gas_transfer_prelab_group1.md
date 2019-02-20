@@ -13,7 +13,7 @@ from aguaclara.core.units import unit_registry as u
 import aguaclara.research.environmental_processes_analysis as epa
 MM_SS=126043*u.mg/u.mol # molar mass of Na2SO3
 MM_O=32000*u.mg/u.mol # molar mass of water
-vol_w= 600*u.mL # volume of water
+vol_w= 750*u.mL # volume of water
 
 
 DO_solubility=epa.O2_sat(1*u.atm,(22+273)*u.kelvin) # calculate solubility of dissolved oxygen in 22C water
@@ -24,9 +24,9 @@ mass_SS= vol_w.to(u.L)*DO_solubility/MM_O*ratio_SSw*MM_SS
 print(mass_SS)
 
 ```
-$$ 600 mL \; H_2O \cdot \frac{{8.92\; mg \; O}_{{2}} }{{1L\; H}_{{2}O}} \frac{{mole\; O}_{{2}} }{{32000\; mg\; O}_{{2}} } \cdot \frac{{2\; mole\; Na}_{{2}} {SO}_{{3}} }{{mole\; O}_{{2}} } \cdot \frac{{126,000\; mg\; Na}_{{2}} {SO}_{{3}} }{{mole\; Na}_{{2}} {SO}_{{3}} } = \; 42.17 \; mg\; Na_2 SO_3 $$
+$$ 750 mL \; H_2O \cdot \frac{{8.92\; mg \; O}_{{2}} }{{1L\; H}_{{2}O}} \frac{{mole\; O}_{{2}} }{{32000\; mg\; O}_{{2}} } \cdot \frac{{2\; mole\; Na}_{{2}} {SO}_{{3}} }{{mole\; O}_{{2}} } \cdot \frac{{126,000\; mg\; Na}_{{2}} {SO}_{{3}} }{{mole\; Na}_{{2}} {SO}_{{3}} } = \; 42.17 \; mg\; Na_2 SO_3 $$
 
-42.17 milligrams of sodium sulfite is needed to reduce all the dissolved oxygen in 600 mL of pure water.
+52.72 milligrams of sodium sulfite is needed to reduce all the dissolved oxygen in 600 mL of pure water.
 
 2. Describe your expectations for dissolved oxygen concentration as a function of time during a reaeration experiment. Assume you have added enough sodium sulfite to consume all of the oxygen at the start of the experiment. What would the shape of the curve look like?
 

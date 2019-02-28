@@ -264,6 +264,7 @@ Figure 6. Gran titration of a sample.
 ``` python
 
 # plotting all the ANCs together
+time
 ANC_graph=np.linspace(0,1.6,40)
 fig, ax = plt.subplots()
 ax.plot(hrt, ANC_expected.to(u.meq/u.L), 'r', hrt, ANC_closed.to(u.meq/u.L), 'g', hrt, ANC_effluent.to(u.meq/u.L), 'b')

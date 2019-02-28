@@ -40,8 +40,6 @@ Figure 3: Plot of concentration pH of lake as acid rain was added over time for 
 
 Figure 4: Plot of concentration calculated ANC over time from conservative, closed, and open calculations for second experiment with about half as much NaHCO3(0.317g).
 
-
-
 #### Acid Rain Questions
 1. If the experiment was repeated with the stirrer were turned off, it would cause the NaHCO3 to simply sink to the bottom of the lake since its density = 2.2g/cm3 is higher than that of the lake. Some of the NaHCO3 will dissolve as it sinks, but even dissolved into water, it makes a more dense solution so that solution will also sink to the bottom. So, there will be less ANC at the top of the lake, where the acid is then added. Thus, the solution will acidify at the top faster than we saw with the stirrer turned on because the ANC will not be evenly distributed and the top of the lake will be lacking.
 
@@ -152,9 +150,9 @@ q = 5.15*u.mL/u.sec # flow of acid into lake
 q=q.to(u.L/u.min)
 
 #extract the corresponding time data and convert to seconds
-time = epa.column_of_time(data_file_path,start,-1).to(u.min)
+time2 = epa.column_of_time(data_file_path,start,-1).to(u.min)
 residencetime = v/q # hydraulic residence time t/θ
-hrt2 = time/residencetime
+hrt2 = time2/residencetime
 #Now plot the graph
 fig, ax = plt.subplots()
 ax.plot(hrt2,lakepH2,'r')
@@ -206,12 +204,15 @@ from scipy import stats
 Gran_data_0 = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab3-ANC/lab%203%20ANC%2C%20t%3D0.xls'
 # The epa.Gran function imports data from your Gran data file as saved by ProCoDA.
 # The epa.Gran function assigns all of the outputs in one statement
-V_titrant, pH, V_Sample, Normality_Titrant, V_equivalent, ANC = epa.Gran(Gran_data_0)
+V_titrant_0, pH_0, V_Sample_0, Normality_Titrant_0, V_equivalent_0, ANC_0 = epa.Gran(Gran_data_0)
 fig, ax = plt.subplots()
-ax.plot(V_titrant,pH,'r')
+ax.plot(V_titrant_0,pH_0,'r')
+ax.grid(True)
 plt.xlabel('volume of titrant')
 plt.ylabel('pH')
 ax.annotate('equivalent volume', xy=(1.433219, 2.8), xytext=(1.4, 4), arrowprops=dict(facecolor='black', shrink=0.10),)
+ax.annotate('equation 1', xy=(0.75, 6.25), xytext=(1, 7), arrowprops=dict(facecolor='black', shrink=0.10),)
+ax.annotate('equation 2', xy=(2, 3.2), xytext=(2, 5), arrowprops=dict(facecolor='black', shrink=0.10),)
 
 #plt.savefig('/Users/Rosie/github/CEE4530/Lab3-ANC/lab3graph.png')
 plt.show()
@@ -223,29 +224,29 @@ plt.show()
 ``` python
 
 #Define the gran function.
-def F1(V_sample,V_titrant,pH):
-  return (V_sample + V_titrant)/V_sample * epa.invpH(pH)
+def F1(V_sample_0,V_titrant_0,pH_0):
+  return (V_sample_0 + V_titrant_0)/V_sample_0 * epa.invpH(pH_0)
 #Create an array of the F1 values.
-F1_data = F1(V_Sample,V_titrant,pH)
+F1_data = F1(V_Sample_0,V_titrant_0,pH_0)
 
 N_good_points = 3
 #use scipy linear regression. Note that the we can extract the last n points from an array using the notation [-N:]
-slope, intercept, r_value, p_value, std_err = stats.linregress(V_titrant[-N_good_points:],F1_data[-N_good_points:])
+slope, intercept, r_value, p_value, std_err = stats.linregress(V_titrant_0[-N_good_points:],F1_data[-N_good_points:])
 #reattach the correct units to the slope and intercept.
 intercept = intercept*u.mole/u.L
 slope = slope*(u.mole/u.L)/u.mL
 V_eq = -intercept/slope
-ANC_sample = V_eq*Normality_Titrant/V_Sample
+ANC_sample = V_eq*Normality_Titrant_0/V_Sample_0
 print('The r value for this curve fit is', ut.round_sf(r_value,5))
 print('The equivalent volume was', ut.round_sf(V_eq,5))
 print('The acid neutralizing capacity was',ut.round_sf(ANC_sample.to(u.meq/u.L),5))
 
 #The equivalent volume agrees well with the value calculated by ProCoDA.
 #create an array of points to draw the linear regression line
-x=[V_eq.magnitude,V_titrant[-1].magnitude ]
-y=[0,(V_titrant[-1]*slope+intercept).magnitude]
+x=[V_eq.magnitude,V_titrant_0[-1].magnitude ]
+y=[0,(V_titrant_0[-1]*slope+intercept).magnitude]
 #Now plot the data and the linear regression
-plt.plot(V_titrant, F1_data,'o')
+plt.plot(V_titrant_0, F1_data,'o')
 plt.plot(x, y,'r')
 plt.xlabel('Titrant Volume (mL)')
 plt.ylabel('Gran function (mole/L)')
@@ -262,16 +263,45 @@ Figure 6. Gran titration of a sample.
 3. Plot the measured ANC of the lake on the same graph as was used to plot the conservative, volatile, and nonvolatile ANC models (see questions 2 to 5 of the Acid Precipitation and Remediation of an Acid Lake lab). Did the measured ANC values agree with the conservative ANC model?
 
 ``` python
+# getting the ANC values at various times
+Gran_data_5 = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab3-ANC/lab%203%20ANC%2C%20t%3D5m.xls'
+V_titrant_5, pH_5, V_Sample_5, Normality_Titrant_5, V_equivalent_5, ANC_5 = epa.Gran(Gran_data_5)
+
+Gran_data_10 = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab3-ANC/lab%203%20ANC%2C%20t%3D10%202nd%20try%2C%20more%20bad.xls'
+V_titrant_10, pH, V_Sample_10, Normality_Titrant_10, V_equivalent_10, ANC_10 = epa.Gran(Gran_data_10)
+
+# at t = 15, we measured pH, ANC=[H+]
+pH_15=3.93
+ANC_15=-epa.invpH(pH_15)
+ANC_15
+
+# at t = 20, we measured pH
+pH_20=3.41
+ANC_20=-epa.invpH(pH_20)
+ANC_20
+10**-3.41
+
+# create a vector of ANC of the lake
+ANC_lake = [ANC_0.to(u.meq/u.L), ANC_5.to(u.meq/u.L), ANC_10.to(u.meq/u.L), ANC_15.to(u.meq/u.L), ANC_20.to(u.meq/u.L)]
+time_lake = [0,5,10,15,20]
+time_lake=time_lake*u.min
+
 
 # plotting all the ANCs together
 ANC_graph=np.linspace(0,1.6,40)
 fig, ax = plt.subplots()
-ax.plot(hrt, ANC_expected.to(u.meq/u.L), 'r', hrt, ANC_closed.to(u.meq/u.L), 'g', hrt, ANC_effluent.to(u.meq/u.L), 'b')
-plt.xlabel('hydraulic residence time')
+ax.plot(time, ANC_expected.to(u.meq/u.L), 'r', time, ANC_closed.to(u.meq/u.L), 'g', time, ANC_effluent.to(u.meq/u.L), 'b')
+ax.plot(0,ANC_0.to(u.meq/u.L), 'o', 5, ANC_5.to(u.meq/u.L), 'o', 10, ANC_10.to(u.meq/u.L), 'o', 15, ANC_15.to(u.meq/u.L), 'o', 20, ANC_20.to(u.meq/u.L), 'o')
+plt.xlabel('time (mins)')
 plt.ylabel('ANC (meq/L)')
-plt.plot(0.5, ANC_sample.to(u.meq/u.L), 'o')
 plt.legend(['ANC conservative', 'ANC closed', 'ANC open'])
 #plt.savefig('/Users/Rosie/github/CEE4530/Lab2-Acid Rain/lab2_ANC_comp.png')
 plt.show()
+
+
+plt.plot(time_lake,[ANC_0.to(u.meq/u.L), ANC_5.to(u.meq/u.L), ANC_10.to(u.meq/u.L), ANC_15.to(u.meq/u.L), ANC_20.to(u.meq/u.L)], 'r')
+ax.plot(time_lake,ANC_lake,'r')
+plt.show()
+
 
 ```

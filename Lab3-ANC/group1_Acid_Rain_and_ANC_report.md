@@ -1,81 +1,84 @@
 # Acid Rain and Acid Neutralizing Capacity
 
-#### Group 1 - Jiwon Lee and Rosie Krasnoff
+#### Group 1 - Jiwon Lee and Rosie Krasnoff (10 hours each)
 ##### March 1st, 2019
 
 ## Introduction and Objectives
+As fossil fuel emissions continuously increase in today’s world, acid precipitation has been worsening as well. Globally, lakes being impacted as the sulfuric and nitric acid in acid rain acidifies these bodies of water. Delving deeper into this widespread issue, it is evident that the pH of the effected lakes is lower than that of a healthy lake in the range of 6.5 to 8.5. This ideal range can be accredited to the natural carbonate system which acts as a buffer and helps to control the pH. However, action needs to be taken for lakes that are no longer healthy on their own. This experiment allows us to explore a common remediation method of applying ANC directly to the lake surface. Through this lab, we aimed to gain information and knowledge about how remediation of applying ANC into a lake would work and the extent to which it is a successful method.
 
+Below are relevant equations:
+
+$$ 1.\;ANC=C_T \left(\alpha_1 +2\alpha_2 \right)+\frac{K_w}{\left[H^+ \right]} - \left[H^+ \right] $$$$ 2.ANC=\frac{P_{CO_2} K_H }{\alpha_0 } (\alpha_1 +2\alpha_2 ) + \frac{K_w }{\left[H^+ \right]} - \left[H^+ \right]$$$$3. \;{ANC}_{{0}} {\; }=\left[{ANC}_{out} - ANC_{in} \cdot \left(1 - {\mathop{e}\nolimits^{-t/\theta}} \right)\right]{\mathop{e}\nolimits^{t/\theta}}$$ $$4. \;ANC=\frac{V_e N_t }{V_s }$$
 
 ## Procedures
 
+In the Acid Rain lab, we modeled acid rain precipitating into a lake by pumping an acidic feed solution into a tub of water + NaHCO3 (the ANC). We kept track of the pH level by taking samples from the lake effluent every 5 minutes for 20 minutes. Then we proceeded to repeat the experiment with less NaHCO3 to test the effects of the amount of ANC added to the lake. For a more detail procedure, refer to the [textbook](https://monroews.github.io/EnvEngLabTextbook/Acid_Rain/Acid_Rain.html).
+
+In the ANC lab, we determined the ANC of the five samples we took in the Acid Rain lab. Using a titration process, we added HCl (the titrant) using a digital pipette in increments until the pH reached a certain point. For a more detail procedure, refer to the [textbook](https://monroews.github.io/EnvEngLabTextbook/Acid_Neutralizing_Capacity/Acid_Neutralizing_Capacity.html#theory).
+
 ## Results and Discussion
-
-## Acid Rain Data Analysis
-1. Plot measured pH of the lake versus dimensionless hydraulic residence time (t/θ).
-
+### Acid Rain Data Analysis
+We plotted the measured pH of the lake versus dimensionless hydraulic residence time (t/θ) to get a visualization of how pH changed over time (Figure 1).
 ![pHgraph1](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph1.png?raw=true)
+Figure 1. Plot of concentration pH of lake as acid rain was added over time.
 
-Figure 1: Plot of concentration pH of lake as acid rain was added over time.
+Calculations were made using three different assumptions for ANC:
+1. Assuming that ANC is a **conservative** parameter, equation 3 can be used to calculate the expected ANC in the lake effluent as the experiment proceeds.
+2. Assuming there are no carbonates exchanged with the atmosphere during the experiment, then we can calculate ANC in the lake effluent by using equation 1 describing the ANC of a **closed** system.
+3. Assuming that there is exchange with the atmosphere and that carbonates are at equilibrium with the atmosphere, then we can calculate ANC in the lake effluent by using equation 2 describing the ANC of an **open** system.
 
-2. Assuming that the lake can be modeled as a completely mixed flow reactor and that ANC is a conservative parameter, equation (25) can be used to calculate the expected ANC in the lake effluent as the experiment proceeds. Graph the expected ANC in the lake effluent versus the hydraulic residence time (t/θ) based on the completely mixed flow reactor equation with the plot labeled (in the legend) as conservative ANC.
-3. If we assume that there are no carbonates exchanged with the atmosphere during the experiment, then we can calculate ANC in the lake effluent by using equation (14) describing the ANC of a closed system. Calculate the ANC under the assumption of a closed system and plot it on the same graph produced in answering question #3 with the plot labeled (in the legend) as closed ANC.
-4. If we assume that there is exchange with the atmosphere and that carbonates are at equilibrium with the atmosphere, then we can calculate ANC in the lake effluent by using equation (18) describing the ANC of an open system. Calculate the ANC under the assumption of an open system and plot it on the same graph produced in answering question #3 with the plot labeled (in the legend) as open ANC.
+The results of these calculations were plotted versus hydraulic residence time so the three methods could be compared (Figure 2).
 
 ![ANCgraphcomp1](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_ANC_comp.png?raw=true)
 
-Figure 2: Plot of concentration calculated ANC over time from conservative, closed, and open calculations.
+Figure 2. Plot of concentration calculated ANC over time from conservative, closed, and open calculations.
 
 **Was the lake better modeled as in equilibrium with atmospheric CO2 or as not exchanging with atmospheric CO2?**  
 
-5. Analyze the data from the second experiment and graph the data appropriately. What did you learn from the second experiment?
+The lake is better modeled as not exchanging with atmospheric CO2, because the closed model is much closer to the conservative model.
 
-In the second experiment, we added about half as much NaHCO3 as we added in the first experiment. Therefore, it had a lower ANC and so the lake was destroyed and unlivable in a shorter amount of time. The ANC worked the same way, it was just less, so less acid could be added from the rain before the pH fell drastically.
-
+In the second experiment, we added about half as much NaHCO3 as we added in the first experiment. Therefore, it had a lower ANC and so the lake was destroyed and unlivable in a shorter amount of time. The curve of the pH over time is the same in the first and second experiment, which can be seen in a comparison of Figure 1 and Figure 3. The ANC worked the same way, it was just less, so less acid could be added from the rain before the pH fell drastically. Again, a comparison of different methods of calculating ANC was created, see Figure 4.
 ![pHgraph2](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph2.png?raw=true)
-
-Figure 3: Plot of concentration pH of lake as acid rain was added over time for second experiment with about half as much NaHCO3 (0.317g).
+Figure 3. Plot of concentration pH of lake as acid rain was added over time for second experiment with about half as much NaHCO3 (0.317g).
 
 ![ANCgraphcomp2](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_ANC_comp2.png?raw=true)
+Figure 4. Plot of concentration calculated ANC over time from conservative, closed, and open calculations for second experiment with about half as much NaHCO3(0.317g).
 
-Figure 4: Plot of concentration calculated ANC over time from conservative, closed, and open calculations for second experiment with about half as much NaHCO3(0.317g).
+If the experiment was repeated with the stirrer were turned off, it would cause the NaHCO3 to simply sink to the bottom of the lake since its density = 2.2g/cm3 is higher than that of the lake. Some of the NaHCO3 will dissolve as it sinks, but even dissolved into water, it makes a more dense solution so that solution will also sink to the bottom. So, there will be less ANC at the top of the lake, where the acid is then added. Thus, the solution will acidify at the top faster than we saw with the stirrer turned on because the ANC will not be evenly distributed and the top of the lake will be lacking.
 
-## ANC Data Analysis
-1. Plot the titration curve of the t=0 sample with 0.05 N HCl (plot pH as a function of titrant volume). Label the equivalent volume of titrant. Label the 2 regions of the graph where pH changes slowly with the dominant reaction that is occurring. (Place labels with the chemical reactions on the graph in the pH regions where each reaction is occurring.) Note that in a third region of slow pH change no significant reactions are occurring (added hydrogen ions contribute directly to change in pH).
+Some complications of attempting to remediate a lake with CaCO3 include the density of CaCO3 is 2.71 g/cm³, which is higher than that of NaHCO3 at 2.2g/cm³, so it sinks quicker. This will exacerbate the issues discussed in question 1 above, where there will be a gradient of ANC because of the higher density. This problem will be made worse if there is no mixing. The solubility of CaCO3 is also much lower than that of NaHCO3, so even if one calculated how much CaCO3 to add to get the same ANC as we got from NaHCO3, the particles would likely not all dissolve, and therefore the actual ANC of the solution would not be as high as expected.
+
+### ANC Data Analysis
+
+Using the measured data from the t=0 titration, the pH titration curve was plotted as a function of titrant volume that had been added (Figure 5). The equivalent volume of titrant is labeled with a vertical blue line. If the titration curve was complete, there would be three regions of the graph where pH changes slowly. In two of these regions, the dominant reaction is occurring. In a region that occurs at a higher pH than we saw, the reaction $ HCO_3^- \Rightarrow CO_3^2- + H^+ $ would be occurring first. Because we started at pH 8, we didn't observe that so it isn't in Figure 5. In the second region, the reaction is $HCO_3^- + H^+ \Rightarrow H_2CO_3$. In the third region, there is no reaction, because added hydrogen ions contribute directly to change in pH.
 
 ![part1graph](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab3-ANC/titrationcurve.png?raw=true)
+Figure 5. Titration curve of the t=0 sample with 0.05 N HCl.
 
-In a region that occurs at a higher pH than we saw, the reaction $HCO_3^- <-> CO_3^2- + H^+$ would be occurring first. In the no reaction region, added hydrogen ions contribute directly to change in pH as noted in question prompt.
-
-2. Prepare a Gran plot using the data from the titration curve of the t=0 sample. Use linear regression on the linear region or simply draw a straight line through the linear region of the curve to identify the equivalent volume. Compare your calculation of Ve with that was calculated by ProCoDA.
-
-The Ve that we calculated using linear regression was 1.433 mL, which is essentially identical to that of ProCoDA at 1.433219 mL.
-
+Next, using linear regression on the linear region of the data from the titration curve of the t=0 sample, the Gran plot was plotted (Figure 6). Comparing the equivalent volume that we calculated using linear regression with that of ProCoDa, we found that both were essentially identical at 1.433219 mL.
 
 ![part2graph](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab3-ANC/Granplot.png?raw=true)
-
 Figure 6. Gran titration of a sample.
 
-3. Plot the measured ANC of the lake on the same graph as was used to plot the conservative, volatile, and nonvolatile ANC models (see questions 2 to 5 of the Acid Precipitation and Remediation of an Acid Lake lab). Did the measured ANC values agree with the conservative ANC model?
+Finally, a comparison with the 3 ANC models from the Acid Rain portion above was made to the measure ANC from the titration data (Figure 7). A visual assessment suggests that the conservative model is the most accurate in comparison to the measured ANC data points. Although not identical, the measured ANC agrees pretty well with the conservative ANC model.
 
-Although not identical, the measured ANC agrees pretty well with the conservative ANC model.
+![part3graph](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab3-ANC/ANC_comp_data_plot.png?raw=true)
+Figure 7. Plot of conservative, closed, open, and measured ANC concentration over time.
 
-https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab3-ANC/ANC_comp_data_plot.png?raw=true
+### Discussion
+Compare theoretical expectations with your results and discuss reasons for any observed deviations. If the results weren't as expected, suggest reasons why the laboratory results may have differed from theory and suggest improved techniques to obtain more accurate results or modifications to the theory to better describe the experimental conditions.
 
-
-## Answers to Acid Rain Questions
-1. If the experiment was repeated with the stirrer were turned off, it would cause the NaHCO3 to simply sink to the bottom of the lake since its density = 2.2g/cm3 is higher than that of the lake. Some of the NaHCO3 will dissolve as it sinks, but even dissolved into water, it makes a more dense solution so that solution will also sink to the bottom. So, there will be less ANC at the top of the lake, where the acid is then added. Thus, the solution will acidify at the top faster than we saw with the stirrer turned on because the ANC will not be evenly distributed and the top of the lake will be lacking.
-
-2. Some complications of attempting to remediate a lake with CaCO3 include the density of CaCO3 is 2.71 g/cm³, which is higher than that of NaHCO3 at 2.2g/cm³, so it sinks quicker. This will exacerbate the issues discussed in question 1 above, where there will be a gradient of ANC because of the higher density. This problem will be made worse if there is no mixing. The solubility of CaCO3 is also much lower than that of NaHCO3, so even if one calculated how much CaCO3 to add to get the same ANC as we got from NaHCO3, the particles would likely not all dissolve, and therefore the actual ANC of the solution would not be as high as expected.
+In the ANC lab, we made an error in collecting data in ProCoDa during the titration of the t=10 sample. This led to blah and blah.
 
 ## Conclusion
+In the Acid Rain lab, we replicated the effects of acid lake remediation in the form of sodium bicarbonate by adding enough to equal the negative ANC from the acid precipitation input plus the amount of ANC lost by outflow from the lake during the 15-minute design period. In this experiment, we saw that the ANC in all three cases (conservative, closed, and open) took an hydraulic residence time of approximately 1.1 to hit zero. The same pattern was observed when only half the amount of NaHCO3 was added - about 0.7 hydraulic residence time passed before the three ANCs approached 0.  
 
-In this lab, we replicated the effects of acid lake remediation in the form of sodium bicarbonate by adding enough to equal the negative ANC from the acid precipitation input plus the amount of ANC lost by outflow from the lake during the 15-minute design period. In this experiment, we saw that the ANC in all three cases (conservative, closed, and open) took an hydraulic residence time of approximately 1.1 to hit zero. The same pattern was observed when only half the amount of NaHCO3 was added - about 0.7 hydraulic residence time passed before the three ANCs approached 0.  
+In the ANC lab, we determined the ANC of our acid rain samples using titration. As a result, we were able to compare the measured ANC data with the three cases mentioned above to conclude that the conservative model is the most ideal.
 
 ## Suggestions/Comments
-We had complications with ProCoDa not saving our data properly, which then caused more problems because the data file could not be read easy when it was edited. Students should be warned to verify that data is saving properly before beginning experiments. Also, we had several leaks in our system because we weren't using the connectors properly (needed to twist and push to get a tighter fit). A warning about that would be helpful.  We would appreciate more clarity on what the expectations are for the lab report/postlab. What is the extent of "data analysis" that is expected and how should we be presenting it?
+With the Acid Rain lab, we had complications with ProCoDa not saving our data properly, which then caused more problems because the data file could not be read easy when it was edited. Students should be warned to verify that data is saving properly before beginning experiments. Also, we had several leaks in our system because we weren't using the connectors properly (needed to twist and push to get a tighter fit). A warning about that would be helpful. Additionally, in the ANC lab, blah blah would have been nice.
 
 ## Appendix
-
 ```python
 from aguaclara.core.units import unit_registry as u
 import aguaclara.research.environmental_processes_analysis as epa
@@ -224,7 +227,7 @@ plt.xlabel('volume of titrant (mL)')
 plt.ylabel('pH')
 #ax.annotate('equivalent volume', xy=(1.433219, 2.8), xytext=(0.8, 4), arrowprops=dict(facecolor='black', shrink=0.10),)
 plt.axvline(x=V_equivalent_0.magnitude,color='b')
-ax.annotate('$HCO_3^- + H^+ <-> H_2CO_3$', xy=(0.75, 6.25), xytext=(0.45, 7), arrowprops=dict(facecolor='black', shrink=0.10),)
+ax.annotate('$HCO_3^- + H^+ \Rightarrow H_2CO_3$', xy=(0.75, 6.25), xytext=(0.45, 7), arrowprops=dict(facecolor='black', shrink=0.10),)
 ax.annotate('no reaction', xy=(2, 3.2), xytext=(1.7, 5), arrowprops=dict(facecolor='black', shrink=0.10),)
 plt.legend(['titration curve', 'equiv titrant vol'])
 plt.savefig('/Users/Rosie/github/CEE4530/Lab3-ANC/titrationcurve.png')
@@ -274,13 +277,10 @@ V_titrant_10, pH, V_Sample_10, Normality_Titrant_10, V_equivalent_10, ANC_10 = e
 # at t = 15, we measured pH, ANC=[H+]
 pH_15=3.93
 ANC_15=-epa.invpH(pH_15)
-ANC_15
 
 # at t = 20, we measured pH
 pH_20=3.41
 ANC_20=-epa.invpH(pH_20)
-ANC_20
-10**-3.41
 
 # create a vector of ANC of the lake
 time_lake=np.array([0,5,10,15,20])*u.min
@@ -293,7 +293,7 @@ ax.plot(time, ANC_expected.to(u.meq/u.L), 'r', time, ANC_closed.to(u.meq/u.L), '
 ax.plot(time_lake, ANC_lake, 'o')
 plt.xlabel('time (mins)')
 plt.ylabel('ANC (meq/L)')
-plt.legend(['ANC conservative', 'ANC closed', 'ANC open', 'ANC data points'])
+plt.legend(['ANC conservative', 'ANC closed', 'ANC open', 'measured ANC'])
 plt.savefig('/Users/Rosie/github/CEE4530/Lab3-ANC/ANC_comp_data_plot.png')
 plt.show()
 ```

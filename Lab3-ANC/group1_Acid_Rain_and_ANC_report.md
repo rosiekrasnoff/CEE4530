@@ -33,9 +33,7 @@ The results of these calculations were plotted versus hydraulic residence time s
 
 Figure 2. Plot of concentration calculated ANC over time from conservative, closed, and open calculations.
 
-**Was the lake better modeled as in equilibrium with atmospheric CO2 or as not exchanging with atmospheric CO2?**  
-
-The lake is better modeled as not exchanging with atmospheric CO2, because the closed model is much closer to the conservative model.
+The lake is better modeled with the assumption that CO2 is not exchanging with the atmosphere, because the closed model is much closer to the conservative model. The conservative model is very good, because it assumes very little, just that ANC is conservative which is a very logical assumption. Therefore, the more closely a model aligns with the conservative model, the better, so the closed model does pretty well.
 
 In the second experiment, we added about half as much NaHCO3 as we added in the first experiment. Therefore, it had a lower ANC and so the lake was destroyed and unlivable in a shorter amount of time. The curve of the pH over time is the same in the first and second experiment, which can be seen in a comparison of Figure 1 and Figure 3. The ANC worked the same way, it was just less, so less acid could be added from the rain before the pH fell drastically. Again, a comparison of different methods of calculating ANC was created, see Figure 4.
 ![pHgraph2](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph2.png?raw=true)
@@ -53,16 +51,19 @@ Some complications of attempting to remediate a lake with CaCO3 include the dens
 Using the measured data from the t=0 titration, the pH titration curve was plotted as a function of titrant volume that had been added (Figure 5). The equivalent volume of titrant is labeled with a vertical blue line. If the titration curve was complete, there would be three regions of the graph where pH changes slowly. In two of these regions, the dominant reaction is occurring. In a region that occurs at a higher pH than we saw, the reaction $ HCO_3^- \Rightarrow CO_3^2- + H^+ $ would be occurring first. Because we started at pH 8, we didn't observe that so it isn't in Figure 5. In the second region, the reaction is $HCO_3^- + H^+ \Rightarrow H_2CO_3$. In the third region, there is no reaction, because added hydrogen ions contribute directly to change in pH.
 
 ![part1graph](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab3-ANC/titrationcurve.png?raw=true)
+
 Figure 5. Titration curve of the t=0 sample with 0.05 N HCl.
 
 Next, using linear regression on the linear region of the data from the titration curve of the t=0 sample, the Gran plot was plotted (Figure 6). Comparing the equivalent volume that we calculated using linear regression with that of ProCoDa, we found that both were essentially identical at 1.433219 mL.
 
 ![part2graph](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab3-ANC/Granplot.png?raw=true)
+
 Figure 6. Gran titration of a sample.
 
 Finally, a comparison with the 3 ANC models from the Acid Rain portion above was made to the measure ANC from the titration data (Figure 7). A visual assessment suggests that the conservative model is the most accurate in comparison to the measured ANC data points. Although not identical, the measured ANC agrees pretty well with the conservative ANC model.
 
 ![part3graph](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab3-ANC/ANC_comp_data_plot.png?raw=true)
+
 Figure 7. Plot of conservative, closed, open, and measured ANC concentration over time.
 
 ### Discussion
@@ -136,7 +137,7 @@ ANC_expected=epa.ANC_open(3)*(1-(np.exp(-hrt)))+(ANC_0*(np.exp(-hrt)))
 #plt.show()
 
 #Number 3
-carbs=ANC_0
+carbs=(ANC_0*(np.exp(-hrt)))
 ANC_closed=epa.ANC_closed(lakepH,carbs)
 #fig, ax = plt.subplots()
 #ax.plot(hrt,ANC_closed,'g')
@@ -161,7 +162,7 @@ ax.plot(hrt, ANC_expected.to(u.meq/u.L), 'r', hrt, ANC_closed.to(u.meq/u.L), 'g'
 plt.xlabel('hydraulic residence time')
 plt.ylabel('ANC (meq/L)')
 plt.legend(['ANC conservative', 'ANC closed', 'ANC open'])
-#plt.savefig('/Users/Rosie/github/CEE4530/Lab2-Acid Rain/lab2_ANC_comp.png')
+plt.savefig('/Users/Rosie/github/CEE4530/Lab2-Acid Rain/lab2_ANC_comp.png')
 plt.show()
 
 #Number 5
@@ -190,15 +191,15 @@ plt.show()
 
 #Number 5.2
 #ANC_expected=[ANC_out−ANC_in⋅(1−e^−t/θ)]e^t/θ
-#to find ANCo: added .317 g of NaH2CO3
+#to find ANC_0: added .317 g of NaH2CO3
 mass_NA_2=.317*u.g
 
 ANC_02=mass_NA_2/MM_NaH2CO3/Vol
 ANC_expected2=epa.ANC_open(3)*(1-(np.exp(-hrt2)))+(ANC_0*(np.exp(-hrt2)))
 
 #Number 5.3
-carbs2=ANC_02
-ANC_closed2=epa.ANC_closed(lakepH2,carbs)
+carbs2=(ANC_02*(np.exp(-hrt2)))
+ANC_closed2=epa.ANC_closed(lakepH2,carbs2)
 
 #Number 5.4
 #ANC_effluent=(PCO2*KH)/α0*(α1+2α2)+Kw/[H+]−[H+]
@@ -211,7 +212,7 @@ ax.plot(hrt2, ANC_expected2.to(u.meq/u.L), 'r', hrt2, ANC_closed2.to(u.meq/u.L),
 plt.xlabel('hydraulic residence time')
 plt.ylabel('ANC (meq/L)')
 plt.legend(['ANC conservative', 'ANC closed', 'ANC open'])
-#plt.savefig('/Users/Rosie/github/CEE4530/Lab2-Acid Rain/lab2_ANC_comp2.png')
+plt.savefig('/Users/Rosie/github/CEE4530/Lab2-Acid Rain/lab2_ANC_comp2.png')
 plt.show()
 
 ##ANC LAB PORTION

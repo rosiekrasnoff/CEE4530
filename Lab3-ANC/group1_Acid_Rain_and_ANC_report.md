@@ -10,7 +10,7 @@
 
 ## Results and Discussion
 
-## Data Analysis
+## Acid Rain Data Analysis
 1. Plot measured pH of the lake versus dimensionless hydraulic residence time (t/θ).
 
 ![pHgraph1](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph1.png?raw=true)
@@ -27,7 +27,6 @@ Figure 2: Plot of concentration calculated ANC over time from conservative, clos
 
 **Was the lake better modeled as in equilibrium with atmospheric CO2 or as not exchanging with atmospheric CO2?**  
 
-
 5. Analyze the data from the second experiment and graph the data appropriately. What did you learn from the second experiment?
 
 In the second experiment, we added about half as much NaHCO3 as we added in the first experiment. Therefore, it had a lower ANC and so the lake was destroyed and unlivable in a shorter amount of time. The ANC worked the same way, it was just less, so less acid could be added from the rain before the pH fell drastically.
@@ -40,7 +39,30 @@ Figure 3: Plot of concentration pH of lake as acid rain was added over time for 
 
 Figure 4: Plot of concentration calculated ANC over time from conservative, closed, and open calculations for second experiment with about half as much NaHCO3(0.317g).
 
-#### Acid Rain Questions
+## ANC Data Analysis
+1. Plot the titration curve of the t=0 sample with 0.05 N HCl (plot pH as a function of titrant volume). Label the equivalent volume of titrant. Label the 2 regions of the graph where pH changes slowly with the dominant reaction that is occurring. (Place labels with the chemical reactions on the graph in the pH regions where each reaction is occurring.) Note that in a third region of slow pH change no significant reactions are occurring (added hydrogen ions contribute directly to change in pH).
+
+![part1graph](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab3-ANC/titrationcurve.png?raw=true)
+
+In a region that occurs at a higher pH than we saw, the reaction $HCO_3^- <-> CO_3^2- + H^+$ would be occurring first. In the no reaction region, added hydrogen ions contribute directly to change in pH as noted in question prompt.
+
+2. Prepare a Gran plot using the data from the titration curve of the t=0 sample. Use linear regression on the linear region or simply draw a straight line through the linear region of the curve to identify the equivalent volume. Compare your calculation of Ve with that was calculated by ProCoDA.
+
+The Ve that we calculated using linear regression was 1.433 mL, which is essentially identical to that of ProCoDA at 1.433219 mL.
+
+
+![part2graph](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab3-ANC/Granplot.png?raw=true)
+
+Figure 6. Gran titration of a sample.
+
+3. Plot the measured ANC of the lake on the same graph as was used to plot the conservative, volatile, and nonvolatile ANC models (see questions 2 to 5 of the Acid Precipitation and Remediation of an Acid Lake lab). Did the measured ANC values agree with the conservative ANC model?
+
+Although not identical, the measured ANC agrees pretty well with the conservative ANC model.
+
+https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab3-ANC/ANC_comp_data_plot.png?raw=true
+
+
+## Answers to Acid Rain Questions
 1. If the experiment was repeated with the stirrer were turned off, it would cause the NaHCO3 to simply sink to the bottom of the lake since its density = 2.2g/cm3 is higher than that of the lake. Some of the NaHCO3 will dissolve as it sinks, but even dissolved into water, it makes a more dense solution so that solution will also sink to the bottom. So, there will be less ANC at the top of the lake, where the acid is then added. Thus, the solution will acidify at the top faster than we saw with the stirrer turned on because the ANC will not be evenly distributed and the top of the lake will be lacking.
 
 2. Some complications of attempting to remediate a lake with CaCO3 include the density of CaCO3 is 2.71 g/cm³, which is higher than that of NaHCO3 at 2.2g/cm³, so it sinks quicker. This will exacerbate the issues discussed in question 1 above, where there will be a gradient of ANC because of the higher density. This problem will be made worse if there is no mixing. The solubility of CaCO3 is also much lower than that of NaHCO3, so even if one calculated how much CaCO3 to add to get the same ANC as we got from NaHCO3, the particles would likely not all dissolve, and therefore the actual ANC of the solution would not be as high as expected.
@@ -57,11 +79,14 @@ We had complications with ProCoDa not saving our data properly, which then cause
 ```python
 from aguaclara.core.units import unit_registry as u
 import aguaclara.research.environmental_processes_analysis as epa
+import aguaclara.core.utility as ut
 from scipy import optimize
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+from scipy import stats
 
+##ACID RAIN PORTION
 #Number 1
 #push the data file to your github and then get the url of the raw file.
 data_file_path="https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab2-Acid%20Rain/Lab_2_Acid_Rain.xls"
@@ -136,8 +161,7 @@ plt.legend(['ANC conservative', 'ANC closed', 'ANC open'])
 #plt.savefig('/Users/Rosie/github/CEE4530/Lab2-Acid Rain/lab2_ANC_comp.png')
 plt.show()
 
-#Number 5 (with our data)
-
+#Number 5
 data_file_path="https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab2-Acid%20Rain/Lab_2_Acid_rain_with_half_ANC.xls"
 # set the start index
 start=17
@@ -158,7 +182,6 @@ fig, ax = plt.subplots()
 ax.plot(hrt2,lakepH2,'r')
 plt.xlabel('hydraulic retention time')
 plt.ylabel('pH')
-
 #plt.savefig('/Users/Rosie/github/CEE4530/Lab2-Acid Rain/lab2_pHgraph2.png')
 plt.show()
 
@@ -188,19 +211,8 @@ plt.legend(['ANC conservative', 'ANC closed', 'ANC open'])
 #plt.savefig('/Users/Rosie/github/CEE4530/Lab2-Acid Rain/lab2_ANC_comp2.png')
 plt.show()
 
-```
-1. Plot the titration curve of the t=0 sample with 0.05 N HCl (plot pH as a function of titrant volume). Label the equivalent volume of titrant. Label the 2 regions of the graph where pH changes slowly with the dominant reaction that is occurring. (Place labels with the chemical reactions on the graph in the pH regions where each reaction is occurring.) Note that in a third region of slow pH change no significant reactions are occurring (added hydrogen ions contribute directly to change in pH).
-
-``` python
-from aguaclara.core.units import unit_registry as u
-import aguaclara.research.environmental_processes_analysis as epa
-import aguaclara.core.utility as ut
-from scipy import optimize
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-from scipy import stats
-
+##ANC LAB PORTION
+#Number 1
 Gran_data_0 = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab3-ANC/lab%203%20ANC%2C%20t%3D0.xls'
 # The epa.Gran function imports data from your Gran data file as saved by ProCoDA.
 # The epa.Gran function assigns all of the outputs in one statement
@@ -208,21 +220,17 @@ V_titrant_0, pH_0, V_Sample_0, Normality_Titrant_0, V_equivalent_0, ANC_0 = epa.
 fig, ax = plt.subplots()
 ax.plot(V_titrant_0,pH_0,'r')
 ax.grid(True)
-plt.xlabel('volume of titrant')
+plt.xlabel('volume of titrant (mL)')
 plt.ylabel('pH')
-ax.annotate('equivalent volume', xy=(1.433219, 2.8), xytext=(1.4, 4), arrowprops=dict(facecolor='black', shrink=0.10),)
-ax.annotate('equation 1', xy=(0.75, 6.25), xytext=(1, 7), arrowprops=dict(facecolor='black', shrink=0.10),)
-ax.annotate('equation 2', xy=(2, 3.2), xytext=(2, 5), arrowprops=dict(facecolor='black', shrink=0.10),)
-
-#plt.savefig('/Users/Rosie/github/CEE4530/Lab3-ANC/lab3graph.png')
+#ax.annotate('equivalent volume', xy=(1.433219, 2.8), xytext=(0.8, 4), arrowprops=dict(facecolor='black', shrink=0.10),)
+plt.axvline(x=V_equivalent_0.magnitude,color='b')
+ax.annotate('$HCO_3^- + H^+ <-> H_2CO_3$', xy=(0.75, 6.25), xytext=(0.45, 7), arrowprops=dict(facecolor='black', shrink=0.10),)
+ax.annotate('no reaction', xy=(2, 3.2), xytext=(1.7, 5), arrowprops=dict(facecolor='black', shrink=0.10),)
+plt.legend(['titration curve', 'equiv titrant vol'])
+plt.savefig('/Users/Rosie/github/CEE4530/Lab3-ANC/titrationcurve.png')
 plt.show()
 
-```
-
-2. Prepare a Gran plot using the data from the titration curve of the t=0 sample. Use linear regression on the linear region or simply draw a straight line through the linear region of the curve to identify the equivalent volume. Compare your calculation of Ve with that was calculated by ProCoDA.
-
-``` python
-
+#Number 2
 #Define the gran function.
 def F1(V_sample_0,V_titrant_0,pH_0):
   return (V_sample_0 + V_titrant_0)/V_sample_0 * epa.invpH(pH_0)
@@ -251,18 +259,11 @@ plt.plot(x, y,'r')
 plt.xlabel('Titrant Volume (mL)')
 plt.ylabel('Gran function (mole/L)')
 plt.legend(['data'])
-
-#plt.savefig('Examples/images/Gran.png')
+plt.tight_layout()
+plt.savefig('/Users/Rosie/github/CEE4530/Lab3-ANC/Granplot.png')
 plt.show()
 
-```
-The Ve that we calculated using linear regression was 1.433 mL, which is essentially identical to that of ProCoDA at 1.433219 mL.
-
-Figure 6. Gran titration of a sample.
-
-3. Plot the measured ANC of the lake on the same graph as was used to plot the conservative, volatile, and nonvolatile ANC models (see questions 2 to 5 of the Acid Precipitation and Remediation of an Acid Lake lab). Did the measured ANC values agree with the conservative ANC model?
-
-``` python
+#Number 3
 # getting the ANC values at various times
 Gran_data_5 = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab3-ANC/lab%203%20ANC%2C%20t%3D5m.xls'
 V_titrant_5, pH_5, V_Sample_5, Normality_Titrant_5, V_equivalent_5, ANC_5 = epa.Gran(Gran_data_5)
@@ -282,26 +283,17 @@ ANC_20
 10**-3.41
 
 # create a vector of ANC of the lake
-ANC_lake = [ANC_0.to(u.meq/u.L), ANC_5.to(u.meq/u.L), ANC_10.to(u.meq/u.L), ANC_15.to(u.meq/u.L), ANC_20.to(u.meq/u.L)]
-time_lake = [0,5,10,15,20]
-time_lake=time_lake*u.min
-
+time_lake=np.array([0,5,10,15,20])*u.min
+ANC_lake = np.array([(ANC_0.to(u.meq/u.L)).magnitude, (ANC_5.to(u.meq/u.L)).magnitude, (ANC_10.to(u.meq/u.L)).magnitude, (ANC_15.to(u.meq/u.L)).magnitude, (ANC_20.to(u.meq/u.L)).magnitude])*u.meq/u.L
 
 # plotting all the ANCs together
 ANC_graph=np.linspace(0,1.6,40)
 fig, ax = plt.subplots()
 ax.plot(time, ANC_expected.to(u.meq/u.L), 'r', time, ANC_closed.to(u.meq/u.L), 'g', time, ANC_effluent.to(u.meq/u.L), 'b')
-ax.plot(0,ANC_0.to(u.meq/u.L), 'o', 5, ANC_5.to(u.meq/u.L), 'o', 10, ANC_10.to(u.meq/u.L), 'o', 15, ANC_15.to(u.meq/u.L), 'o', 20, ANC_20.to(u.meq/u.L), 'o')
+ax.plot(time_lake, ANC_lake, 'o')
 plt.xlabel('time (mins)')
 plt.ylabel('ANC (meq/L)')
-plt.legend(['ANC conservative', 'ANC closed', 'ANC open'])
-#plt.savefig('/Users/Rosie/github/CEE4530/Lab2-Acid Rain/lab2_ANC_comp.png')
+plt.legend(['ANC conservative', 'ANC closed', 'ANC open', 'ANC data points'])
+plt.savefig('/Users/Rosie/github/CEE4530/Lab3-ANC/ANC_comp_data_plot.png')
 plt.show()
-
-
-plt.plot(time_lake,[ANC_0.to(u.meq/u.L), ANC_5.to(u.meq/u.L), ANC_10.to(u.meq/u.L), ANC_15.to(u.meq/u.L), ANC_20.to(u.meq/u.L)], 'r')
-ax.plot(time_lake,ANC_lake,'r')
-plt.show()
-
-
 ```

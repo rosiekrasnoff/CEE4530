@@ -14,7 +14,7 @@ $$ 1.\;ANC=C_T \left(\alpha_1 +2\alpha_2 \right)+\frac{K_w}{\left[H^+ \right]} -
 
 In the Acid Rain lab, we modeled acid rain precipitating into a lake by pumping an acidic feed solution into a tub of water + NaHCO3 (the ANC). We kept track of the pH level by taking samples from the lake effluent every 5 minutes for 20 minutes. Then we proceeded to repeat the experiment with less NaHCO3 to test the effects of the amount of ANC added to the lake. For a more detail procedure, refer to the [textbook](https://monroews.github.io/EnvEngLabTextbook/Acid_Rain/Acid_Rain.html).
 
-In the ANC lab, we determined the ANC of the five samples we took in the Acid Rain lab. Using a titration process, we added HCl (the titrant) using a digital pipette in increments until the pH reached a certain point. For a more detail procedure, refer to the [textbook](https://monroews.github.io/EnvEngLabTextbook/Acid_Neutralizing_Capacity/Acid_Neutralizing_Capacity.html#theory).
+In the ANC lab, we determined the ANC of the five samples we took in the Acid Rain lab. Using a titration process, we added 0.05 N HCl (the titrant) using a digital pipette in increments until the pH reached a certain point. For a more detail procedure, refer to the [textbook](https://monroews.github.io/EnvEngLabTextbook/Acid_Neutralizing_Capacity/Acid_Neutralizing_Capacity.html#theory).
 
 ## Results and Discussion
 ### Acid Rain Data Analysis
@@ -47,37 +47,33 @@ If the experiment was repeated with the stirrer were turned off, it would cause 
 Some complications of attempting to remediate a lake with CaCO3 include the density of CaCO3 is 2.71 g/cm³, which is higher than that of NaHCO3 at 2.2g/cm³, so it sinks quicker. This will exacerbate the issues discussed in question 1 above, where there will be a gradient of ANC because of the higher density. This problem will be made worse if there is no mixing. The solubility of CaCO3 is also much lower than that of NaHCO3, so even if one calculated how much CaCO3 to add to get the same ANC as we got from NaHCO3, the particles would likely not all dissolve, and therefore the actual ANC of the solution would not be as high as expected.
 
 ### ANC Data Analysis
-
 Using the measured data from the t=0 titration, the pH titration curve was plotted as a function of titrant volume that had been added (Figure 5). The equivalent volume of titrant is labeled with a vertical blue line. If the titration curve was complete, there would be three regions of the graph where pH changes slowly. In two of these regions, the dominant reaction is occurring. In a region that occurs at a higher pH than we saw, the reaction $ HCO_3^- \Rightarrow CO_3^2- + H^+ $ would be occurring first. Because we started at pH 8, we didn't observe that so it isn't in Figure 5. In the second region, the reaction is $HCO_3^- + H^+ \Rightarrow H_2CO_3$. In the third region, there is no reaction, because added hydrogen ions contribute directly to change in pH.
 
 ![part1graph](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab3-ANC/titrationcurve.png?raw=true)
 
 Figure 5. Titration curve of the t=0 sample with 0.05 N HCl.
 
-Next, using linear regression on the linear region of the data from the titration curve of the t=0 sample, the Gran plot was plotted (Figure 6). Comparing the equivalent volume that we calculated using linear regression with that of ProCoDa, we found that both were essentially identical at 1.433219 mL.
+Next, using linear regression on the linear region of the data from the titration curve of the t=0 sample, the Gran plot was plotted (Figure 6). Comparing the equivalent volume that we calculated using linear regression with that of ProCoDa, we found that both were essentially identical at 1.433219 mL (see equation 4), suggesting that we likely calculated the value the exact same way as ProCoDA did.
 
 ![part2graph](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab3-ANC/Granplot.png?raw=true)
 
 Figure 6. Gran titration of a sample.
 
-Finally, a comparison with the 3 ANC models from the Acid Rain portion above was made to the measure ANC from the titration data (Figure 7). A visual assessment suggests that the conservative model is the most accurate in comparison to the measured ANC data points. Although not identical, the measured ANC agrees pretty well with the conservative ANC model.
+Finally, a comparison with the 3 ANC models from the Acid Rain portion above was made to the measure ANC from the titration data (Figure 7). A visual assessment suggests that the closed model is the most accurate in comparison to the measured ANC data points. Although not identical, the measured ANC also agrees pretty well with the conservative ANC model.
 
 ![part3graph](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab3-ANC/ANC_comp_data_plot.png?raw=true)
 
 Figure 7. Plot of conservative, closed, open, and measured ANC concentration over time.
 
-### Discussion
-Compare theoretical expectations with your results and discuss reasons for any observed deviations. If the results weren't as expected, suggest reasons why the laboratory results may have differed from theory and suggest improved techniques to obtain more accurate results or modifications to the theory to better describe the experimental conditions.
-
-In the ANC lab, we made an error in collecting data in ProCoDa during the titration of the t=10 sample. This led to blah and blah.
+In the ANC lab, we made an error in collecting data in ProCoDa during the titration of the t=10 sample. This may have led to potential errors in our data point at t=10.
 
 ## Conclusion
 In the Acid Rain lab, we replicated the effects of acid lake remediation in the form of sodium bicarbonate by adding enough to equal the negative ANC from the acid precipitation input plus the amount of ANC lost by outflow from the lake during the 15-minute design period. In this experiment, we saw that the ANC in all three cases (conservative, closed, and open) took an hydraulic residence time of approximately 1.1 to hit zero. The same pattern was observed when only half the amount of NaHCO3 was added - about 0.7 hydraulic residence time passed before the three ANCs approached 0.  
 
-In the ANC lab, we determined the ANC of our acid rain samples using titration. As a result, we were able to compare the measured ANC data with the three cases mentioned above to conclude that the conservative model is the most ideal.
+In the ANC lab, we determined the ANC of our five acid rain samples using a titration method by adding in 0.05 N HCl with a pipette. With our t=0 sample, we performed linear regression on our data to obtain a Gran plot. This plot allowed us to find the equivalent titrant volume. Additionally, we did analysis on all five samples to be able to compare the measured ANC data of our five sample points with the three cases mentioned above to conclude that the closed model is the most ideal.
 
 ## Suggestions/Comments
-With the Acid Rain lab, we had complications with ProCoDa not saving our data properly, which then caused more problems because the data file could not be read easy when it was edited. Students should be warned to verify that data is saving properly before beginning experiments. Also, we had several leaks in our system because we weren't using the connectors properly (needed to twist and push to get a tighter fit). A warning about that would be helpful. Additionally, in the ANC lab, blah blah would have been nice.
+With the Acid Rain lab, we had complications with ProCoDa not saving our data properly, which then caused more problems because the data file could not be read easy when it was edited. Students should be warned to verify that data is saving properly before beginning experiments. Also, we had several leaks in our system because we weren't using the connectors properly (needed to twist and push to get a tighter fit). A warning about that would be helpful. Additionally, in the ANC lab, things were very straight forward and we felt adequately prepared.
 
 ## Appendix
 ```python

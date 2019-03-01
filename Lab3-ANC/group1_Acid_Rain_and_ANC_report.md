@@ -20,6 +20,7 @@ In the ANC lab, we determined the ANC of the five samples we took in the Acid Ra
 ### Acid Rain Data Analysis
 We plotted the measured pH of the lake versus dimensionless hydraulic residence time (t/θ) to get a visualization of how pH changed over time (Figure 1).
 ![pHgraph1](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph1.png?raw=true)
+
 Figure 1. Plot of concentration pH of lake as acid rain was added over time.
 
 Calculations were made using three different assumptions for ANC:
@@ -36,10 +37,13 @@ Figure 2. Plot of concentration calculated ANC over time from conservative, clos
 The lake is better modeled with the assumption that CO2 is not exchanging with the atmosphere, because the closed model is much closer to the conservative model. The conservative model is very good, because it assumes very little, just that ANC is conservative which is a very logical assumption. Therefore, the more closely a model aligns with the conservative model, the better, so the closed model does pretty well.
 
 In the second experiment, we added about half as much NaHCO3 as we added in the first experiment. Therefore, it had a lower ANC and so the lake was destroyed and unlivable in a shorter amount of time. The curve of the pH over time is the same in the first and second experiment, which can be seen in a comparison of Figure 1 and Figure 3. The ANC worked the same way, it was just less, so less acid could be added from the rain before the pH fell drastically. Again, a comparison of different methods of calculating ANC was created, see Figure 4.
+
 ![pHgraph2](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph2.png?raw=true)
+
 Figure 3. Plot of concentration pH of lake as acid rain was added over time for second experiment with about half as much NaHCO3 (0.317g).
 
 ![ANCgraphcomp2](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_ANC_comp2.png?raw=true)
+
 Figure 4. Plot of concentration calculated ANC over time from conservative, closed, and open calculations for second experiment with about half as much NaHCO3(0.317g).
 
 If the experiment was repeated with the stirrer were turned off, it would cause the NaHCO3 to simply sink to the bottom of the lake since its density = 2.2g/cm3 is higher than that of the lake. Some of the NaHCO3 will dissolve as it sinks, but even dissolved into water, it makes a more dense solution so that solution will also sink to the bottom. So, there will be less ANC at the top of the lake, where the acid is then added. Thus, the solution will acidify at the top faster than we saw with the stirrer turned on because the ANC will not be evenly distributed and the top of the lake will be lacking.

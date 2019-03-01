@@ -19,6 +19,7 @@ In the ANC lab, we determined the ANC of the five samples we took in the Acid Ra
 ## Results and Discussion
 ### Acid Rain Data Analysis
 We plotted the measured pH of the lake versus dimensionless hydraulic residence time (t/θ) to get a visualization of how pH changed over time (Figure 1).
+
 ![pHgraph1](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab2-Acid%20Rain/lab2_pHgraph1.png?raw=true)
 
 Figure 1. Plot of concentration pH of lake as acid rain was added over time.

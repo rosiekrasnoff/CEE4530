@@ -11,7 +11,7 @@ $$\Delta h = \frac{(\frac{Q}{nKA})^2}{2g}$$
 
 The change in hydraulic grade line for six orifices (aka total head loss) is 0.232 meters.
 
-6 holes in 1 mm in diameter would not be a good design for this reactor because head loss is reduced as the number of holes increase. Thus, the ideal reactor would have more holes.  
+6 holes in 1 mm in diameter would not be a good design for this reactor because head loss is reduced as the number of holes increase. The head loss with 6 holes is too high and will cause the reactor to overflow. Thus, the ideal reactor would have more holes.  
 
 ``` python
 import math as m

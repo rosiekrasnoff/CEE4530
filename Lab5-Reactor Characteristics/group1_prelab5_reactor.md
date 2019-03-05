@@ -54,6 +54,9 @@ plt.ylabel('E')
 plt.legend(['Peclet=1', 'Peclet=10', 'Peclet=100'])
 plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab5-Reactor Characteristics/E_peclet_graph.png')
 plt.show()
-
 ```
-As the Peclet number increases the dispersion decreases and the response becomes closer to plug flow.
+![E_peclet_graph](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/E_peclet_graph.png?raw=true)
+
+Figure 1. Exit Age Distribution (E(t⋆)) for a reactor that operates as a 1-dimensional advection-dispersion reactor with Peclet numbers of 1, 10, and 100 as a function of t*.
+
+As the Peclet number increases, the dispersion decreases and the response becomes closer to plug flow. This can be seen in the graph above as the curve forms sharper peak at a higher magnitude when the Peclet number increases to 100.

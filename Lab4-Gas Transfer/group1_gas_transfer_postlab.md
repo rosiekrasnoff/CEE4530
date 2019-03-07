@@ -2,7 +2,12 @@
 ## Group 1 - Jiwon Lee and Rosie Krasnoff
 ##### March 8th
 
+2.
+![DO_vs_Time](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab4-Gas%20Transfer/DO_vs_Time.png?raw=true)
 
+Figure 1. A representative subset of six of the tested flow rates showing dissolved oxygen vs. time.
+
+3. A calculation of C* based on the average water temperature, $22^\circ C$ and the barometric pressure, 101.3 kPa using the equation C⋆=PO2e(1727T−2.105) finds a value of C*= 8.894 mg/L
 
 ``` python
 from aguaclara.core.units import unit_registry as u
@@ -54,7 +59,6 @@ for i in range(airflows.size):
   #Accumulator_P[i] = Accumulator_P[i][idx_start:idx_end]
 
 ## Number 2
-
 #getting all the data
 for i in range(airflows.size):
   plt.plot(time_data[i], DO_data[i],'-')
@@ -68,19 +72,64 @@ plt.plot(time_data[0], DO_data[0],'-', time_data[4], DO_data[4],'-', time_data[9
 plt.xlabel(r'$time (s)$')
 plt.ylabel(r'Oxygen concentration $\left ( \frac{mg}{L} \right )$')
 plt.legend(['100', '225', '475', '575', '950'])
-plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/DO_vs_Time.png')
+#plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/DO_vs_Time.png')
 plt.show()
 
 ## Number 3
+T_w=22*u.celsius
+Temp=T_w.to(u.K)
+P = 101.3*u.kPa
+C_star = epa.O2_sat(P,Temp)
 
+## Number 4
+t_0=time_data[0]
+C_0=DO_data[0]
+t_0
+
+for i in range(airflows.size):
+#use scipy linear regression. Note that the we can extract the last n points from an array using the notation [-N:]
+slope, intercept, r_value, p_value, std_err = stats.linregress(time_data[-i],DO_data[-i])
+#reattach the correct units to the slope and intercept.
+intercept = intercept*u.mole/u.L
+slope = slope*(u.mole/u.L)/u.mL
+
+#The equivalent volume agrees well with the value calculated by ProCoDA.
+#create an array of points to draw the linear regression line
+x=[V_eq.magnitude,time_data[-i].magnitude ]
+y=[0,(DO_data[-1]*slope+intercept).magnitude]
+
+
+## Number 5
+#Now plot the data and the linear regression
+plt.plot(time_data, DO_data,'o')
+plt.plot(x, y,'r')
+plt.xlabel('Titrant Volume (mL)')
+plt.ylabel(' (mole/L)')
+plt.legend(['data'])
+plt.tight_layout()
+#plt.savefig('')
+plt.show()
+
+## Number 6
+plt.plot(time_data, DO_data,'o')
+plt.plot(x, y,'r')
+plt.xlabel('airflow rate (μmole/s) ')
+plt.ylabel('k^v,l')
+plt.tight_layout()
+#plt.savefig('')
+plt.show()
+
+## Number 7
+plt.plot(time_data, DO_data,'o')
+plt.plot(x, y,'r')
+plt.xlabel('airflow rate (μmole/s) ')
+plt.ylabel('OTE')
+plt.tight_layout()
+#plt.savefig('')
+plt.show()
 
 ```
 
-2. Plot a representative subset of the data showing dissolved oxygen vs. time. Perhaps show 5 plots on one graph.
-
-![DO_vs_Time](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/E_peclet_graph.png?raw=true)
-
-3. Calculate C⋆ based on the average water temperature, barometric pressure, and the equation from environmental processes analysis called O2_sat. C⋆=PO2e(1727T−2.105) where T is in Kelvin, PO2 is the partial pressure of oxygen in atmospheres, and C⋆ is in mg/L.
 4. Estimate k^v,l using linear regression and equation (103) for each data set.
 
 $$Equation \; 103:$$
@@ -98,6 +147,7 @@ $$\ln \frac{C^{*} -C}{C^{*} -C_{0} } =-\hat{k}_{v,l} (t-t_{0} )$$
 
 
 # Appendix
+
 ``` python
 
 ```

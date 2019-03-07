@@ -3,6 +3,15 @@
 ##### March 8th
 
 1. Eliminate the data from each data set when the dissolved oxygen concentration was less than 2 mg/L. This will ensure that all of the sulfite has reacted. Also remove the data when the dissolved oxygen concentration was greater than 6 mg/L to reduce the effect of measurement errors when the oxygen deficit is small.
+
+
+``` python
+
+
+
+```
+
+
 2. Plot a representative subset of the data showing dissolved oxygen vs. time. Perhaps show 5 plots on one graph.
 3. Calculate C⋆ based on the average water temperature, barometric pressure, and the equation from environmental processes analysis called O2_sat. C⋆=PO2e(1727T−2.105) where T is in Kelvin, PO2 is the partial pressure of oxygen in atmospheres, and C⋆ is in mg/L.
 4. Estimate k^v,l using linear regression and equation (103) for each data set.

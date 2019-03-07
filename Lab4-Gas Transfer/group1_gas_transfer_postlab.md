@@ -2,7 +2,7 @@
 ## Group 1 - Jiwon Lee and Rosie Krasnoff
 ##### March 8th
 
-1. Eliminate the data from each data set when the dissolved oxygen concentration was less than 2 mg/L. This will ensure that all of the sulfite has reacted. Also remove the data when the dissolved oxygen concentration was greater than 6 mg/L to reduce the effect of measurement errors when the oxygen deficit is small.
+
 
 ``` python
 from aguaclara.core.units import unit_registry as u
@@ -38,19 +38,11 @@ def aeration_data(DO_column, dirpath):
 
 # The column of data containing the dissolved oxygen concentrations
 DO_column = 2
-dirpath = "Examples/data/Aeration"
+#dirpath = "/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/Aeration/Aeration"
+#dirpath='/Users/Rosie/github/CEE4530/Lab4-Gas Transfer/Aeration/Aeration/'
 filepaths, airflows, DO_data, time_data = aeration_data(DO_column,dirpath)
 
-
-# Plot the raw data
-
-for i in range(airflows.size):
-  plt.plot(time_data[i], DO_data[i],'-')
-plt.xlabel(r'$time (s)$')
-plt.ylabel(r'Oxygen concentration $\left ( \frac{mg}{L} \right )$')
-plt.legend(airflows.magnitude)
-plt.show()
-
+## Number 1
 #delete data that is less than 2 or greater than 6 mg/L
 DO_min = 2 * u.mg/u.L
 DO_max = 6 * u.mg/u.L
@@ -59,13 +51,35 @@ for i in range(airflows.size):
   idx_end = (np.abs(DO_data[i]-DO_max)).argmin()
   time_data[i] = time_data[i][idx_start:idx_end] - time_data[i][idx_start]
   DO_data[i] = DO_data[i][idx_start:idx_end]
-  Accumulator_P[i] = Accumulator_P[i][idx_start:idx_end]
+  #Accumulator_P[i] = Accumulator_P[i][idx_start:idx_end]
+
+## Number 2
+
+#getting all the data
+for i in range(airflows.size):
+  plt.plot(time_data[i], DO_data[i],'-')
+plt.xlabel(r'$time (s)$')
+plt.ylabel(r'Oxygen concentration $\left ( \frac{mg}{L} \right )$')
+plt.legend(airflows.magnitude)
+plt.show()
+
+#pick 5 representative values
+plt.plot(time_data[0], DO_data[0],'-', time_data[4], DO_data[4],'-', time_data[9], DO_data[9],'-', time_data[13], DO_data[13],'-', time_data[23], DO_data[23],'-')
+plt.xlabel(r'$time (s)$')
+plt.ylabel(r'Oxygen concentration $\left ( \frac{mg}{L} \right )$')
+plt.legend(['100', '225', '475', '575', '950'])
+plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/DO_vs_Time.png')
+plt.show()
+
+## Number 3
 
 
 ```
 
-
 2. Plot a representative subset of the data showing dissolved oxygen vs. time. Perhaps show 5 plots on one graph.
+
+![DO_vs_Time](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/E_peclet_graph.png?raw=true)
+
 3. Calculate C⋆ based on the average water temperature, barometric pressure, and the equation from environmental processes analysis called O2_sat. C⋆=PO2e(1727T−2.105) where T is in Kelvin, PO2 is the partial pressure of oxygen in atmospheres, and C⋆ is in mg/L.
 4. Estimate k^v,l using linear regression and equation (103) for each data set.
 

@@ -43,7 +43,7 @@ def aeration_data(DO_column, dirpath):
 
 # The column of data containing the dissolved oxygen concentrations
 DO_column = 2
-#dirpath = "/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/Aeration/Aeration"
+dirpath = "/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/Aeration/Aeration"
 #dirpath='/Users/Rosie/github/CEE4530/Lab4-Gas Transfer/Aeration/Aeration/'
 filepaths, airflows, DO_data, time_data = aeration_data(DO_column,dirpath)
 
@@ -82,22 +82,47 @@ P = 101.3*u.kPa
 C_star = epa.O2_sat(P,Temp)
 
 ## Number 4
-time_array=time_data[4]
-t_0=time_array[0]
-C_array=DO_data[4]
-C_0=C_array[0]
-
+delta_t=np.empty(airflows.size,dtype="object")
 for i in range(airflows.size):
-  time_array=time_data[i]
-  t_0=time_array[0]
+  t_temp=time_data[i].magnitude
+  delta_t_temp=t_temp - t_temp[0]
+  delta_t[i] = delta_t_temp
+  # delta_t=np.append(delta_t,[delta_t_temp])
+x=delta_t
 
-  C_array=DO_data[i]
-  C_0=C_array[0]
+
+y=np.empty(airflows.size,dtype="object")
+for i in range(airflows.size):
+  do_temp=DO_data[i].magnitude
+  numerator = C_star.magnitude - do_temp
+  denominator = C_star.magnitude - do_temp[0]
+  y_temp = np.log(numerator/denominator)
+  y[i] = y_temp
+
+kvl = np.empty(airflows.size,dtype="object")
+for i in range(airflows.size):
+  x_temp = delta_t[i]
+  y_temp = y[i]
+  slope, intercept, r_value, p_value, std_err = stats.linregress(x_temp, y_temp)
+  kvl[i] = slope
+
+
+#time_array=time_data[4]
+#t_0=time_array[0]
+#C_array=DO_data[4]
+#C_0=C_array[0]
+
+#for i in range(airflows.size):
+  #time_array=time_data[i]
+  #t_0=time_array[0]
+
+  #C_array=DO_data[i]
+  #C_0=C_array[0]
 #use scipy linear regression. Note that the we can extract the last n points from an array using the notation [-N:]
-slope, intercept, r_value, p_value, std_err = stats.linregress(time_data[-i],DO_data[-i])
+#slope, intercept, r_value, p_value, std_err = stats.linregress(time_data[-i],DO_data[-i])
 #reattach the correct units to the slope and intercept.
 #intercept = intercept*u.mole/u.L
-k = slope #k^v,l
+#k = slope #k^v,l
 
 #The equivalent volume agrees well with the value calculated by ProCoDA.
 #create an array of points to draw the linear regression line

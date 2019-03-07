@@ -56,7 +56,6 @@ for i in range(airflows.size):
   idx_end = (np.abs(DO_data[i]-DO_max)).argmin()
   time_data[i] = time_data[i][idx_start:idx_end] - time_data[i][idx_start]
   DO_data[i] = DO_data[i][idx_start:idx_end]
-  #Accumulator_P[i] = Accumulator_P[i][idx_start:idx_end]
 
 ## Number 2
 #getting all the data
@@ -90,7 +89,6 @@ for i in range(airflows.size):
   # delta_t=np.append(delta_t,[delta_t_temp])
 x=delta_t
 
-
 y=np.empty(airflows.size,dtype="object")
 for i in range(airflows.size):
   do_temp=DO_data[i].magnitude
@@ -105,6 +103,7 @@ for i in range(airflows.size):
   y_temp = y[i]
   slope, intercept, r_value, p_value, std_err = stats.linregress(x_temp, y_temp)
   kvl[i] = slope
+  kvl
 
 
 #time_array=time_data[4]
@@ -142,8 +141,8 @@ plt.tight_layout()
 plt.show()
 
 ## Number 6
-plt.plot(time_data, DO_data,'o')
-plt.plot(x, y,'r')
+plt.plot(airflows, kvl,'r')
+#plt.plot(x, y,'r')
 plt.xlabel('airflow rate (μmole/s) ')
 plt.ylabel('k^v,l')
 plt.tight_layout()
@@ -172,7 +171,6 @@ $$\ln \frac{C^{*} -C}{C^{*} -C_{0} } =-\hat{k}_{v,l} (t-t_{0} )$$
 8. Comment on the oxygen transfer efficiency and the trend or trends that you observe.
 9. Propose a change to the experimental apparatus that would increase the efficiency.
 10. Verify that your report and graphs meet the requirements.
-
 
 
 # Conclusion

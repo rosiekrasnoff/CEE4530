@@ -13,16 +13,52 @@ Figure 1. A representative subset of six of the tested flow rates showing dissol
 from aguaclara.core.units import unit_registry as u
 import aguaclara.research.environmental_processes_analysis as epa
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
+import pandas as pd
 from scipy import stats
 import collections
 import os
 from pathlib import Path
+import time
 
 # This code is included because there is a bug in the version of this code that is in epa.
-
 def aeration_data(DO_column, dirpath):
+    """This function extracts the data from folder containing tab delimited
+    files of aeration data. The file must be the original tab delimited file.
+    All text strings below the header must be removed from these files.
+    The file names must be the air flow rates with units of micromoles/s.
+    An example file name would be "300.xls" where 300 is the flowrate in
+    micromoles/s. The function opens a file dialog for the user to select
+    the directory containing the data.
+
+    Parameters
+    ----------
+    DO_column : int
+        index of the column that contains the dissolved oxygen concentration
+        data.
+
+    dirpath : string
+        path to the directory containing aeration data you want to analyze
+
+    Returns
+    -------
+    filepaths : string list
+        all file paths in the directory sorted by flow rate
+
+    airflows : numpy array
+        sorted array of air flow rates with units of micromole/s attached
+
+    DO_data : numpy array list
+        sorted list of numpy arrays. Thus each of the numpy data arrays can
+        have different lengths to accommodate short and long experiments
+
+    time_data : numpy array list
+        sorted list of numpy arrays containing the times with units of seconds
+
+    Examples
+    --------
+
+    """
     #return the list of files in the directory
     filenames = os.listdir(dirpath)
     #extract the flowrates from the filenames and apply units
@@ -44,14 +80,14 @@ def aeration_data(DO_column, dirpath):
 # The column of data containing the dissolved oxygen concentrations
 DO_column = 2
 dirpath = "/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/Aeration/Aeration"
-#dirpath='/Users/Rosie/github/CEE4530/Lab4-Gas Transfer/Aeration/Aeration/'
+dirpath='/Users/Rosie/github/CEE4530/Lab4-Gas Transfer/Aeration/Aeration/'
 filepaths, airflows, DO_data, time_data = aeration_data(DO_column,dirpath)
-
+epa.column_of_data('/Users/Rosie/github/CEE4530/Lab4-Gas Transfer/550.xls',1,-1,1,'Pa')
 ## Number 1
 #delete data that is less than 2 or greater than 6 mg/L
 DO_min = 2 * u.mg/u.L
 DO_max = 6 * u.mg/u.L
-for i in range(airflows.size):
+for i in range(1,airflows.size,4):
   idx_start = (np.abs(DO_data[i]-DO_min)).argmin()
   idx_end = (np.abs(DO_data[i]-DO_max)).argmin()
   time_data[i] = time_data[i][idx_start:idx_end] - time_data[i][idx_start]
@@ -80,60 +116,41 @@ Temp=T_w.to(u.K)
 P = 101.3*u.kPa
 C_star = epa.O2_sat(P,Temp)
 
-## Number 4
-delta_t=np.empty(airflows.size,dtype="object")
-for i in range(airflows.size):
+
+
+#numb=airflows.size
+numb=11
+
+y=np.empty(numb,dtype="object")
+delta_t=np.empty(numb,dtype="object")
+for i in range(numb):
   t_temp=time_data[i].magnitude
+  t_temp
   delta_t_temp=t_temp - t_temp[0]
   delta_t[i] = delta_t_temp
   # delta_t=np.append(delta_t,[delta_t_temp])
-x=delta_t
-
-y=np.empty(airflows.size,dtype="object")
-for i in range(airflows.size):
   do_temp=DO_data[i].magnitude
   numerator = C_star.magnitude - do_temp
   denominator = C_star.magnitude - do_temp[0]
   y_temp = np.log(numerator/denominator)
   y[i] = y_temp
+x=delta_t
 
-kvl = np.empty(airflows.size,dtype="object")
-for i in range(airflows.size):
+kvl = np.empty(numb,dtype="object")
+for i in range(numb):
   x_temp = delta_t[i]
   y_temp = y[i]
   slope, intercept, r_value, p_value, std_err = stats.linregress(x_temp, y_temp)
   kvl[i] = slope
-  kvl
 
-
-#time_array=time_data[4]
-#t_0=time_array[0]
-#C_array=DO_data[4]
-#C_0=C_array[0]
-
-#for i in range(airflows.size):
-  #time_array=time_data[i]
-  #t_0=time_array[0]
-
-  #C_array=DO_data[i]
-  #C_0=C_array[0]
-#use scipy linear regression. Note that the we can extract the last n points from an array using the notation [-N:]
-#slope, intercept, r_value, p_value, std_err = stats.linregress(time_data[-i],DO_data[-i])
-#reattach the correct units to the slope and intercept.
-#intercept = intercept*u.mole/u.L
-#k = slope #k^v,l
-
-#The equivalent volume agrees well with the value calculated by ProCoDA.
-#create an array of points to draw the linear regression line
-x=[0,(time_data[i]-t_initial).magnitude]
-y=[0,(DO_data[i]*k+intercept).magnitude]
+kvl
 
 
 ## Number 5
 #Now plot the data and the linear regression
-plt.plot(time_data, DO_data,'o')
-plt.plot(x, y,'r')
-plt.xlabel('Titrant Volume (mL)')
+plt.plot(time_data[14], DO_data[14],'o')
+plt.plot(x_temp, y_temp,'r')
+plt.xlabel('time (s)')
 plt.ylabel(' (mole/L)')
 plt.legend(['data'])
 plt.tight_layout()

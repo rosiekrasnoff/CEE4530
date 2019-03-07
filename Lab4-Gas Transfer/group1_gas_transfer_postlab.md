@@ -82,21 +82,27 @@ P = 101.3*u.kPa
 C_star = epa.O2_sat(P,Temp)
 
 ## Number 4
-t_0=time_data[0]
-C_0=DO_data[0]
-t_0
+time_array=time_data[4]
+t_0=time_array[0]
+C_array=DO_data[4]
+C_0=C_array[0]
 
 for i in range(airflows.size):
+  time_array=time_data[i]
+  t_0=time_array[0]
+
+  C_array=DO_data[i]
+  C_0=C_array[0]
 #use scipy linear regression. Note that the we can extract the last n points from an array using the notation [-N:]
 slope, intercept, r_value, p_value, std_err = stats.linregress(time_data[-i],DO_data[-i])
 #reattach the correct units to the slope and intercept.
-intercept = intercept*u.mole/u.L
-slope = slope*(u.mole/u.L)/u.mL
+#intercept = intercept*u.mole/u.L
+k = slope #k^v,l
 
 #The equivalent volume agrees well with the value calculated by ProCoDA.
 #create an array of points to draw the linear regression line
-x=[V_eq.magnitude,time_data[-i].magnitude ]
-y=[0,(DO_data[-1]*slope+intercept).magnitude]
+x=[0,(time_data[i]-t_initial).magnitude]
+y=[0,(DO_data[i]*k+intercept).magnitude]
 
 
 ## Number 5
@@ -144,6 +150,9 @@ $$\ln \frac{C^{*} -C}{C^{*} -C_{0} } =-\hat{k}_{v,l} (t-t_{0} )$$
 
 
 
+# Conclusion
+
+# Suggestions / Comments
 
 
 # Appendix

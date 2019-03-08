@@ -83,11 +83,13 @@ dirpath = "/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/Aeration/Aeration"
 dirpath='/Users/Rosie/github/CEE4530/Lab4-Gas Transfer/Aeration/Aeration/'
 filepaths, airflows, DO_data, time_data = aeration_data(DO_column,dirpath)
 
+airflows.size
+
 ## Number 1
 #delete data that is less than 2 or greater than 6 mg/L
 DO_min = 2 * u.mg/u.L
 DO_max = 6 * u.mg/u.L
-for i in range(1,airflows.size,4):
+for i in range(airflows.size):
   idx_start = (np.abs(DO_data[i]-DO_min)).argmin()
   idx_end = (np.abs(DO_data[i]-DO_max)).argmin()
   time_data[i] = time_data[i][idx_start:idx_end] - time_data[i][idx_start]
@@ -103,11 +105,11 @@ plt.legend(airflows.magnitude)
 plt.show()
 
 #pick 5 representative values
-plt.plot(time_data[0], DO_data[0],'-', time_data[4], DO_data[4],'-', time_data[10], DO_data[10],'-', time_data[13], DO_data[13],'-', time_data[22], DO_data[22],'-')
+plt.plot(time_data[0], DO_data[0],'-', time_data[4], DO_data[4],'-', time_data[10], DO_data[10],'-', time_data[15], DO_data[15],'-', time_data[22], DO_data[22],'-')
 plt.xlabel(r'$time (s)$')
 plt.ylabel(r'Oxygen concentration $\left ( \frac{mg}{L} \right )$')
-plt.legend(['100', '225', '475', '575', '950'])
-#plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/DO_vs_Time.png')
+plt.legend(['100', '225', '500', '725', '950'])
+plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/DO_vs_Time.png')
 plt.show()
 
 ## Number 3

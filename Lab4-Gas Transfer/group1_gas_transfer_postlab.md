@@ -119,8 +119,7 @@ P = 101.3*u.kPa
 C_star = epa.O2_sat(P,Temp)
 
 ## Number 4
-#numb=airflows.size
-numb=11
+numb=airflows.size
 
 y=np.empty(numb,dtype="object")
 delta_t=np.empty(numb,dtype="object")
@@ -137,7 +136,6 @@ for i in range(numb):
   y[i] = y_temp
 x=delta_t
 
-do_temp[0]
 
 kvl = np.empty(numb,dtype="object")
 for i in range(numb):
@@ -146,38 +144,46 @@ for i in range(numb):
   slope, intercept, r_value, p_value, std_err = stats.linregress(x_temp, y_temp)
   kvl[i] = -1*slope
 
-
-trial_N=5
-t=np.linspace(0,100,500)
+## Number 5
+trial_N=0
+t=np.linspace(0,200,500)
 #equation C=C_star-(C_star-C0)*np.exp(-kvl*t)
 C0 = DO_data[trial_N][0].magnitude
 C=C_star.magnitude-(C_star.magnitude-C0)*np.exp(-kvl[trial_N]*t)
 
-## Number 5
 #Now plot the data and the linear regression
 plt.plot(t,C,'r')
 plt.plot(time_data[trial_N], DO_data[trial_N],'o')
 plt.xlabel('time (s)')
-plt.ylabel(' (mole/L)')
-plt.legend(['model','data'])
+plt.ylabel(' DO concentration (mg/L)')
+plt.legend(['model','data for flow=100 $\mu M/s$'])
 plt.tight_layout()
-#plt.savefig('')
+#plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/time_vs_C.png')
 plt.show()
 
 ## Number 6
-plt.plot(airflows, kvl,'r')
+plt.plot(airflows, kvl,'o-')
 #plt.plot(x, y,'r')
-plt.xlabel('airflow rate (μmole/s) ')
+plt.xlabel('airflow rate ($\mu M/s$) ')
 plt.ylabel('k^v,l')
 plt.tight_layout()
 #plt.savefig('')
 plt.show()
 
 ## Number 7
-plt.plot(time_data, DO_data,'o')
-plt.plot(x, y,'r')
+V=.750*u.L
+T=293*u.K
+MW=32*u.gram/u.mole
+nair=airflows.to(u.mole/u.s)
+P=101.3*u.kPa
+P=P.to(u.atm)
+f=0.21
+deltaC=6*u.mg/u.L
+OTE = np.array((V*kvl*(deltaC))/(MW*nair*f))
+
+plt.plot(airflows, OTE,'o-')
 plt.xlabel('airflow rate (μmole/s) ')
-plt.ylabel('OTE')
+plt.ylabel('oxygen transfer efficiency')
 plt.tight_layout()
 #plt.savefig('')
 plt.show()
@@ -187,11 +193,17 @@ plt.show()
 4. Estimate k^v,l using linear regression and equation (103) for each data set.
 
 $$Equation \; 103:$$
-$$\ln \frac{C^{*} -C}{C^{*} -C_{0} } =-\hat{k}_{v,l} (t-t_{0} )$$
+$$\ln \frac{C^{\star} -C}{C^{\star} -C_{0} } =-\hat{k}_{v,l} (t-t_{0} )$$
 
 5. Create a graph with a representative plot showing the model curve (as a smooth curve) and the data from one experiment. You will need to derive the equation for the concentration of oxygen as a function of time based on equation (103).
+
+
 6. Plot k^v,l as a function of airflow rate (μmole/s).
 7. Plot OTE as a function of airflow rate (?mole/s) with the oxygen deficit (C⋆−C) set at 6 mg/L.
+
+$$OTE=\frac{\dot{n}_{aq\; o_{2} } }{f_{O_{2} } \dot{n}_{air} } =\frac{V\hat{k}_{v,l} \left(C^{\star} -C\right)}{f_{O_{2} } \dot{n}_{air} MW_{O_{2} } }$$
+
+
 8. Comment on the oxygen transfer efficiency and the trend or trends that you observe.
 9. Propose a change to the experimental apparatus that would increase the efficiency.
 10. Verify that your report and graphs meet the requirements.

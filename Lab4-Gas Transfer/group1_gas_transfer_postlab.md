@@ -82,7 +82,7 @@ DO_column = 2
 dirpath = "/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/Aeration/Aeration"
 dirpath='/Users/Rosie/github/CEE4530/Lab4-Gas Transfer/Aeration/Aeration/'
 filepaths, airflows, DO_data, time_data = aeration_data(DO_column,dirpath)
-epa.column_of_data('/Users/Rosie/github/CEE4530/Lab4-Gas Transfer/550.xls',1,-1,1,'Pa')
+
 ## Number 1
 #delete data that is less than 2 or greater than 6 mg/L
 DO_min = 2 * u.mg/u.L
@@ -103,7 +103,7 @@ plt.legend(airflows.magnitude)
 plt.show()
 
 #pick 5 representative values
-plt.plot(time_data[0], DO_data[0],'-', time_data[4], DO_data[4],'-', time_data[9], DO_data[9],'-', time_data[13], DO_data[13],'-', time_data[23], DO_data[23],'-')
+plt.plot(time_data[0], DO_data[0],'-', time_data[4], DO_data[4],'-', time_data[10], DO_data[10],'-', time_data[13], DO_data[13],'-', time_data[22], DO_data[22],'-')
 plt.xlabel(r'$time (s)$')
 plt.ylabel(r'Oxygen concentration $\left ( \frac{mg}{L} \right )$')
 plt.legend(['100', '225', '475', '575', '950'])
@@ -116,8 +116,7 @@ Temp=T_w.to(u.K)
 P = 101.3*u.kPa
 C_star = epa.O2_sat(P,Temp)
 
-
-
+## Number 4
 #numb=airflows.size
 numb=11
 
@@ -136,23 +135,29 @@ for i in range(numb):
   y[i] = y_temp
 x=delta_t
 
+do_temp[0]
+
 kvl = np.empty(numb,dtype="object")
 for i in range(numb):
   x_temp = delta_t[i]
   y_temp = y[i]
   slope, intercept, r_value, p_value, std_err = stats.linregress(x_temp, y_temp)
-  kvl[i] = slope
+  kvl[i] = -1*slope
 
-kvl
 
+trial_N=5
+t=np.linspace(0,100,500)
+#equation C=C_star-(C_star-C0)*np.exp(-kvl*t)
+C0 = DO_data[trial_N][0].magnitude
+C=C_star.magnitude-(C_star.magnitude-C0)*np.exp(-kvl[trial_N]*t)
 
 ## Number 5
 #Now plot the data and the linear regression
-plt.plot(time_data[14], DO_data[14],'o')
-plt.plot(x_temp, y_temp,'r')
+plt.plot(t,C,'r')
+plt.plot(time_data[trial_N], DO_data[trial_N],'o')
 plt.xlabel('time (s)')
 plt.ylabel(' (mole/L)')
-plt.legend(['data'])
+plt.legend(['model','data'])
 plt.tight_layout()
 #plt.savefig('')
 plt.show()

@@ -1,6 +1,6 @@
 # Gas Transfer
 ## Group 1 - Jiwon Lee and Rosie Krasnoff
-##### March 8th
+##### Deadline extended: Due March 12th
 
 2.
 ![DO_vs_Time](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab4-Gas%20Transfer/DO_vs_Time.png?raw=true)
@@ -8,6 +8,18 @@
 Figure 1. A representative subset of six of the tested flow rates showing dissolved oxygen vs. time.
 
 3. A calculation of C* based on the average water temperature, $22^\circ C$ and the barometric pressure, 101.3 kPa using the equation C⋆=PO2e(1727T−2.105) finds a value of C*= 8.894 mg/L
+
+4. Estimate k^v,l using linear regression and equation (103) for each data set.
+
+Using linear regression and equation 103 (typed below), we found the k^v,l for each data set to be as follows:
+0.00272, 0.00365, 0.00347, 0.003194, 0.00420,0.00669, 0.006456, 0.00851, 0.00904, 0.00904, 0.00715, 0.00739, 0.006467, 0.00977, 0.01143, 0.00907, 0.01083, 0.01080, 0.00708, 0.00695, 0.00998, 0.00494, 0.01142
+
+
+5. ![time_vs_C](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab4-Gas%20Transfer/DO_vs_Time.png?raw=true)
+
+
+$$Equation \; 103:$$
+$$\ln \frac{C^{\star} -C}{C^{\star} -C_{0} } =-\hat{k}_{v,l} (t-t_{0} )$$
 
 ``` python
 from aguaclara.core.units import unit_registry as u
@@ -109,7 +121,7 @@ plt.plot(time_data[0], DO_data[0],'-', time_data[4], DO_data[4],'-', time_data[1
 plt.xlabel(r'$time (s)$')
 plt.ylabel(r'Oxygen concentration $\left ( \frac{mg}{L} \right )$')
 plt.legend(['100', '225', '500', '725', '950'])
-plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/DO_vs_Time.png')
+#plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/DO_vs_Time.png')
 plt.show()
 
 ## Number 3
@@ -158,16 +170,15 @@ plt.xlabel('time (s)')
 plt.ylabel(' DO concentration (mg/L)')
 plt.legend(['model','data for flow=100 $\mu M/s$'])
 plt.tight_layout()
-#plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/time_vs_C.png')
+plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/time_vs_C.png')
 plt.show()
 
 ## Number 6
 plt.plot(airflows, kvl,'o-')
-#plt.plot(x, y,'r')
 plt.xlabel('airflow rate ($\mu M/s$) ')
 plt.ylabel('k^v,l')
 plt.tight_layout()
-#plt.savefig('')
+plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/airflow_rate_vs_kvl.png')
 plt.show()
 
 ## Number 7
@@ -185,15 +196,11 @@ plt.plot(airflows, OTE,'o-')
 plt.xlabel('airflow rate (μmole/s) ')
 plt.ylabel('oxygen transfer efficiency')
 plt.tight_layout()
-#plt.savefig('')
+plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/airflow_rate_vs_OTE.png')
 plt.show()
 
 ```
 
-4. Estimate k^v,l using linear regression and equation (103) for each data set.
-
-$$Equation \; 103:$$
-$$\ln \frac{C^{\star} -C}{C^{\star} -C_{0} } =-\hat{k}_{v,l} (t-t_{0} )$$
 
 5. Create a graph with a representative plot showing the model curve (as a smooth curve) and the data from one experiment. You will need to derive the equation for the concentration of oxygen as a function of time based on equation (103).
 

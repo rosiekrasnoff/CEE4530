@@ -9,18 +9,42 @@ Figure 1. A representative subset of six of the tested flow rates showing dissol
 
 3. A calculation of C* based on the average water temperature, $22^\circ C$ and the barometric pressure, 101.3 kPa using the equation C⋆=PO2e(1727T−2.105) finds a value of C*= 8.894 mg/L
 
-4. Estimate k^v,l using linear regression and equation (103) for each data set.
+4. $$ \ln \frac{C^{\star} -C}{C^{\star} -C_{0} } =-\hat{k}_{v,l} (t-t_{0} )\space\space\space\space\space(103)$$
 
-Using linear regression and equation 103 (typed below), we found the k^v,l for each data set to be as follows:
+Using linear regression and equation 103 above, we found an estimation for the k^v,l for each data set to be as follows:
 0.00272, 0.00365, 0.00347, 0.003194, 0.00420,0.00669, 0.006456, 0.00851, 0.00904, 0.00904, 0.00715, 0.00739, 0.006467, 0.00977, 0.01143, 0.00907, 0.01083, 0.01080, 0.00708, 0.00695, 0.00998, 0.00494, 0.01142
 
+5.
+![time_vs_C](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab4-Gas%20Transfer/time_vs_C.png?raw=true)
 
-5. ![time_vs_C](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab4-Gas%20Transfer/DO_vs_Time.png?raw=true)
+Figure 2. A representative plot showing the linear regression model curve and the data for when flow rate = 100$\mu M/s$. Model is a close fit to the measured data, which suggests that it is a good model and any assumptions were valid.
+
+6. ![airflow_vs_kvl](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab4-Gas%20Transfer/airflow_rate_vs_kvl.png?raw=true)
+
+Figure 3. k^v,l as a function of airflow rate (μmole/s).
+
+7. Using equation 108, we calculated the oxygen transfer efficiency: $$OTE=\frac{\dot{n}_{aq\; o_{2} } }{f_{O_{2} } \dot{n}_{air} } =\frac{V\hat{k}_{v,l} \left(C^{\star} -C\right)}{f_{O_{2} } \dot{n}_{air} MW_{O_{2} } }$$
+
+![airflow_vs_OTE](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab4-Gas%20Transfer/airflow_rate_vs_OTE.png?raw=true)
+
+Figure 4. Oxygen transfer efficiency as a function of airflow rate (μmole/s) with the oxygen deficit set at 6 mg/L.
+
+8. As the airflow rate (μmole/s) increases, the oxygen transfer efficiency decreases. Thus, we can observe an inverse relationship between OTE and airflow rate. This makes sense because we're dividing by a larger $\dot{n}_{aq\; o_{2} }$ each time, so with increasing air flow rate, the oxygen transfer efficiency decreases.
+
+9. Propose a change to the experimental apparatus that would increase the efficiency.
 
 
-$$Equation \; 103:$$
-$$\ln \frac{C^{\star} -C}{C^{\star} -C_{0} } =-\hat{k}_{v,l} (t-t_{0} )$$
+This oxygen transfer efficiency (OTE) is a function of the type of diffuser, the diffuser depth of submergence, as well as temperature and ionic strength of the activated sludge.
 
+10. Verify that your report and graphs meet the requirements.
+
+
+# Conclusion
+
+# Suggestions / Comments
+
+
+# Appendix
 ``` python
 from aguaclara.core.units import unit_registry as u
 import aguaclara.research.environmental_processes_analysis as epa
@@ -192,37 +216,14 @@ f=0.21
 deltaC=6*u.mg/u.L
 OTE = np.array((V*kvl*(deltaC))/(MW*nair*f))
 
+T=V*kvl*(deltaC))/(MW*nair*f)
+
+
 plt.plot(airflows, OTE,'o-')
 plt.xlabel('airflow rate (μmole/s) ')
 plt.ylabel('oxygen transfer efficiency')
 plt.tight_layout()
 plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/airflow_rate_vs_OTE.png')
 plt.show()
-
-```
-
-
-5. Create a graph with a representative plot showing the model curve (as a smooth curve) and the data from one experiment. You will need to derive the equation for the concentration of oxygen as a function of time based on equation (103).
-
-
-6. Plot k^v,l as a function of airflow rate (μmole/s).
-7. Plot OTE as a function of airflow rate (?mole/s) with the oxygen deficit (C⋆−C) set at 6 mg/L.
-
-$$OTE=\frac{\dot{n}_{aq\; o_{2} } }{f_{O_{2} } \dot{n}_{air} } =\frac{V\hat{k}_{v,l} \left(C^{\star} -C\right)}{f_{O_{2} } \dot{n}_{air} MW_{O_{2} } }$$
-
-
-8. Comment on the oxygen transfer efficiency and the trend or trends that you observe.
-9. Propose a change to the experimental apparatus that would increase the efficiency.
-10. Verify that your report and graphs meet the requirements.
-
-
-# Conclusion
-
-# Suggestions / Comments
-
-
-# Appendix
-
-``` python
 
 ```

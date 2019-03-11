@@ -1,5 +1,5 @@
 # Gas Transfer
-## Group 1 - Jiwon Lee and Rosie Krasnoff
+## Group 1 - Jiwon Lee and Rosie Krasnoff (12 hours each)
 ##### Deadline extended: Due March 12th
 
 # Lab Exploration

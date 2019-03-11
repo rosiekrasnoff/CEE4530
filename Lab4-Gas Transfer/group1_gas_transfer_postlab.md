@@ -2,6 +2,18 @@
 ## Group 1 - Jiwon Lee and Rosie Krasnoff
 ##### Deadline extended: Due March 12th
 
+# Lab Exploration
+1. ProCoDA switches from the “prepare to calibrate” state to the “calibrate” state when accumulator pressure is greater than or equal to the minimum  calibration pressure.
+2. ProCoDA switches from the “calibrate” state to the “Pause” state when accumulator pressure is greater than the maximum calibration pressure.
+3. The “Pause” state knows which state to go to next because the rule is that once the elapsed time in the current state, “pause”, is greater than the input calibrate to aeration lag time, it will then move to the aeration state.
+4. The equation that is used to calculate the maximum calibration pressure multiplies the max calibration pressure/source pressure and the source pressure. This equation is better than using a constant for the maximum calibration pressure because it is actually based on the environment and isn’t accidentally set too high so that calibration takes too long.
+5. By using the ramp function, ProCoDA calculates the predicted pressure in the accumulator when it is filled at the constant mass flow rate, aka the air fill model, by taking the minimum calibration pressure (a constant), the maximum calibration pressure (the equation as explained above in number 4), and the fill time (Delta P/air flow rate).
+6. The inputs to the “air valve control” are the air slope and the air flow rate.
+7. The “Air valve control” controls the “Aerate” and “Fill accumulator” states.
+8. Jonathan gave us a thumbs up for our ProCoDA program that cycles between two states that aerate for 15 s and then pause for 10 s.
+
+# Data Analysis
+
 2.
 ![DO_vs_Time](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab4-Gas%20Transfer/DO_vs_Time.png?raw=true)
 
@@ -29,37 +41,18 @@ Figure 3. k^v,l as a function of airflow rate (μmole/s).
 
 Figure 4. Oxygen transfer efficiency as a function of airflow rate (μmole/s) with the oxygen deficit set at 6 mg/L.
 
-8. As the airflow rate (μmole/s) increases, the oxygen transfer efficiency decreases. Thus, we can observe an inverse relationship between OTE and airflow rate. This makes sense because we're dividing by a larger $\dot{n}_{aq\; o_{2} }$ each time, so with increasing air flow rate, the oxygen transfer efficiency decreases.
-less surface area to volume
-faster -> less time in the reactor
+8. As the airflow rate (μmole/s) increases, the oxygen transfer efficiency decreases. Thus, we can observe an inverse relationship between OTE and airflow rate. This makes sense because we're dividing by a larger $\dot{n}_{aq\; o_{2} }$ each time, so with increasing air flow rate, the oxygen transfer efficiency decreases. Furthermore, this lines up with our observation that there were larger, faster bubbles with increasing airflow rate. The OTE would decrease with larger flow rates because there is a smaller surface area to volume ratio as well as less time spent in the reactor.
 
-9. Propose a change to the experimental apparatus that would increase the efficiency.
-
-
-This oxygen transfer efficiency (OTE) is a function of the type of diffuser, the diffuser depth of submergence, as well as temperature and ionic strength of the activated sludge.
-The most efficient systems use membrane diffusers and achieve an OTE of approximately 10%.
-
-10. Verify that your report and graphs meet the requirements.
-
-
-# Lab Exploration
-1. ProCoDA switches from the “prepare to calibrate” state to the “calibrate” state when accumulator pressure is greater than or equal to the minimum  calibration pressure.
-2. ProCoDA switches from the “calibrate” state to the “Pause” state when accumulator pressure is greater than the maximum calibration pressure.
-3. The “Pause” state knows which state to go to next because the rule is that once the elapsed time in the current state, “pause”, is greater than the input calibrate to aeration lag time, it will then move to the aeration state.
-4. The equation that is used to calculate the maximum calibration pressure multiplies the max calibration pressure/source pressure and the source pressure. This equation is better than using a constant for the maximum calibration pressure because it is actually based on the environment and isn’t accidentally set too high so that calibration takes too long.
-5. By using the ramp function, ProCoDA calculates the predicted pressure in the accumulator when it is filled at the constant mass flow rate, aka the air fill model, by taking the minimum calibration pressure (a constant), the maximum calibration pressure (the equation as explained above in number 4), and the fill time (Delta P/air flow rate).
-6. The inputs to the “air valve control” are the air slope and the air flow rate.
-7. The “Air valve control” controls the “Aerate” and “Fill accumulator” states.
-8. Jonathan gives us a thumbs up for our ProCoDA program that cycles between two states that aerate for 15 s and then pause for 10 s.
+9. One change to the experimental apparatus that would increase the efficiency is increasing the depth of the reactor. This would especially help at higher airflow rates because the bubbles would spend more time in the reactor and thus, increase the OTE. Another change is to obtain an aerator that produced smaller bubbles to keep the surface area to volume ratio minimal.
 
 # Conclusion
 
-A small reactor that meets the conditions of a constant gas transfer coefficient will be used to characterize the dependence of the gas transfer coefficient on the gas flow rate through a simple diffuser. The gas transfer coefficient is a function of the gas flow rate because the interface surface area i.e., the surface area of the air bubbles) increases as the gas flow rate increases.
+In this lab, we simulated an activated sludge tank of a wastewater treatment plant that maintains aerobic degradation using a small reactor that meets the conditions of a constant gas transfer coefficient (k^v,l). Through a simple diffuser, we modeled the dependence of k^v,l on the gas flow rate. In this experiment,
+
 
 # Suggestions / Comments
 
-Problem with one of the data sets in the Aeration folder.
-
+It should be more clear that people should not edit their ProCoDA files ever so that the problem with one of the data sets in the Aeration folder could have been avoided, since something happened to that data that caused issues with the code. We found the addition of the instructions in the second week of the lab very helpful and made things much smoother. I think it would be helpful to have pictures of the set up actually done in the lab so that we can see what the apparati look like, for example the solenoid and needle valves.
 
 # Appendix
 ``` python

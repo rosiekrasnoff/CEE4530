@@ -130,8 +130,6 @@ dirpath = "/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/Aeration/Aeration"
 dirpath='/Users/Rosie/github/CEE4530/Lab4-Gas Transfer/Aeration/Aeration/'
 filepaths, airflows, DO_data, time_data = aeration_data(DO_column,dirpath)
 
-airflows.size
-
 ## Number 1
 #delete data that is less than 2 or greater than 6 mg/L
 DO_min = 2 * u.mg/u.L

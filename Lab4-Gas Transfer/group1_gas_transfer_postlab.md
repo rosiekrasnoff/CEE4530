@@ -30,18 +30,35 @@ Figure 3. k^v,l as a function of airflow rate (μmole/s).
 Figure 4. Oxygen transfer efficiency as a function of airflow rate (μmole/s) with the oxygen deficit set at 6 mg/L.
 
 8. As the airflow rate (μmole/s) increases, the oxygen transfer efficiency decreases. Thus, we can observe an inverse relationship between OTE and airflow rate. This makes sense because we're dividing by a larger $\dot{n}_{aq\; o_{2} }$ each time, so with increasing air flow rate, the oxygen transfer efficiency decreases.
+less surface area to volume
+faster -> less time in the reactor
 
 9. Propose a change to the experimental apparatus that would increase the efficiency.
 
 
 This oxygen transfer efficiency (OTE) is a function of the type of diffuser, the diffuser depth of submergence, as well as temperature and ionic strength of the activated sludge.
+The most efficient systems use membrane diffusers and achieve an OTE of approximately 10%.
 
 10. Verify that your report and graphs meet the requirements.
 
 
+# Lab Exploration
+1. ProCoDA switches from the “prepare to calibrate” state to the “calibrate” state when accumulator pressure is greater than or equal to the minimum  calibration pressure.
+2. ProCoDA switches from the “calibrate” state to the “Pause” state when accumulator pressure is greater than the maximum calibration pressure.
+3. The “Pause” state knows which state to go to next because the rule is that once the elapsed time in the current state, “pause”, is greater than the input calibrate to aeration lag time, it will then move to the aeration state.
+4. The equation that is used to calculate the maximum calibration pressure multiplies the max calibration pressure/source pressure and the source pressure. This equation is better than using a constant for the maximum calibration pressure because it is actually based on the environment and isn’t accidentally set too high so that calibration takes too long.
+5. By using the ramp function, ProCoDA calculates the predicted pressure in the accumulator when it is filled at the constant mass flow rate, aka the air fill model, by taking the minimum calibration pressure (a constant), the maximum calibration pressure (the equation as explained above in number 4), and the fill time (Delta P/air flow rate).
+6. The inputs to the “air valve control” are the air slope and the air flow rate.
+7. The “Air valve control” controls the “Aerate” and “Fill accumulator” states.
+8. Jonathan gives us a thumbs up for our ProCoDA program that cycles between two states that aerate for 15 s and then pause for 10 s.
+
 # Conclusion
 
+A small reactor that meets the conditions of a constant gas transfer coefficient will be used to characterize the dependence of the gas transfer coefficient on the gas flow rate through a simple diffuser. The gas transfer coefficient is a function of the gas flow rate because the interface surface area i.e., the surface area of the air bubbles) increases as the gas flow rate increases.
+
 # Suggestions / Comments
+
+Problem with one of the data sets in the Aeration folder.
 
 
 # Appendix
@@ -198,7 +215,7 @@ plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/time_vs_C.png')
 plt.show()
 
 ## Number 6
-plt.plot(airflows, kvl,'o-')
+plt.plot(airflows, kvl,'o')
 plt.xlabel('airflow rate ($\mu M/s$) ')
 plt.ylabel('k^v,l')
 plt.tight_layout()
@@ -209,6 +226,7 @@ plt.show()
 V=.750*u.L
 T=293*u.K
 MW=32*u.gram/u.mole
+MW=MW.to(u.mg/u.mole)
 nair=airflows.to(u.mole/u.s)
 P=101.3*u.kPa
 P=P.to(u.atm)
@@ -216,10 +234,7 @@ f=0.21
 deltaC=6*u.mg/u.L
 OTE = np.array((V*kvl*(deltaC))/(MW*nair*f))
 
-T=V*kvl*(deltaC))/(MW*nair*f)
-
-
-plt.plot(airflows, OTE,'o-')
+plt.plot(airflows, OTE,'o')
 plt.xlabel('airflow rate (μmole/s) ')
 plt.ylabel('oxygen transfer efficiency')
 plt.tight_layout()

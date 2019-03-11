@@ -32,6 +32,7 @@ Using linear regression and equation 103 above, we found an estimation for the $
 Figure 2. A representative plot showing the linear regression model curve and the data for when flow rate = 100$\mu M/s$. Model is a close fit to the measured data, which suggests that it is a good model and any assumptions were valid.
 
 6. Figure 3 below shows the relationship between airflow rate and $\hat{k}_{v,l}$. The data is quite noisy so the trend is not all that clear, but generally, as airflow rate increases, $\hat{k}_{v,l}$ also increases. This is what was expected: as gas flow rate increases, the bubbles increase in surface area, and so there is a larger area over which gas transfer occurs, so $\hat{k}_{v,l}$ increases.
+
 ![airflow_vs_kvl](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab4-Gas%20Transfer/airflow_rate_vs_kvl.png?raw=true)
 
 Figure 3. $\hat{k}_{v,l}$ as a function of airflow rate (μmole/s).

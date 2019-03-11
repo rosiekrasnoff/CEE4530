@@ -23,7 +23,7 @@ Figure 1. A representative subset of six of the tested flow rates showing dissol
 
 4. $$ \ln \frac{C^{\star} -C}{C^{\star} -C_{0} } =-\hat{k}_{v,l} (t-t_{0} )\space\space\space\space\space(103)$$
 
-Using linear regression and equation 103 above, we found an estimation for the k^v,l for each data set to be as follows:
+Using linear regression and equation 103 above, we found an estimation for the $\hat{k}_{v,l}$ for each data set to be as follows:
 0.00272, 0.00365, 0.00347, 0.003194, 0.00420,0.00669, 0.006456, 0.00851, 0.00904, 0.00904, 0.00715, 0.00739, 0.006467, 0.00977, 0.01143, 0.00907, 0.01083, 0.01080, 0.00708, 0.00695, 0.00998, 0.00494, 0.01142
 
 5.
@@ -31,9 +31,10 @@ Using linear regression and equation 103 above, we found an estimation for the k
 
 Figure 2. A representative plot showing the linear regression model curve and the data for when flow rate = 100$\mu M/s$. Model is a close fit to the measured data, which suggests that it is a good model and any assumptions were valid.
 
-6. ![airflow_vs_kvl](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab4-Gas%20Transfer/airflow_rate_vs_kvl.png?raw=true)
+6. Figure 3 below shows the relationship between airflow rate and $\hat{k}_{v,l}$. The data is quite noisy so the trend is not all that clear, but generally, as airflow rate increases, $\hat{k}_{v,l}$ also increases. This is what was expected: as gas flow rate increases, the bubbles increase in surface area, and so there is a larger area over which gas transfer occurs, so $\hat{k}_{v,l}$ increases.
+![airflow_vs_kvl](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab4-Gas%20Transfer/airflow_rate_vs_kvl.png?raw=true)
 
-Figure 3. k^v,l as a function of airflow rate (μmole/s).
+Figure 3. $\hat{k}_{v,l}$ as a function of airflow rate (μmole/s).
 
 7. Using equation 108, we calculated the oxygen transfer efficiency: $$OTE=\frac{\dot{n}_{aq\; o_{2} } }{f_{O_{2} } \dot{n}_{air} } =\frac{V\hat{k}_{v,l} \left(C^{\star} -C\right)}{f_{O_{2} } \dot{n}_{air} MW_{O_{2} } }$$
 
@@ -47,12 +48,12 @@ Figure 4. Oxygen transfer efficiency as a function of airflow rate (μmole/s) wi
 
 # Conclusion
 
-In this lab, we simulated an activated sludge tank of a wastewater treatment plant that maintains aerobic degradation using a small reactor that meets the conditions of a constant gas transfer coefficient (k^v,l). Through a simple diffuser, we modeled the dependence of k^v,l on the gas flow rate. In this experiment,
+In this lab, we simulated an activated sludge tank of a wastewater treatment plant that maintains aerobic degradation using a small reactor that meets the conditions of a constant gas transfer coefficient ($\hat{k}_{v,l}$). Through a simple diffuser, we modeled the dependence of $\hat{k}_{v,l}$ on the gas flow rate. Using a set up with a aeration stone in a small container serving as a CMFR with a DO probe to constantly keep track of the oxygen concentration, many tests were done at different air flow levels. From the DO concentration and other measurements like temperature and pressure, we calculated $\hat{k}_{v,l}$ as well as the oxygen transfer efficiency (OTE) and observed the relationship between air flow rate and these two variables. For $\hat{k}_{v,l}$, it increases with air flow rate. OTE and air flow rate are inversely related, so as air flow rate increases, the OTE decreases proportionally. From this information, we can make judgements about the ideal design (depth or air flow rate) of an aeration tank for aerobic digestion based on the requirements of the system.
 
 
 # Suggestions / Comments
 
-It should be more clear that people should not edit their ProCoDA files ever so that the problem with one of the data sets in the Aeration folder could have been avoided, since something happened to that data that caused issues with the code. We found the addition of the instructions in the second week of the lab very helpful and made things much smoother. I think it would be helpful to have pictures of the set up actually done in the lab so that we can see what the apparati look like, for example the solenoid and needle valves.
+It should be more clear that people should not edit their ProCoDA files ever so that the problem with one of the data sets in the Aeration folder could have been avoided, since something happened to that data that caused issues with the code. We found the addition of the instructions in the second week of the lab very helpful and made things much smoother. I think it would be helpful to have pictures of the set up actually done in the lab so that we can see what the parts of the apparatus look like, for example the solenoid and needle valves.
 
 # Appendix
 ``` python
@@ -210,7 +211,7 @@ plt.show()
 ## Number 6
 plt.plot(airflows, kvl,'o')
 plt.xlabel('airflow rate ($\mu M/s$) ')
-plt.ylabel('k^v,l')
+plt.ylabel('$\hat{k}_{v,l}$')
 plt.tight_layout()
 plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab4-Gas Transfer/airflow_rate_vs_kvl.png')
 plt.show()

@@ -14,6 +14,7 @@ Report the values of t⋆ at F = 0.1 for each of your experiments. Do they meet 
 ``` python
 from aguaclara.core.units import unit_registry as u
 import aguaclara.research.environmental_processes_analysis as epa
+import aguaclara.core.utility as ut
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -25,7 +26,7 @@ from pathlib import Path
 # Number 1
 
 #The following file is from a CMFR
-CMFR_path = 'https://raw.githubusercontent.com/monroews/CEE4530/master/Examples/data/CMFR_example.xls'
+CMFR_path = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab5-Reactor%20Characteristics/lab%205%20-%20CMFR.xls'
 
 # find the row after the last note in the file. This assumes that the last note marks the beginning of the test.
 epa.notes(CMFR_path)
@@ -72,7 +73,7 @@ plt.plot(CMFR_time_data.to(u.min), CMFR_CMFR_model,'b')
 plt.xlabel(r'$time (min)$')
 plt.ylabel(r'Concentration $\left ( \frac{mg}{L} \right )$')
 plt.legend(['Measured dye','CMFR Model'])
-plt.savefig('Examples/images/CMFR.png', bbox_inches = 'tight')
+#plt.savefig('Examples/images/CMFR.png', bbox_inches = 'tight')
 plt.show()
 
 #Load a data file for a reactor with baffles.

@@ -17,11 +17,11 @@ import aguaclara.research.environmental_processes_analysis as epa
 import aguaclara.core.utility as ut
 import numpy as np
 import matplotlib.pyplot as plt
+from aguaclara.research.procoda_parser import *
 import pandas as pd
-from scipy import stats
+from scipy import special
+from scipy.optimize import curve_fit
 import collections
-import os
-from pathlib import Path
 
 # Number 1
 
@@ -78,7 +78,7 @@ plt.show()
 
 #Load a data file for a reactor with baffles.
 
-one_baffle_path = 'https://raw.githubusercontent.com/monroews/CEE4530/master/Examples/data/Dispersion_example.xls'
+one_baffle_path = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab5-Reactor%20Characteristics/lab%205%20-%204%20CMFRs%20again%20but%20with%20more%20dye%20and%20better.xls'
 one_baffle_firstrow = epa.notes(one_baffle_path).last_valid_index() + 1
 one_baffle_time_data = (epa.column_of_time(one_baffle_path,one_baffle_firstrow,-1)).to(u.s)
 one_baffle_concentration_data = epa.column_of_data(one_baffle_path,one_baffle_firstrow,1,-1,'mg/L')

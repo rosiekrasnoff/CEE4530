@@ -6,6 +6,20 @@
 2. Generate a plot showing the experimental data as points and the model results as thin lines for each of your experiments. Explain which model fits best and discuss those results based on your expectations.
 3. Compare the trends in the estimated values of N and Pe across your set of experiments. How did your chosen reactor modifications effect dispersion?
 Report the values of t⋆ at F = 0.1 for each of your experiments. Do they meet your expectations?
+
+
+graph E curve -> integrate to get F curve (numpy cumulative sum; numpy trapz)
+write a function to find F = 0.1
+  looks through array and find values
+  smth like this:
+  DO_min = 2 * u.mg/u.L
+  DO_max = 6 * u.mg/u.L
+  for i in range(airflows.size):
+    idx_start = (np.abs(DO_data[i]-DO_min)).argmin()
+    idx_end = (np.abs(DO_data[i]-DO_max)).argmin()
+    time_data[i] = time_data[i][idx_start:idx_end] - time_data[i][idx_start]
+    DO_data[i] = DO_data[i][idx_start:idx_end]
+
 4. Evaluate whether there is any evidence of “dead volumes” or “short circuiting” in your reactor.
 5. Make a recommendation for the design of a full scale chlorine contact tank. As part of your recommendation discuss the parameter you chose to vary as part of your experimentation and what the optimal value was determined to be.
 

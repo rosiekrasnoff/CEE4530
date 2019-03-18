@@ -9,9 +9,9 @@ given: $q_{50 mg/L}$ = 0.08
 $$v_{mtz}=\frac{v_a C_0}{C_0\phi + q_0 \rho_{bulk \; adsorbent}}$$
 
 
-$$\frac{L_{column}}{v_{mtz}} = t_{mtz}$$
+$$t_{mtz} = \frac{L_{column}}{v_{mtz}}$$
 
-It will take the mass transfer zone ___ to travel to the bottom of the carbon column. 
+It will take the mass transfer zone 33.35 hours to travel to the bottom of the carbon column. This is way too long so we should use a smaller depth!
 
 
 ``` python
@@ -26,14 +26,8 @@ p_bulk=(0.5*u.g/u.cm**3).to(u.mg/u.cm**3)
 porosity=0.4
 q0 = 0.08
 
-1-0.5/2.1
-
 v_mtz = (v_a*dye_conc)/((porosity*dye_conc)+(q0*p_bulk))
-v_mtz
 
 t_mtz = depth/v_mtz
-t_mtz
-
-
-
+t_mtz.to(u.hour)
 ```

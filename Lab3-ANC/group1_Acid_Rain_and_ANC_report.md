@@ -196,7 +196,7 @@ plt.show()
 mass_NA_2=.317*u.g
 
 ANC_02=mass_NA_2/MM_NaH2CO3/Vol
-ANC_expected2=epa.ANC_open(3)*(1-(np.exp(-hrt2)))+(ANC_0*(np.exp(-hrt2)))
+ANC_expected2=epa.ANC_open(3)*(1-(np.exp(-hrt2)))+(ANC_02*(np.exp(-hrt2)))
 
 #Number 5.3
 carbs2=(ANC_02*(np.exp(-hrt2)))

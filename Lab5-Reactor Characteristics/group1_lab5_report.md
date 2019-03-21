@@ -1,9 +1,20 @@
 # Reactor Characteristics
-#### Group 1- Jiwon Lee and Rosie Krasnoff
-##### March 22
+#### Group 1- Jiwon Lee and Rosie Krasnoff ( hours each)
+##### March 27
+
+## Introduction and Objectives
+## Procedures
+## Results and Discussion
+### Data Analysis
+## Conclusion
+## Suggestions/Comments
+
+
 
 1. Use multivariable nonlinear regression to obtain the best fit between the experimental data and the two models by minimizing the sum of the squared errors. Use epa.Solver_AD_Pe and epa.Solver_CMFR_N. These functions will minimize the error by varying the values of average residence time, (mass of tracer/reactor volume), and either the number of CMFR in series or the Peclet number.
+
 2. Generate a plot showing the experimental data as points and the model results as thin lines for each of your experiments. Explain which model fits best and discuss those results based on your expectations.
+
 3. Compare the trends in the estimated values of N and Pe across your set of experiments. How did your chosen reactor modifications effect dispersion?
 Report the values of t⋆ at F = 0.1 for each of your experiments. Do they meet your expectations?
 
@@ -40,7 +51,7 @@ import collections
 # Number 1
 
 #The following file is from a CMFR
-CMFR_path = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab5-Reactor%20Characteristics/lab%205%20-%20CMFR.xls'
+CMFR_path = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab5-Reactor%20Characteristics/reactor%20data/1%20CMFR.xls'
 
 # find the row after the last note in the file. This assumes that the last note marks the beginning of the test.
 epa.notes(CMFR_path)
@@ -53,14 +64,11 @@ CMFR_firstrow
 #except in the estimate of the initial tracer mass.#
 CMFR_firstrow = CMFR_firstrow + 10
 
-
 CMFR_time_data = (epa.column_of_time(CMFR_path,CMFR_firstrow,-1)).to(u.s)
-
 CMFR_concentration_data = epa.column_of_data(CMFR_path,CMFR_firstrow,1,-1,'mg/L')
 
-#I don't actually know the values that follow. I'm guessing.
-#You should use real measured values!#
-CMFR_V = 1.5*u.L
+# CMFR volume and flowrate
+CMFR_V = (2.590-.596)*u.L
 CMFR_Q = 380 * u.mL/u.min
 
 #here we set estimates that we will use as starting values for the curve fitting
@@ -92,10 +100,10 @@ plt.show()
 
 #Load a data file for a reactor with baffles.
 
-one_baffle_path = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab5-Reactor%20Characteristics/lab%205%20-%204%20CMFRs%20again%20but%20with%20more%20dye%20and%20better.xls'
-one_baffle_firstrow = epa.notes(one_baffle_path).last_valid_index() + 1
-one_baffle_time_data = (epa.column_of_time(one_baffle_path,one_baffle_firstrow,-1)).to(u.s)
-one_baffle_concentration_data = epa.column_of_data(one_baffle_path,one_baffle_firstrow,1,-1,'mg/L')
+CMFRs_with_24baffles_path = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab5-Reactor%20Characteristics/reactor%20data/4%20CMFRs%20w%2024%20holes.xls'
+holes24_baffle_firstrow = epa.notes(CMFRs_with_24baffles_path).last_valid_index() + 1
+one_baffle_time_data = (epa.column_of_time(CMFRs_with_24baffles_path,holes24_baffle_firstrow,-1)).to(u.s)
+one_baffle_concentration_data = epa.column_of_data(CMFRs_with_24baffles_path,holes24_baffle_firstrow,1,-1,'mg/L')
 
 #I noticed that the initial concentration measured by the photometer wasn't
 #zero. This suggests that there may have been a small air bubble in the

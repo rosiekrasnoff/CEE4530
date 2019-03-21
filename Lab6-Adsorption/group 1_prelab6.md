@@ -19,7 +19,7 @@ from aguaclara.core.units import unit_registry as u
 import numpy as np
 
 # givens
-depth=15*u.cm
+depth=0.01*u.cm
 dye_conc=(50*u.mg/u.L).to(u.mg/u.cm**3)
 v_a=(1*u.mm/u.s).to(u.cm/u.s)
 p_bulk=(0.5*u.g/u.cm**3).to(u.mg/u.cm**3)

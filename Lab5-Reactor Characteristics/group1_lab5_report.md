@@ -103,7 +103,7 @@ plt.show()
 CMFRs_with_24baffles_path = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab5-Reactor%20Characteristics/reactor%20data/4%20CMFRs%20w%2024%20holes.xls'
 holes24_baffle_firstrow = epa.notes(CMFRs_with_24baffles_path).last_valid_index() + 1
 one_baffle_time_data = (epa.column_of_time(CMFRs_with_24baffles_path,holes24_baffle_firstrow,-1)).to(u.s)
-one_baffle_concentration_data = epa.column_of_data(CMFRs_with_24baffles_path,holes24_baffle_firstrow,1,-1,'mg/L')
+one_baffle_concentration_data = epa.column_of_data(CMFRs_with_24baffles_path,one_baffle_firstrow,1,-1,'mg/L')
 
 #I noticed that the initial concentration measured by the photometer wasn't
 #zero. This suggests that there may have been a small air bubble in the

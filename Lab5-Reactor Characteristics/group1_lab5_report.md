@@ -1,6 +1,6 @@
 # Reactor Characteristics
 #### Group 1- Jiwon Lee and Rosie Krasnoff ( hours each)
-##### March 27
+##### Due March 27
 
 ## Introduction and Objectives
 ## Procedures
@@ -17,11 +17,38 @@
 
 ![trial 1](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/CMFR.png?raw=true)
 
-Figure 1. Plot of concentration pH of lake as acid rain was added over time.
+Figure 1. Plot showing the simple CMFR experimental data and the CMFR model.
+
+![trial 2](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/4_CMFR_with_holes.png?raw=true)
+
+Figure 1. Plot showing the 4 CMFR experimental data and the CMFR model.
+
+In trial 2, the CMFR model fits better and discuss those results based on your expectations.
+
+![trial 3](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/3_CMFR_alternating.png?raw=true)
+
+Figure 1. Plot showing the 3 alternating CMFR experimental data and the CMFR model.
+
+In trial 3, the CMFR model fits better and discuss those results based on your expectations.
+
+![trial 4](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/4_CMFR_alternating.png?raw=true)
+
+Figure 1. Plot showing the 4 alternating CMFR experimental data and the CMFR model.
+
+In trial 4, the CMFR model fits better and discuss those results based on your expectations.
 
 3. Compare the trends in the estimated values of N and Pe across your set of experiments. How did your chosen reactor modifications effect dispersion?
-Report the values of t⋆ at F = 0.1 for each of your experiments. Do they meet your expectations?
 
+Trial 1: The model estimate of the number of reactors in series was 1.0.
+
+Trial 2: The model estimate of the number of reactors in series was 1.6087605429907506. The model estimate of the Peclet number was 1.2178282957059587.
+
+Trial 3: The model estimate of the number of reactors in series was 3.0132831433153338. The model estimate of the Peclet number was 4.044518749000499.
+
+Trial 4: The model estimate of the number of reactors in series was 3.669886514421101. The model estimate of the Peclet number was 5.479660899821685.
+
+
+4. Report the values of t⋆ at F = 0.1 for each of your experiments. Do they meet your expectations?
 
 graph E curve -> integrate to get F curve (numpy cumulative sum; numpy trapz)
 write a function to find F = 0.1
@@ -35,8 +62,8 @@ write a function to find F = 0.1
     time_data[i] = time_data[i][idx_start:idx_end] - time_data[i][idx_start]
     DO_data[i] = DO_data[i][idx_start:idx_end]
 
-4. Evaluate whether there is any evidence of “dead volumes” or “short circuiting” in your reactor.
-5. Make a recommendation for the design of a full scale chlorine contact tank. As part of your recommendation discuss the parameter you chose to vary as part of your experimentation and what the optimal value was determined to be.
+5. Evaluate whether there is any evidence of “dead volumes” or “short circuiting” in your reactor.
+6. Make a recommendation for the design of a full scale chlorine contact tank. As part of your recommendation discuss the parameter you chose to vary as part of your experimentation and what the optimal value was determined to be.
 
 
 # Appendix
@@ -90,7 +117,6 @@ print('The ratio of tracer to hydraulic residence time was',(CMFR_CMFR.theta/CMF
 CMFR_CMFR_model = CMFR_CMFR.C_bar * epa.E_CMFR_N(CMFR_time_data/CMFR_CMFR.theta,CMFR_CMFR.N)
 plt.plot(CMFR_time_data.to(u.min), CMFR_concentration_data.to(u.mg/u.L),'r')
 plt.plot(CMFR_time_data.to(u.min), CMFR_CMFR_model,'b')
-
 plt.xlabel(r'$time (min)$')
 plt.ylabel(r'Concentration $\left ( \frac{mg}{L} \right )$')
 plt.legend(['Measured dye','CMFR Model'])
@@ -116,6 +142,7 @@ trial2_CMFR = epa.Solver_CMFR_N(trial2_time_data, trial2_concentration_data, tri
 trial2_CMFR.C_bar
 trial2_CMFR.N
 trial2_CMFR.theta.to(u.s)
+print('The model estimate of the number of reactors in series was', trial2_CMFR.N)
 
 #Create the CMFR model curve based on the scipy.optimize curve_fit
 #parameters. We do this with dimensions so that we can plot both models and
@@ -177,6 +204,7 @@ trial3_CMFR = epa.Solver_CMFR_N(trial3_time_data, trial3_concentration_data, tri
 trial3_CMFR.C_bar
 trial3_CMFR.N
 trial3_CMFR.theta.to(u.s)
+print('The model estimate of the number of reactors in series was', trial3_CMFR.N)
 
 #Create the CMFR model curve based on the scipy.optimize curve_fit
 #parameters. We do this with dimensions so that we can plot both models and
@@ -236,6 +264,7 @@ trial4_CMFR = epa.Solver_CMFR_N(trial4_time_data, trial4_concentration_data, tri
 trial4_CMFR.C_bar
 trial4_CMFR.N
 trial4_CMFR.theta.to(u.s)
+print('The model estimate of the number of reactors in series was', trial4_CMFR.N)
 
 #Create the CMFR model curve based on the scipy.optimize curve_fit
 #parameters. We do this with dimensions so that we can plot both models and

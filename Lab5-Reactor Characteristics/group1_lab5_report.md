@@ -15,6 +15,10 @@
 
 2. Generate a plot showing the experimental data as points and the model results as thin lines for each of your experiments. Explain which model fits best and discuss those results based on your expectations.
 
+![trial 1](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/CMFR.png?raw=true)
+
+Figure 1. Plot of concentration pH of lake as acid rain was added over time.
+
 3. Compare the trends in the estimated values of N and Pe across your set of experiments. How did your chosen reactor modifications effect dispersion?
 Report the values of t⋆ at F = 0.1 for each of your experiments. Do they meet your expectations?
 
@@ -93,13 +97,67 @@ plt.legend(['Measured dye','CMFR Model'])
 plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/CMFR.png', bbox_inches = 'tight')
 plt.show()
 
-#Trial 2: 4 CMFRs with 24 baffles
-#Load a data file for a reactor with baffles.
 
+#Trial 2: 4 CMFRs (3 baffles) with 24 holes each
+#Load a data file for a reactor with baffles.
 trial2_path = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab5-Reactor%20Characteristics/reactor%20data/trial%202.xls'
 trial2_firstrow = epa.notes(trial2_path).last_valid_index() + 1
 trial2_time_data = (epa.column_of_time(trial2_path,trial2_firstrow,-1)).to(u.s)
 trial2_concentration_data = epa.column_of_data(trial2_path,trial2_firstrow,1,-1,'mg/L')
+
+#subtract initial concentration from all data to correct
+trial2_concentration_data = trial2_concentration_data - trial2_concentration_data[0]
+trial2_V = (2.590-.596)*u.L
+trial2_Q = 380 * u.mL/u.min
+trial2_theta_hydraulic = (trial2_V/trial2_Q).to(u.s)
+trial2_C_bar_guess = np.max(trial2_concentration_data)/2
+#use solver to get the CMFR parameters
+trial2_CMFR = epa.Solver_CMFR_N(trial2_time_data, trial2_concentration_data, trial2_theta_hydraulic, trial2_C_bar_guess)
+trial2_CMFR.C_bar
+trial2_CMFR.N
+trial2_CMFR.theta.to(u.s)
+
+#Create the CMFR model curve based on the scipy.optimize curve_fit
+#parameters. We do this with dimensions so that we can plot both models and
+#the data on the same graph. If we did this in dimensionless space it wouldn't
+#be possible to plot everything on the same plot because the values used to
+#create dimensionless time and dimensionless concentration are different for
+#the two models.
+trial2_CMFR_model = (trial2_CMFR.C_bar*epa.E_CMFR_N(trial2_time_data/trial2_CMFR.theta, trial2_CMFR.N)).to(u.mg/u.L)
+
+#use solver to get the advection dispersion parameters
+trial2_AD = epa.Solver_AD_Pe(trial2_time_data, trial2_concentration_data, trial2_theta_hydraulic, trial2_C_bar_guess)
+trial2_AD.C_bar
+trial2_AD.Pe
+trial2_AD.theta
+
+print('The model estimated mass of tracer injected was',ut.round_sf(trial2_AD.C_bar*trial2_V ,2) )
+print('The model estimate of the Peclet number was', trial2_AD.Pe)
+print('The tracer residence time was',ut.round_sf(trial2_AD.theta ,2))
+print('The ratio of tracer to hydraulic residence time was',(trial2_AD.theta/trial2_theta_hydraulic).magnitude)
+
+#Create the advection dispersion model curve based on the solver parameters
+trial2_AD_model = (trial2_AD.C_bar*epa.E_Advective_Dispersion((trial2_time_data/trial2_AD.theta).to_base_units(), trial2_AD.Pe)).to(u.mg/u.L)
+
+#Plot the data and the two model curves.
+plt.plot(trial2_time_data.to(u.s), trial2_concentration_data.to(u.mg/u.L),'ro')
+plt.plot(trial2_time_data.to(u.s), trial2_CMFR_model,'b')
+plt.plot(trial2_time_data.to(u.s), trial2_AD_model,'g')
+plt.xlabel(r'$time (min)$')
+plt.ylabel(r'Concentration $\left ( \frac{mg}{L} \right )$')
+plt.legend(['Measured dye','CMFR Model', 'AD Model'])
+#plt.savefig('Examples/images/Dispersion.png', bbox_inches = 'tight')
+plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/4_CMFR_with_holes.png', bbox_inches = 'tight')
+plt.show()
+
+
+#Trial 3: 3 alternating CMFRs
+#Load a data file for a reactor with baffles.
+
+trial3_path = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab5-Reactor%20Characteristics/reactor%20data/trial%203.xls'
+trial3_firstrow = epa.notes(trial3_path).last_valid_index() + 1
+trial3_time_data = (epa.column_of_time(trial3_path,trial3_firstrow,-1)).to(u.s)
+trial3_concentration_data = epa.column_of_data(trial3_path,trial3_firstrow,1,-1,'mg/L')
 
 #I noticed that the initial concentration measured by the photometer wasn't
 #zero. This suggests that there may have been a small air bubble in the
@@ -109,16 +167,16 @@ trial2_concentration_data = epa.column_of_data(trial2_path,trial2_firstrow,1,-1,
 #from all of the data. This was based on the assumption that the concentration
 #measurement error persisted for the entire experiment.#
 
-one_baffle_concentration_data = one_baffle_concentration_data - one_baffle_concentration_data[0]
-one_baffle_V = (2.590-.596)*u.L
-one_baffle_Q = 380 * u.mL/u.min
-one_baffle_theta_hydraulic = (one_baffle_V/one_baffle_Q).to(u.s)
-one_baffle_C_bar_guess = np.max(one_baffle_concentration_data)/2
+trial3_concentration_data = trial3_concentration_data - trial3_concentration_data[0]
+trial3_V = (2.590-.596)*u.L
+trial3_Q = 380 * u.mL/u.min
+trial3_theta_hydraulic = (trial3_V/trial3_Q).to(u.s)
+trial3_C_bar_guess = np.max(trial3_concentration_data)/2
 #use solver to get the CMFR parameters
-one_baffle_CMFR = epa.Solver_CMFR_N(one_baffle_time_data, one_baffle_concentration_data, one_baffle_theta_hydraulic, one_baffle_C_bar_guess)
-one_baffle_CMFR.C_bar
-one_baffle_CMFR.N
-one_baffle_CMFR.theta.to(u.s)
+trial3_CMFR = epa.Solver_CMFR_N(trial3_time_data, trial3_concentration_data, trial3_theta_hydraulic, trial3_C_bar_guess)
+trial3_CMFR.C_bar
+trial3_CMFR.N
+trial3_CMFR.theta.to(u.s)
 
 #Create the CMFR model curve based on the scipy.optimize curve_fit
 #parameters. We do this with dimensions so that we can plot both models and
@@ -126,26 +184,170 @@ one_baffle_CMFR.theta.to(u.s)
 #be possible to plot everything on the same plot because the values used to
 #create dimensionless time and dimensionless concentration are different for
 #the two models.
-one_baffle_CMFR_model = (one_baffle_CMFR.C_bar*epa.E_CMFR_N(one_baffle_time_data/one_baffle_CMFR.theta, one_baffle_CMFR.N)).to(u.mg/u.L)
+trial3_CMFR_model = (trial3_CMFR.C_bar*epa.E_CMFR_N(trial3_time_data/trial3_CMFR.theta, trial3_CMFR.N)).to(u.mg/u.L)
 
 #use solver to get the advection dispersion parameters
-one_baffle_AD = epa.Solver_AD_Pe(one_baffle_time_data, one_baffle_concentration_data, one_baffle_theta_hydraulic, one_baffle_C_bar_guess)
-one_baffle_AD.C_bar
-one_baffle_AD.Pe
-one_baffle_AD.theta
+trial3_AD = epa.Solver_AD_Pe(trial3_time_data, trial3_concentration_data, trial3_theta_hydraulic, trial3_C_bar_guess)
+trial3_AD.C_bar
+trial3_AD.Pe
+trial3_AD.theta
 
-print('The model estimated mass of tracer injected was',ut.round_sf(one_baffle_AD.C_bar*one_baffle_V ,2) )
-print('The model estimate of the Peclet number was', one_baffle_AD.Pe)
-print('The tracer residence time was',ut.round_sf(one_baffle_AD.theta ,2))
-print('The ratio of tracer to hydraulic residence time was',(one_baffle_AD.theta/one_baffle_theta_hydraulic).magnitude)
+print('The model estimated mass of tracer injected was',ut.round_sf(trial3_AD.C_bar*trial3_V ,2) )
+print('The model estimate of the Peclet number was', trial3_AD.Pe)
+print('The tracer residence time was',ut.round_sf(trial3_AD.theta ,2))
+print('The ratio of tracer to hydraulic residence time was',(trial3_AD.theta/trial3_theta_hydraulic).magnitude)
 
 #Create the advection dispersion model curve based on the solver parameters
-one_baffle_AD_model = (one_baffle_AD.C_bar*epa.E_Advective_Dispersion((one_baffle_time_data/one_baffle_AD.theta).to_base_units(), one_baffle_AD.Pe)).to(u.mg/u.L)
+trial3_AD_model = (trial3_AD.C_bar*epa.E_Advective_Dispersion((trial3_time_data/trial3_AD.theta).to_base_units(), trial3_AD.Pe)).to(u.mg/u.L)
 
 #Plot the data and the two model curves.
-plt.plot(one_baffle_time_data.to(u.s), one_baffle_concentration_data.to(u.mg/u.L),'r')
-plt.plot(one_baffle_time_data.to(u.s), one_baffle_CMFR_model,'b')
-plt.plot(one_baffle_time_data.to(u.s), one_baffle_AD_model,'g')
+plt.plot(trial3_time_data.to(u.s), trial3_concentration_data.to(u.mg/u.L),'or')
+plt.plot(trial3_time_data.to(u.s), trial3_CMFR_model,'b')
+plt.plot(trial3_time_data.to(u.s), trial3_AD_model,'g')
+plt.xlabel(r'$time (min)$')
+plt.ylabel(r'Concentration $\left ( \frac{mg}{L} \right )$')
+plt.legend(['Measured dye','CMFR Model', 'AD Model'])
+plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
+plt.show()
+
+#Trial 4: 4 alternating CMFRs
+#Load a data file for a reactor with baffles.
+
+trial4_path = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab5-Reactor%20Characteristics/reactor%20data/trial%204.xls'
+trial4_firstrow = epa.notes(trial4_path).last_valid_index() + 1
+trial4_time_data = (epa.column_of_time(trial4_path,trial4_firstrow,-1)).to(u.s)
+trial4_concentration_data = epa.column_of_data(trial4_path,trial4_firstrow,1,-1,'mg/L')
+
+#I noticed that the initial concentration measured by the photometer wasn't
+#zero. This suggests that there may have been a small air bubble in the
+#photometer or perhaps there was some other anomoly that was causing the
+#photometer to read a concentration that was higher than was actually present in
+#the reactor. To correct for this I subtracted the initial concentration reading
+#from all of the data. This was based on the assumption that the concentration
+#measurement error persisted for the entire experiment.#
+
+trial4_concentration_data = trial4_concentration_data - trial4_concentration_data[0]
+trial4_V = (2.590-.596)*u.L
+trial4_Q = 380 * u.mL/u.min
+trial4_theta_hydraulic = (trial4_V/trial4_Q).to(u.s)
+trial4_C_bar_guess = np.max(trial4_concentration_data)/2
+#use solver to get the CMFR parameters
+trial4_CMFR = epa.Solver_CMFR_N(trial4_time_data, trial4_concentration_data, trial4_theta_hydraulic, trial4_C_bar_guess)
+trial4_CMFR.C_bar
+trial4_CMFR.N
+trial4_CMFR.theta.to(u.s)
+
+#Create the CMFR model curve based on the scipy.optimize curve_fit
+#parameters. We do this with dimensions so that we can plot both models and
+#the data on the same graph. If we did this in dimensionless space it wouldn't
+#be possible to plot everything on the same plot because the values used to
+#create dimensionless time and dimensionless concentration are different for
+#the two models.
+trial4_CMFR_model = (trial4_CMFR.C_bar*epa.E_CMFR_N(trial4_time_data/trial4_CMFR.theta, trial4_CMFR.N)).to(u.mg/u.L)
+
+#use solver to get the advection dispersion parameters
+trial4_AD = epa.Solver_AD_Pe(trial4_time_data, trial4_concentration_data, trial4_theta_hydraulic, trial4_C_bar_guess)
+trial4_AD.C_bar
+trial4_AD.Pe
+trial4_AD.theta
+
+print('The model estimated mass of tracer injected was',ut.round_sf(trial4_AD.C_bar*trial4_V ,2) )
+print('The model estimate of the Peclet number was', trial4_AD.Pe)
+print('The tracer residence time was',ut.round_sf(trial4_AD.theta ,2))
+print('The ratio of tracer to hydraulic residence time was',(trial4_AD.theta/trial4_theta_hydraulic).magnitude)
+
+#Create the advection dispersion model curve based on the solver parameters
+trial4_AD_model = (trial4_AD.C_bar*epa.E_Advective_Dispersion((trial4_time_data/trial4_AD.theta).to_base_units(), trial4_AD.Pe)).to(u.mg/u.L)
+
+#Plot the data and the two model curves.
+plt.plot(trial4_time_data.to(u.s), trial4_concentration_data.to(u.mg/u.L),'or')
+plt.plot(trial4_time_data.to(u.s), trial4_CMFR_model,'b')
+plt.plot(trial4_time_data.to(u.s), trial4_AD_model,'g')
+plt.xlabel(r'$time (min)$')
+plt.ylabel(r'Concentration $\left ( \frac{mg}{L} \right )$')
+plt.legend(['Measured dye','CMFR Model', 'AD Model'])
+plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/4_CMFR_alternating.png', bbox_inches = 'tight')
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Trial 5: PFR suction with 1 mL of dye
+#Load a data file for a reactor with baffles.
+
+trial5_path = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab5-Reactor%20Characteristics/reactor%20data/trial%204.xls'
+trial5_firstrow = epa.notes(trial5_path).last_valid_index() + 1
+trial5_time_data = (epa.column_of_time(trial5_path,trial5_firstrow,-1)).to(u.s)
+trial5_concentration_data = epa.column_of_data(trial5_path,trial5_firstrow,1,-1,'mg/L')
+
+#I noticed that the initial concentration measured by the photometer wasn't
+#zero. This suggests that there may have been a small air bubble in the
+#photometer or perhaps there was some other anomoly that was causing the
+#photometer to read a concentration that was higher than was actually present in
+#the reactor. To correct for this I subtracted the initial concentration reading
+#from all of the data. This was based on the assumption that the concentration
+#measurement error persisted for the entire experiment.#
+
+trial5_concentration_data = trial5_concentration_data - trial5_concentration_data[0]
+trial5_V = (2.590-.596)*u.L
+trial5_Q = 380 * u.mL/u.min
+trial5_theta_hydraulic = (trial5_V/trial5_Q).to(u.s)
+trial5_C_bar_guess = np.max(trial5_concentration_data)/2
+#use solver to get the CMFR parameters
+trial5_CMFR = epa.Solver_CMFR_N(trial5_time_data, trial5_concentration_data, trial5_theta_hydraulic, trial5_C_bar_guess)
+trial5_CMFR.C_bar
+trial5_CMFR.N
+trial5_CMFR.theta.to(u.s)
+
+#Create the CMFR model curve based on the scipy.optimize curve_fit
+#parameters. We do this with dimensions so that we can plot both models and
+#the data on the same graph. If we did this in dimensionless space it wouldn't
+#be possible to plot everything on the same plot because the values used to
+#create dimensionless time and dimensionless concentration are different for
+#the two models.
+trial5_CMFR_model = (trial5_CMFR.C_bar*epa.E_CMFR_N(trial5_time_data/trial5_CMFR.theta, trial5_CMFR.N)).to(u.mg/u.L)
+
+#use solver to get the advection dispersion parameters
+trial5_AD = epa.Solver_AD_Pe(trial5_time_data, trial5_concentration_data, trial5_theta_hydraulic, trial5_C_bar_guess)
+trial5_AD.C_bar
+trial5_AD.Pe
+trial5_AD.theta
+
+print('The model estimated mass of tracer injected was',ut.round_sf(trial5_AD.C_bar*trial5_V ,2) )
+print('The model estimate of the Peclet number was', trial5_AD.Pe)
+print('The tracer residence time was',ut.round_sf(trial5_AD.theta ,2))
+print('The ratio of tracer to hydraulic residence time was',(trial5_AD.theta/trial5_theta_hydraulic).magnitude)
+
+#Create the advection dispersion model curve based on the solver parameters
+trial5_AD_model = (trial5_AD.C_bar*epa.E_Advective_Dispersion((trial5_time_data/trial5_AD.theta).to_base_units(), trial5_AD.Pe)).to(u.mg/u.L)
+
+#Plot the data and the two model curves.
+plt.plot(trial5_time_data.to(u.s), trial5_concentration_data.to(u.mg/u.L),'r')
+plt.plot(trial5_time_data.to(u.s), trial5_CMFR_model,'b')
+plt.plot(trial5_time_data.to(u.s), trial5_AD_model,'g')
 plt.xlabel(r'$time (min)$')
 plt.ylabel(r'Concentration $\left ( \frac{mg}{L} \right )$')
 plt.legend(['Measured dye','CMFR Model', 'AD Model'])
@@ -153,13 +355,13 @@ plt.legend(['Measured dye','CMFR Model', 'AD Model'])
 plt.show()
 
 
-#Trial 3: 4 CMFRs with 24 baffles
+#Trial 6: PFR pump with 0.35 mL of dye
 #Load a data file for a reactor with baffles.
 
-trial2_path = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab5-Reactor%20Characteristics/reactor%20data/trial%202.xls'
-trial2_firstrow = epa.notes(trial2_path).last_valid_index() + 1
-trial2_time_data = (epa.column_of_time(trial2_path,trial2_firstrow,-1)).to(u.s)
-trial2_concentration_data = epa.column_of_data(trial2_path,trial2_firstrow,1,-1,'mg/L')
+trial6_path = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab5-Reactor%20Characteristics/reactor%20data/lab%205-%20trial%205.xls'
+trial6_firstrow = epa.notes(trial6_path).last_valid_index() + 1
+trial6_time_data = (epa.column_of_time(trial6_path,trial6_firstrow,-1)).to(u.s)
+trial6_concentration_data = epa.column_of_data(trial6_path,trial6_firstrow,1,-1,'mg/L')
 
 #I noticed that the initial concentration measured by the photometer wasn't
 #zero. This suggests that there may have been a small air bubble in the
@@ -169,16 +371,16 @@ trial2_concentration_data = epa.column_of_data(trial2_path,trial2_firstrow,1,-1,
 #from all of the data. This was based on the assumption that the concentration
 #measurement error persisted for the entire experiment.#
 
-one_baffle_concentration_data = one_baffle_concentration_data - one_baffle_concentration_data[0]
-one_baffle_V = (2.590-.596)*u.L
-one_baffle_Q = 380 * u.mL/u.min
-one_baffle_theta_hydraulic = (one_baffle_V/one_baffle_Q).to(u.s)
-one_baffle_C_bar_guess = np.max(one_baffle_concentration_data)/2
+trial6_concentration_data = trial6_concentration_data - trial6_concentration_data[0]
+trial6_V = (2.590-.596)*u.L
+trial6_Q = 380 * u.mL/u.min
+trial6_theta_hydraulic = (trial6_V/trial6_Q).to(u.s)
+trial6_C_bar_guess = np.max(trial6_concentration_data)/2
 #use solver to get the CMFR parameters
-one_baffle_CMFR = epa.Solver_CMFR_N(one_baffle_time_data, one_baffle_concentration_data, one_baffle_theta_hydraulic, one_baffle_C_bar_guess)
-one_baffle_CMFR.C_bar
-one_baffle_CMFR.N
-one_baffle_CMFR.theta.to(u.s)
+trial6_CMFR = epa.Solver_CMFR_N(trial6_time_data, trial6_concentration_data, trial6_theta_hydraulic, trial6_C_bar_guess)
+trial6_CMFR.C_bar
+trial6_CMFR.N
+trial6_CMFR.theta.to(u.s)
 
 #Create the CMFR model curve based on the scipy.optimize curve_fit
 #parameters. We do this with dimensions so that we can plot both models and
@@ -186,26 +388,26 @@ one_baffle_CMFR.theta.to(u.s)
 #be possible to plot everything on the same plot because the values used to
 #create dimensionless time and dimensionless concentration are different for
 #the two models.
-one_baffle_CMFR_model = (one_baffle_CMFR.C_bar*epa.E_CMFR_N(one_baffle_time_data/one_baffle_CMFR.theta, one_baffle_CMFR.N)).to(u.mg/u.L)
+trial6_CMFR_model = (trial6_CMFR.C_bar*epa.E_CMFR_N(trial6_time_data/trial6_CMFR.theta, trial6_CMFR.N)).to(u.mg/u.L)
 
 #use solver to get the advection dispersion parameters
-one_baffle_AD = epa.Solver_AD_Pe(one_baffle_time_data, one_baffle_concentration_data, one_baffle_theta_hydraulic, one_baffle_C_bar_guess)
-one_baffle_AD.C_bar
-one_baffle_AD.Pe
-one_baffle_AD.theta
+trial6_AD = epa.Solver_AD_Pe(trial6_time_data, trial6_concentration_data, trial6_theta_hydraulic, trial6_C_bar_guess)
+trial6_AD.C_bar
+trial6_AD.Pe
+trial6_AD.theta
 
-print('The model estimated mass of tracer injected was',ut.round_sf(one_baffle_AD.C_bar*one_baffle_V ,2) )
-print('The model estimate of the Peclet number was', one_baffle_AD.Pe)
-print('The tracer residence time was',ut.round_sf(one_baffle_AD.theta ,2))
-print('The ratio of tracer to hydraulic residence time was',(one_baffle_AD.theta/one_baffle_theta_hydraulic).magnitude)
+print('The model estimated mass of tracer injected was',ut.round_sf(trial6_AD.C_bar*trial6_V ,2) )
+print('The model estimate of the Peclet number was', trial6_AD.Pe)
+print('The tracer residence time was',ut.round_sf(trial6_AD.theta ,2))
+print('The ratio of tracer to hydraulic residence time was',(trial6_AD.theta/trial6_theta_hydraulic).magnitude)
 
 #Create the advection dispersion model curve based on the solver parameters
-one_baffle_AD_model = (one_baffle_AD.C_bar*epa.E_Advective_Dispersion((one_baffle_time_data/one_baffle_AD.theta).to_base_units(), one_baffle_AD.Pe)).to(u.mg/u.L)
+trial6_AD_model = (trial6_AD.C_bar*epa.E_Advective_Dispersion((trial6_time_data/trial6_AD.theta).to_base_units(), trial6_AD.Pe)).to(u.mg/u.L)
 
 #Plot the data and the two model curves.
-plt.plot(one_baffle_time_data.to(u.s), one_baffle_concentration_data.to(u.mg/u.L),'r')
-plt.plot(one_baffle_time_data.to(u.s), one_baffle_CMFR_model,'b')
-plt.plot(one_baffle_time_data.to(u.s), one_baffle_AD_model,'g')
+plt.plot(trial6_time_data.to(u.s), trial6_concentration_data.to(u.mg/u.L),'r')
+plt.plot(trial6_time_data.to(u.s), trial6_CMFR_model,'-b')
+plt.plot(trial6_time_data.to(u.s), trial6_AD_model,'g')
 plt.xlabel(r'$time (min)$')
 plt.ylabel(r'Concentration $\left ( \frac{mg}{L} \right )$')
 plt.legend(['Measured dye','CMFR Model', 'AD Model'])

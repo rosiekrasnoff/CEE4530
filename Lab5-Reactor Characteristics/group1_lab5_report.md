@@ -66,6 +66,9 @@ write a function to find F = 0.1
     DO_data[i] = DO_data[i][idx_start:idx_end]
 
 5. Evaluate whether there is any evidence of “dead volumes” or “short circuiting” in your reactor.
+
+dye comes out faster than you though it would
+
 6. Make a recommendation for the design of a full scale chlorine contact tank. As part of your recommendation discuss the parameter you chose to vary as part of your experimentation and what the optimal value was determined to be.
 
 
@@ -258,24 +261,21 @@ from sklearn import preprocessing
 t_star = trial3_time_data/trial3_theta_hydraulic
 E = trial3_concentration_data.to(u.mg/u.L)*trial3_V/trial3_AD.C_bar
 trial3_AD.C_bar
+
+
 F = integrate.cumtrapz(E,t_star, initial=0)
-F
 plt.plot(t_star,F,'g')
 plt.show()
 
-# making series from list
-series = pd.Series(EOFError)
-
-# calling method
-cumsum = series.cumsum()
-
-# display
-cumsum
 
 
+10g/L*6.5367mL/1000
 
+10*6.5367/1000
 
+trial3_V
 
+65/trial3_V
 
 #Trial 4: 4 alternating CMFRs
 #Load a data file for a reactor with baffles.
@@ -336,6 +336,19 @@ plt.ylabel(r'Concentration $\left ( \frac{mg}{L} \right )$')
 plt.legend(['Measured dye','CMFR Model', 'AD Model'])
 plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/4_CMFR_alternating.png', bbox_inches = 'tight')
 plt.show()
+
+trial4_AD.theta
+trial4_theta_hydraulic
+t_star = trial4_time_data/trial4_theta_hydraulic
+E = trial4_concentration_data.to(u.mg/u.L)*trial4_V/trial4_AD.C_bar
+trial4_AD.C_bar
+
+F = integrate.cumtrapz(E,t_star, initial=0)
+plt.plot(t_star,F,'g')
+plt.show()
+
+
+
 
 
 #Trial 5: PFR suction with 1 mL of dye

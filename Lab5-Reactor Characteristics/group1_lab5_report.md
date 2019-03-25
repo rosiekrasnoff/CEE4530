@@ -314,7 +314,7 @@ trial5_concentration_data = epa.column_of_data(trial5_path,trial5_firstrow,1,-1,
 #measurement error persisted for the entire experiment.#
 
 trial5_concentration_data = trial5_concentration_data - trial5_concentration_data[0]
-trial5_V = (2.590-.596)*u.L
+trial5_V = 400*u.mL
 trial5_Q = 380 * u.mL/u.min
 trial5_theta_hydraulic = (trial5_V/trial5_Q).to(u.s)
 trial5_theta_hydraulic
@@ -372,7 +372,7 @@ plt.plot(t_star1,F,'g')
 plt.xlabel(r'hydraulic residence time (t*)')
 plt.ylabel(r'exit age')
 plt.legend(['E','F'])
-#plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
+plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab5-Reactor Characteristics/1-E_and_F.png', bbox_inches = 'tight')
 plt.show()
 
 
@@ -386,7 +386,7 @@ plt.plot(t_star2,F,'g')
 plt.xlabel(r'hydraulic residence time (t*)')
 plt.ylabel(r'exit age')
 plt.legend(['E','F'])
-#plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
+plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab5-Reactor Characteristics/2-E_and_F.png', bbox_inches = 'tight')
 plt.show()
 
 #Trial 3
@@ -398,7 +398,7 @@ plt.plot(t_star3,F,'g')
 plt.xlabel(r'hydraulic residence time')
 plt.ylabel(r'exit age')
 plt.legend(['E','F'])
-#plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
+plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab5-Reactor Characteristics/3-E_and_F.png', bbox_inches = 'tight')
 plt.show()
 
 #Trial 4
@@ -410,7 +410,7 @@ plt.plot(t_star4,F,'g')
 plt.xlabel(r'hydraulic residence time')
 plt.ylabel(r'exit age')
 plt.legend(['E','F'])
-#plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
+plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab5-Reactor Characteristics/4-E_and_F.png', bbox_inches = 'tight')
 plt.show()
 
 #Trial 5
@@ -422,7 +422,7 @@ plt.plot(t_star5,F,'g')
 plt.xlabel(r'hydraulic residence time')
 plt.ylabel(r'exit age')
 plt.legend(['E','F'])
-#plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
+plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab5-Reactor Characteristics/5-E_and_F.png', bbox_inches = 'tight')
 plt.show()
 
 

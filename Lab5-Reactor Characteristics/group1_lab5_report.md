@@ -141,7 +141,7 @@ trial2_concentration_data = epa.column_of_data(trial2_path,trial2_firstrow,1,-1,
 
 #subtract initial concentration from all data to correct
 trial2_concentration_data = trial2_concentration_data - trial2_concentration_data[0]
-trial2_V = (2.590-.596)*u.L
+trial2_V = (2.578-.585)*u.L
 trial2_Q = 380 * u.mL/u.min
 trial2_theta_hydraulic = (trial2_V/trial2_Q).to(u.s)
 trial2_C_bar_guess = np.max(trial2_concentration_data)/2
@@ -194,7 +194,7 @@ trial3_time_data = (epa.column_of_time(trial3_path,trial3_firstrow,-1)).to(u.s)
 trial3_concentration_data = epa.column_of_data(trial3_path,trial3_firstrow,1,-1,'mg/L')
 
 trial3_concentration_data = trial3_concentration_data - trial3_concentration_data[0]
-trial3_V = (2.590-.596)*u.L
+trial3_V = (2.659-.584)*u.L
 trial3_Q = 380 * u.mL/u.min
 trial3_theta_hydraulic = (trial3_V/trial3_Q).to(u.s)
 trial3_C_bar_guess = np.max(trial3_concentration_data)/2
@@ -255,7 +255,7 @@ trial4_concentration_data = epa.column_of_data(trial4_path,trial4_firstrow,1,-1,
 #measurement error persisted for the entire experiment.#
 
 trial4_concentration_data = trial4_concentration_data - trial4_concentration_data[0]
-trial4_V = (2.590-.596)*u.L
+trial4_V = (2.529-.588)*u.L
 trial4_Q = 380 * u.mL/u.min
 trial4_theta_hydraulic = (trial4_V/trial4_Q).to(u.s)
 trial4_C_bar_guess = np.max(trial4_concentration_data)/2
@@ -300,14 +300,14 @@ plt.show()
 
 
 #Trial 5: PFR pump with 0.35 mL of dye (last try)
-trial5_path = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab5-Reactor%20Characteristics/reactor%20data/lab%205-%20trial%205.xls'
+trial5_path = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab5-Reactor%20Characteristics/reactor%20data/trial%205_PFR.xls'
 trial5_firstrow = epa.notes(trial5_path).last_valid_index() + 1
 trial5_time_data = (epa.column_of_time(trial5_path,trial5_firstrow,-1)).to(u.s)
 trial5_concentration_data = epa.column_of_data(trial5_path,trial5_firstrow,1,-1,'mg/L')
 
 #I noticed that the initial concentration measured by the photometer wasn't
 #zero. This suggests that there may have been a small air bubble in the
-#photometer or perhaps there was some other anomoly that was causing the
+#photometer or perhaps there was some other anomaly that was causing the
 #photometer to read a concentration that was higher than was actually present in
 #the reactor. To correct for this I subtracted the initial concentration reading
 #from all of the data. This was based on the assumption that the concentration
@@ -317,6 +317,7 @@ trial5_concentration_data = trial5_concentration_data - trial5_concentration_dat
 trial5_V = (2.590-.596)*u.L
 trial5_Q = 380 * u.mL/u.min
 trial5_theta_hydraulic = (trial5_V/trial5_Q).to(u.s)
+trial5_theta_hydraulic
 trial5_C_bar_guess = np.max(trial5_concentration_data)/2
 #use solver to get the CMFR parameters
 trial5_CMFR = epa.Solver_CMFR_N(trial5_time_data, trial5_concentration_data, trial5_theta_hydraulic, trial5_C_bar_guess)
@@ -353,7 +354,7 @@ plt.plot(trial5_time_data.to(u.s), trial5_AD_model,'g')
 plt.xlabel(r'$time (min)$')
 plt.ylabel(r'Concentration $\left ( \frac{mg}{L} \right )$')
 plt.legend(['Measured dye','CMFR Model', 'AD Model'])
-#plt.savefig('Examples/images/Dispersion.png', bbox_inches = 'tight')
+plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/PFR.png', bbox_inches = 'tight')
 plt.show()
 
 
@@ -366,31 +367,14 @@ plt.show()
 t_star1 = CMFR_time_data/CMFR_theta_hydraulic # hydraulic residence time
 E = CMFR_concentration_data.to(u.mg/u.L)*CMFR_V/CMFR_CMFR.C_bar
 F = integrate.cumtrapz(E,t_star1, initial=0)
-fig, ax1 = plt.subplots()
-ax1.plot(t_star2,E,'b')
-ax1.xlabel('hydraulic residence time')
-ax1.set_ylabel('E', color='b')
-ax1.tick_params('y', colors='b')
-ax2 = ax1.twinx()
-ax2.plot(t_star2, F, 'r.')
-ax2.set_ylabel('F', color='r')
-ax2.tick_params('y', colors='r')
-fig.tight_layout()
+plt.plot(t_star1,E,'r')
+plt.plot(t_star1,F,'g')
+plt.xlabel(r'hydraulic residence time (t*)')
+plt.ylabel(r'exit age')
+plt.legend(['E','F'])
 #plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
 plt.show()
 
-
-fig, ax1 = plt.subplots()
-ax1.plot(t, s1, 'b-')
-ax1.set_xlabel('time (s)')
-# Make the y-axis label, ticks and tick labels match the line color.
-ax1.set_ylabel('exp', color='b')
-ax1.tick_params('y', colors='b')
-
-ax2 = ax1.twinx()
-ax2.plot(t, s2, 'r.')
-ax2.set_ylabel('sin', color='r')
-ax2.tick_params('y', colors='r')
 
 
 #Trial 2
@@ -400,7 +384,8 @@ F = integrate.cumtrapz(E,t_star2, initial=0)
 plt.plot(t_star2,E,'r')
 plt.plot(t_star2,F,'g')
 plt.xlabel(r'hydraulic residence time (t*)')
-plt.ylabel(r'cumulative exit age')
+plt.ylabel(r'exit age')
+plt.legend(['E','F'])
 #plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
 plt.show()
 
@@ -411,7 +396,8 @@ F = integrate.cumtrapz(E,t_star3, initial=0)
 plt.plot(t_star3,E,'r')
 plt.plot(t_star3,F,'g')
 plt.xlabel(r'hydraulic residence time')
-plt.ylabel(r'cumulative exit age')
+plt.ylabel(r'exit age')
+plt.legend(['E','F'])
 #plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
 plt.show()
 
@@ -419,9 +405,11 @@ plt.show()
 t_star4 = trial4_time_data/trial4_theta_hydraulic # hydraulic residence time
 E = trial4_concentration_data.to(u.mg/u.L)*trial4_V/trial4_AD.C_bar
 F = integrate.cumtrapz(E,t_star4, initial=0)
+plt.plot(t_star4,E,'r')
 plt.plot(t_star4,F,'g')
 plt.xlabel(r'hydraulic residence time')
-plt.ylabel(r'cumulative exit age')
+plt.ylabel(r'exit age')
+plt.legend(['E','F'])
 #plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
 plt.show()
 
@@ -429,19 +417,11 @@ plt.show()
 t_star5 = trial5_time_data/trial5_theta_hydraulic # hydraulic residence time
 E = trial5_concentration_data.to(u.mg/u.L)*trial5_V/trial5_AD.C_bar
 F = integrate.cumtrapz(E,t_star5, initial=0)
+plt.plot(t_star5,E,'r')
 plt.plot(t_star5,F,'g')
 plt.xlabel(r'hydraulic residence time')
-plt.ylabel(r'cumulative exit age')
-#plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
-plt.show()
-
-#Trial 6
-t_star6 = trial6_time_data/trial6_theta_hydraulic # hydraulic residence time
-E = trial6_concentration_data.to(u.mg/u.L)*trial6_V/trial6_AD.C_bar
-F = integrate.cumtrapz(E,t_star6, initial=0)
-plt.plot(t_star6,F,'g')
-plt.xlabel(r'hydraulic residence time')
-plt.ylabel(r'cumulative exit age')
+plt.ylabel(r'exit age')
+plt.legend(['E','F'])
 #plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
 plt.show()
 

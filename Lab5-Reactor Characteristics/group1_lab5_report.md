@@ -257,7 +257,7 @@ from sklearn import preprocessing
 
 t_star = trial3_time_data/trial3_theta_hydraulic
 E = trial3_concentration_data.to(u.mg/u.L)*trial3_V/trial3_AD.C_bar
-
+trial3_AD.C_bar
 F = integrate.cumtrapz(E,t_star, initial=0)
 F
 plt.plot(t_star,F,'g')

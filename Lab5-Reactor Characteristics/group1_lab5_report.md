@@ -3,15 +3,29 @@
 ##### Due March 27
 
 ## Introduction and Objectives
+
+In the world of environmental engineering, reactors are ubiquitous. Everything from bodies of water, such as lakes, in nature, to settling tanks in treatment plants are "reactors" that allow chemical, biological, and physical processes to take place. One factor that engineers consider when working with reactors is the mixing level and the residence time. For instance, chlorine contactor tanks in water treatment are built to maximize the residence time of water in the tank to optimize the contact time between chlorine and pathogens. This experiment allows us to use tracer studies, with #40 Red Dye, to obtain estimates of the effective contact time by analyzing different reactor designs. Through this lab, we hope to modify the reactor to obtain a maximum value of t⋆ at F = 0.1, document our progress toward this goal by obtaining appropriate experimental data, and compare our experimental data with appropriate models.
+
+Below are relevant equations:
+
+$$E_{\left(t\right)}=\frac{C_t{\rlap{-} V }_r}{C_{tr}{\rlap{-} V }_{tr}}=e^{\left(-t/\theta \right)}$$
+
+This equation allowed us to solve for E, the exit age distribution, by multiplying the concentration data by the volume of the reactor divided by the pulse input of the tracer.
+
+$$F_{\left(t^{\star} \right)} =\int _{0}^{t^{\star} }E_{\left(t^{\star} \right)} dt^{\star}$$
+
+This equation gave us the F curve.
+
+
 ## Procedures
+
+In the Reactor Characteristics lab, we performed multiple tests with different reactors to measure the reactor volume, residual reactor red dye concentration, and the flow rate. We set up the reactor system to pump distilled water from a 20 L Jerry can to the influent of the reactor, which is placed on a stir plate, and drained out with a straight short tube. Then, we proceeded to add a volume of red dye #40 stock that will give a maximum concentration of approximately 30 mg/L near the influent of the reactor and collected data until the majority of the tracer has exited. Finally, we repeated these steps for various types of reactors, including alternating CMFRs as well as a PFR. For a more detail procedure, refer to the [textbook](https://monroews.github.io/EnvEngLabTextbook/Reactor_Characteristics/Reactor_Characteristics.html).
+
+
 ## Results and Discussion
 ### Data Analysis
-## Conclusion
-## Suggestions/Comments
 
-
-
-1. Use multivariable nonlinear regression to obtain the best fit between the experimental data and the two models by minimizing the sum of the squared errors. Use epa.Solver_AD_Pe and epa.Solver_CMFR_N. These functions will minimize the error by varying the values of average residence time, (mass of tracer/reactor volume), and either the number of CMFR in series or the Peclet number.
+We used multivariable nonlinear regression to obtain the best fit between the experimental data and the two models by minimizing the sum of the squared errors. Using epa.Solver_AD_Pe and epa.Solver_CMFR_N, we minimized the error by varying the values of average residence time, (mass of tracer/reactor volume), and either the number of CMFR in series or the Peclet number.
 
 2. Generate a plot showing the experimental data as points and the model results as thin lines for each of your experiments. Explain which model fits best and discuss those results based on your expectations.
 
@@ -21,23 +35,25 @@ Figure 1. Plot showing the simple CMFR experimental data and the CMFR model.
 
 ![trial 2](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/4_CMFR_with_holes.png?raw=true)
 
-Figure 1. Plot showing the 4 CMFR experimental data and the CMFR model.
+Figure 2. Plot showing the 4 CMFR experimental data and the CMFR model.
 
 In trial 2, the CMFR model fits better and discuss those results based on your expectations.
 
 ![trial 3](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/3_CMFR_alternating.png?raw=true)
 
-Figure 1. Plot showing the 3 alternating CMFR experimental data and the CMFR model.
+Figure 3. Plot showing the 3 alternating CMFR experimental data and the CMFR model.
 
 In trial 3, the CMFR model fits better and discuss those results based on your expectations.
 
 ![trial 4](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/4_CMFR_alternating.png?raw=true)
 
-Figure 1. Plot showing the 4 alternating CMFR experimental data and the CMFR model.
+Figure 4. Plot showing the 4 alternating CMFR experimental data and the CMFR model.
 
-In trial 4, the CMFR model fits better and discuss those results based on your expectations.
+![trial 5](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/PFR.png?raw=true)
 
-3. Compare the trends in the estimated values of N and Pe across your set of experiments. How did your chosen reactor modifications effect dispersion?
+In trial 5, the CMFR model fits better and discuss those results based on your expectations.
+
+3. The estimated values of N and Pe across our set of experiments:
 
 Trial 1: The model estimate of the number of reactors in series was 1.0.
 
@@ -47,27 +63,53 @@ Trial 3: The model estimate of the number of reactors in series was 3.0132831433
 
 Trial 4: The model estimate of the number of reactors in series was 3.669886514421101. The model estimate of the Peclet number was 5.479660899821685.
 
+Trial 5: The model estimate of the number of reactors in series was 70.71324985847279. The model estimate of the Peclet number was 139.17179167794515.
+
+Comparing the trends in the estimated values of N and Pe across your set of experiments, our reactor modifications decreased dispersion in our reactors. As we increased the number of reactors in series by either adding additional baffles or modeling a plug flow, the Peclet number increased as expected. As the Peclet number increases the dispersion decreases and the response becomes closer to plug flow. This matches with our model estimate of the Peclet number for PFR since it was the highest of all 5 trials.
+
 
 4. Report the values of t⋆ at F = 0.1 for each of your experiments. Do they meet your expectations?
 
+![trial 1](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/1-E_and_F.png?raw=true)
 
+Figure 6. Exit age (E) and Cumulative exit age (F) curves for a simple CMFR.
 
+The t* when F=0.1, which is how long it takes for 10% of the dye to leave, is 0.06352.
 
-graph E curve -> integrate to get F curve (numpy cumulative sum; numpy trapz)
-write a function to find F = 0.1
-  looks through array and find values
-  smth like this:
-  DO_min = 2 * u.mg/u.L
-  DO_max = 6 * u.mg/u.L
-  for i in range(airflows.size):
-    idx_start = (np.abs(DO_data[i]-DO_min)).argmin()
-    idx_end = (np.abs(DO_data[i]-DO_max)).argmin()
-    time_data[i] = time_data[i][idx_start:idx_end] - time_data[i][idx_start]
-    DO_data[i] = DO_data[i][idx_start:idx_end]
+![trial 2](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/2-E_and_F.png?raw=true)
+
+Figure 7. Exit age (E) and Cumulative exit age (F) curves for 4 CMFRs with 24 holes.
+
+The t* when F=0.1, which is how long it takes for 10% of the dye to leave, is 0.2066.
+
+![trial 3](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/3-E_and_F.png?raw=true)
+
+Figure 8. Exit age (E) and Cumulative exit age (F) curves for 3 alternating CMFRs.
+
+The t* when F=0.1, which is how long it takes for 10% of the dye to leave, is 0.3051.
+
+![trial 4](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/4-E_and_F.png?raw=true)
+
+Figure 9. Exit age (E) and Cumulative exit age (F) curves for 4 alternating CMFRs.
+
+The t* when F=0.1, which is how long it takes for 10% of the dye to leave, is 0.3426.
+
+![trial 5](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/5-E_and_F.png?raw=true)
+
+Figure 10. Exit age (E) and Cumulative exit age (F) curves for a PFR.
+
+The t* when F=0.1, which is how long it takes for 10% of the dye to leave, is 0.9414.
+
+The normalized time increases as we improved our reactor, which is what we would expect. The t* was 0.06352 for a simple CMFR, 0.2066 for 4 CMFRs with 24 holes, 0.3051 for 3 alternating CMFRs, 0.3426 for 4 alternating CMFRs, and 0.9414 (!!) for a PFR. This makes sense because with each improvement (added or alternating baffle), the dye spends a longer time in the reactor.
+
 
 5. Evaluate whether there is any evidence of “dead volumes” or “short circuiting” in your reactor.
 
 dye comes out faster than you though it would
+
+## Conclusion
+
+## Suggestions/Comments
 
 6. Make a recommendation for the design of a full scale chlorine contact tank. As part of your recommendation discuss the parameter you chose to vary as part of your experimentation and what the optimal value was determined to be.
 
@@ -178,7 +220,7 @@ trial2_AD_model = (trial2_AD.C_bar*epa.E_Advective_Dispersion((trial2_time_data/
 plt.plot(trial2_time_data.to(u.s), trial2_concentration_data.to(u.mg/u.L),'ro')
 plt.plot(trial2_time_data.to(u.s), trial2_CMFR_model,'b')
 plt.plot(trial2_time_data.to(u.s), trial2_AD_model,'g')
-plt.xlabel(r'$time (min)$')
+plt.xlabel(r'$time (sec)$')
 plt.ylabel(r'Concentration $\left ( \frac{mg}{L} \right )$')
 plt.legend(['Measured dye','CMFR Model', 'AD Model'])
 #plt.savefig('Examples/images/Dispersion.png', bbox_inches = 'tight')
@@ -231,7 +273,7 @@ trial3_AD_model = (trial3_AD.C_bar*epa.E_Advective_Dispersion((trial3_time_data/
 plt.plot(trial3_time_data.to(u.s), trial3_concentration_data.to(u.mg/u.L),'or')
 plt.plot(trial3_time_data.to(u.s), trial3_CMFR_model,'b')
 plt.plot(trial3_time_data.to(u.s), trial3_AD_model,'g')
-plt.xlabel(r'$time (min)$')
+plt.xlabel(r'$time (sec)$')
 plt.ylabel(r'Concentration $\left ( \frac{mg}{L} \right )$')
 plt.legend(['Measured dye','CMFR Model', 'AD Model'])
 plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
@@ -292,7 +334,7 @@ trial4_AD_model = (trial4_AD.C_bar*epa.E_Advective_Dispersion((trial4_time_data/
 plt.plot(trial4_time_data.to(u.s), trial4_concentration_data.to(u.mg/u.L),'or')
 plt.plot(trial4_time_data.to(u.s), trial4_CMFR_model,'b')
 plt.plot(trial4_time_data.to(u.s), trial4_AD_model,'g')
-plt.xlabel(r'$time (min)$')
+plt.xlabel(r'$time (sec)$')
 plt.ylabel(r'Concentration $\left ( \frac{mg}{L} \right )$')
 plt.legend(['Measured dye','CMFR Model', 'AD Model'])
 plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/4_CMFR_alternating.png', bbox_inches = 'tight')
@@ -314,13 +356,52 @@ trial5_concentration_data = epa.column_of_data(trial5_path,trial5_firstrow,1,-1,
 #measurement error persisted for the entire experiment.#
 
 trial5_concentration_data = trial5_concentration_data - trial5_concentration_data[0]
-trial5_V = 400*u.mL
-trial5_Q = 380 * u.mL/u.min
+trial5_V = .400*u.L
+trial5_Q = 300 * u.mL/u.min
 trial5_theta_hydraulic = (trial5_V/trial5_Q).to(u.s)
 trial5_theta_hydraulic
 trial5_C_bar_guess = np.max(trial5_concentration_data)/2
 #use solver to get the CMFR parameters
-trial5_CMFR = epa.Solver_CMFR_N(trial5_time_data, trial5_concentration_data, trial5_theta_hydraulic, trial5_C_bar_guess)
+
+#edit function, change solver to assume 50 CMFRs instead of 1
+def Solver_CMFR_N_PFR(t_data, C_data, theta_guess, C_bar_guess):
+    """Use non-linear least squares to fit the function
+    Tracer_CMFR_N(t_seconds, t_bar, C_bar, N), to reactor data.
+    Parameters
+    ----------
+    t_data : float list
+        Array of times with units
+    C_data : float list
+        Array of tracer concentration data with units
+    theta_guess : float
+        Estimate of time spent in one CMFR with units.
+    C_bar_guess : float
+        Estimate of average concentration with units
+        (Mass of tracer)/(volume of one CMFR)
+    Returns
+    -------
+    tuple
+        theta : float
+            residence time in seconds
+        C_bar : float
+            average concentration with same units as C_bar_guess
+        N : float
+            number of CMFRS in series that best fit the data
+    """
+    C_unitless = C_data.magnitude
+    C_units = str(C_bar_guess.units)
+    t_seconds = (t_data.to(u.s)).magnitude
+    # assume that a guess of 50 reactors in series is close enough to get a solution
+    p0 = [theta_guess.to(u.s).magnitude, C_bar_guess.magnitude,50]
+    popt, pcov = curve_fit(epa.Tracer_CMFR_N, t_seconds, C_unitless, p0)
+    Solver_theta = popt[0]*u.s
+    Solver_C_bar = popt[1]*u(C_units)
+    Solver_N = popt[2]
+    Reactor_results = collections.namedtuple('Reactor_results','theta C_bar N')
+    CMFR = Reactor_results(theta=Solver_theta, C_bar=Solver_C_bar, N=Solver_N)
+    return CMFR
+
+trial5_CMFR = Solver_CMFR_N_PFR(trial5_time_data, trial5_concentration_data, trial5_theta_hydraulic, trial5_C_bar_guess)
 trial5_CMFR.C_bar
 trial5_CMFR.N
 trial5_CMFR.theta.to(u.s)
@@ -348,42 +429,37 @@ print('The ratio of tracer to hydraulic residence time was',(trial5_AD.theta/tri
 trial5_AD_model = (trial5_AD.C_bar*epa.E_Advective_Dispersion((trial5_time_data/trial5_AD.theta).to_base_units(), trial5_AD.Pe)).to(u.mg/u.L)
 
 #Plot the data and the two model curves.
-plt.plot(trial5_time_data.to(u.s), trial5_concentration_data.to(u.mg/u.L),'r')
+plt.plot(trial5_time_data.to(u.s), trial5_concentration_data.to(u.mg/u.L),'or')
 plt.plot(trial5_time_data.to(u.s), trial5_CMFR_model,'b')
 plt.plot(trial5_time_data.to(u.s), trial5_AD_model,'g')
-plt.xlabel(r'$time (min)$')
+plt.xlabel(r'$time (sec)$')
 plt.ylabel(r'Concentration $\left ( \frac{mg}{L} \right )$')
 plt.legend(['Measured dye','CMFR Model', 'AD Model'])
 plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/PFR.png', bbox_inches = 'tight')
 plt.show()
 
 
-
-
-
 #Number 3
 
 #Trial 1
 t_star1 = CMFR_time_data/CMFR_theta_hydraulic # hydraulic residence time
-E = CMFR_concentration_data.to(u.mg/u.L)*CMFR_V/CMFR_CMFR.C_bar
-F = integrate.cumtrapz(E,t_star1, initial=0)
-plt.plot(t_star1,E,'r')
-plt.plot(t_star1,F,'g')
-plt.xlabel(r'hydraulic residence time (t*)')
+E1 = CMFR_concentration_data.to(u.mg/u.L)*CMFR_V/CMFR_CMFR.C_bar
+F1 = integrate.cumtrapz(E1,t_star1, initial=0)
+plt.plot(t_star1,E1,'r')
+plt.plot(t_star1,F1,'g')
+plt.xlabel(r't*')
 plt.ylabel(r'exit age')
 plt.legend(['E','F'])
 plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab5-Reactor Characteristics/1-E_and_F.png', bbox_inches = 'tight')
 plt.show()
 
-
-
 #Trial 2
 t_star2 = trial2_time_data/trial2_theta_hydraulic # hydraulic residence time
-E = trial2_concentration_data.to(u.mg/u.L)*trial2_V/trial2_AD.C_bar
-F = integrate.cumtrapz(E,t_star2, initial=0)
-plt.plot(t_star2,E,'r')
-plt.plot(t_star2,F,'g')
-plt.xlabel(r'hydraulic residence time (t*)')
+E2 = trial2_concentration_data.to(u.mg/u.L)*trial2_V/trial2_AD.C_bar
+F2 = integrate.cumtrapz(E2,t_star2, initial=0)
+plt.plot(t_star2,E2,'r')
+plt.plot(t_star2,F2,'g')
+plt.xlabel(r't*')
 plt.ylabel(r'exit age')
 plt.legend(['E','F'])
 plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab5-Reactor Characteristics/2-E_and_F.png', bbox_inches = 'tight')
@@ -391,23 +467,24 @@ plt.show()
 
 #Trial 3
 t_star3 = trial3_time_data/trial3_theta_hydraulic # hydraulic residence time
-E = trial3_concentration_data.to(u.mg/u.L)*trial3_V/trial3_AD.C_bar
-F = integrate.cumtrapz(E,t_star3, initial=0)
-plt.plot(t_star3,E,'r')
-plt.plot(t_star3,F,'g')
-plt.xlabel(r'hydraulic residence time')
+E3 = trial3_concentration_data.to(u.mg/u.L)*trial3_V/trial3_AD.C_bar
+F3 = integrate.cumtrapz(E3,t_star3, initial=0)
+plt.plot(t_star3,E3,'r')
+plt.plot(t_star3,F3,'g')
+plt.xlabel(r't*')
 plt.ylabel(r'exit age')
 plt.legend(['E','F'])
 plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab5-Reactor Characteristics/3-E_and_F.png', bbox_inches = 'tight')
 plt.show()
 
+
 #Trial 4
 t_star4 = trial4_time_data/trial4_theta_hydraulic # hydraulic residence time
-E = trial4_concentration_data.to(u.mg/u.L)*trial4_V/trial4_AD.C_bar
-F = integrate.cumtrapz(E,t_star4, initial=0)
-plt.plot(t_star4,E,'r')
-plt.plot(t_star4,F,'g')
-plt.xlabel(r'hydraulic residence time')
+E4 = trial4_concentration_data.to(u.mg/u.L)*trial4_V/trial4_AD.C_bar
+F4 = integrate.cumtrapz(E4,t_star4, initial=0)
+plt.plot(t_star4,E4,'r')
+plt.plot(t_star4,F4,'g')
+plt.xlabel(r't*')
 plt.ylabel(r'exit age')
 plt.legend(['E','F'])
 plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab5-Reactor Characteristics/4-E_and_F.png', bbox_inches = 'tight')
@@ -415,15 +492,64 @@ plt.show()
 
 #Trial 5
 t_star5 = trial5_time_data/trial5_theta_hydraulic # hydraulic residence time
-E = trial5_concentration_data.to(u.mg/u.L)*trial5_V/trial5_AD.C_bar
-F = integrate.cumtrapz(E,t_star5, initial=0)
-plt.plot(t_star5,E,'r')
-plt.plot(t_star5,F,'g')
-plt.xlabel(r'hydraulic residence time')
+t_star5 = trial5_time_data/trial5_AD.theta
+E5 = trial5_concentration_data.to(u.mg/u.L)*trial5_V/trial5_AD.C_bar
+F5 = integrate.cumtrapz(E5,t_star5, initial=0)
+plt.plot(t_star5,E5,'r')
+plt.plot(t_star5,F5,'g')
+plt.xlabel(r't*')
 plt.ylabel(r'exit age')
 plt.legend(['E','F'])
 plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab5-Reactor Characteristics/5-E_and_F.png', bbox_inches = 'tight')
 plt.show()
+
+#Number 4
+#write a function to find the time when F = 0.1
+#looks through array and find values
+
+#Trial 1
+desired_F = 0.1
+for i in range(CMFR_concentration_data.size):
+    if F1[i-1] < desired_F and F1[i] > desired_F:
+      desired_t_star1 = t_star1[i]
+
+print('The t* when F=0.1, which is how long it takes for 10% of the dye to leave, is', desired_t_star1)
+
+#Trial 2
+desired_F = 0.1
+for i in range(trial2_concentration_data.size):
+    if F2[i-1] < desired_F and F2[i] > desired_F:
+      desired_t_star2 = t_star2[i]
+
+print('The t* when F=0.1, which is how long it takes for 10% of the dye to leave, is', desired_t_star2)
+
+#Trial 3
+desired_F = 0.1
+for i in range(trial3_concentration_data.size):
+    if F3[i-1] < desired_F and F3[i] > desired_F:
+      desired_t_star3 = t_star3[i]
+
+print('The t* when F=0.1, which is how long it takes for 10% of the dye to leave, is', desired_t_star3)
+
+#Trial 4
+desired_F = 0.1
+for i in range(trial4_concentration_data.size):
+    if F4[i-1] < desired_F and F4[i] > desired_F:
+      desired_t_star4 = t_star4[i]
+
+print('The t* when F=0.1, which is how long it takes for 10% of the dye to leave, is', desired_t_star4)
+
+#Trial 5
+desired_F = 0.1
+for i in range(trial5_concentration_data.size):
+    if F5[i-1] < desired_F and F5[i] > desired_F:
+      desired_t_star5 = t_star5[i]
+
+print('The t* when F=0.1, which is how long it takes for 10% of the dye to leave, is', desired_t_star5)
+
+
+
+
 
 
 

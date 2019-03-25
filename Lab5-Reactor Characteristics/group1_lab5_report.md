@@ -67,8 +67,7 @@ Trial 5: The model estimate of the number of reactors in series was 70.713249858
 
 Comparing the trends in the estimated values of N and Pe across your set of experiments, our reactor modifications decreased dispersion in our reactors. As we increased the number of reactors in series by either adding additional baffles or modeling a plug flow, the Peclet number increased as expected. As the Peclet number increases the dispersion decreases and the response becomes closer to plug flow. This matches with our model estimate of the Peclet number for PFR since it was the highest of all 5 trials.
 
-
-4. Report the values of t⋆ at F = 0.1 for each of your experiments. Do they meet your expectations?
+4. The values of t⋆ at F = 0.1 for each of your experiments:
 
 ![trial 1](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/1-E_and_F.png?raw=true)
 
@@ -100,19 +99,21 @@ Figure 10. Exit age (E) and Cumulative exit age (F) curves for a PFR.
 
 The t* when F=0.1, which is how long it takes for 10% of the dye to leave, is 0.9414.
 
-The normalized time increases as we improved our reactor, which is what we would expect. The t* was 0.06352 for a simple CMFR, 0.2066 for 4 CMFRs with 24 holes, 0.3051 for 3 alternating CMFRs, 0.3426 for 4 alternating CMFRs, and 0.9414 (!!) for a PFR. This makes sense because with each improvement (added or alternating baffle), the dye spends a longer time in the reactor.
+The normalized time increases as we improved our reactor, which is what we would expect. The t* was 0.06352 for a simple CMFR, 0.2066 for 4 CMFRs with 24 holes, 0.3051 for 3 alternating CMFRs, 0.3426 for 4 alternating CMFRs, and 0.9414 for a PFR. This makes sense because with each improvement (added or alternating baffle), the dye spends a longer time in the reactor.
 
+5. There was definitely evidence of "dead volumes" in our reactors. In both of the alternating CMFR models, there were areas - specifically near the edges of the baffles - that never had any contact time with the red dye.
 
-5. Evaluate whether there is any evidence of “dead volumes” or “short circuiting” in your reactor.
+For the 4 CMFRs with 24 holes, the predicted theta from our volume and flow rate is 314.7 seconds and the theta from the AD model is 142.2 seconds. This means that the dye left the reactor much quicker than was expected based just on the flow rate and volume. This is because there were flow paths possible through the reactor that allowed the dye to "short circuit" and not actually get mixed in the reactor. Thus, some of the dye was able to leave the reactor much sooner than predicted. This same phenomenon occurred in the next two trials as well:
+For the 3 alternating CMFRs, the predicted theta from our volume and flow rate is 327.6 second and the theta from the AD model is 202.2 seconds
+For the 4 alternating CMFRs, the predicted theta from our volume and flow rate is 306.5 seconds and the theta from the AD model is 213.8 seconds.
 
-dye comes out faster than you though it would
+For the PFR, we would expect very little dead volume, because the dye is moving through the tube and dye comes out faster than we though it would. This somewhat lines up with our output that the predicted theta from our volume and flow rate is 80 seconds and the theta from the AD model is 64.79 seconds; however, we do not actually know the volume of the PFR and used a rough estimate, so it is possible that these values would actually be closer if we knew the exact length of the tubing and could calculate the exact volume.
+
+6. Make a recommendation for the design of a full scale chlorine contact tank. As part of your recommendation discuss the parameter you chose to vary as part of your experimentation and what the optimal value was determined to be.
 
 ## Conclusion
 
 ## Suggestions/Comments
-
-6. Make a recommendation for the design of a full scale chlorine contact tank. As part of your recommendation discuss the parameter you chose to vary as part of your experimentation and what the optimal value was determined to be.
-
 
 # Appendix
 ``` python
@@ -172,7 +173,6 @@ plt.ylabel(r'Concentration $\left ( \frac{mg}{L} \right )$')
 plt.legend(['Measured dye','CMFR Model'])
 plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/CMFR.png', bbox_inches = 'tight')
 plt.show()
-
 
 #Trial 2: 4 CMFRs (3 baffles) with 24 holes each
 #Load a data file for a reactor with baffles.
@@ -548,32 +548,24 @@ for i in range(trial5_concentration_data.size):
 print('The t* when F=0.1, which is how long it takes for 10% of the dye to leave, is', desired_t_star5)
 
 
+# Number 5
+# comparing predicted theta and theta from the data
 
 
+#Trial 2
+print('The predicted theta from our volume and flow rate is', trial2_theta_hydraulic)
+print('The theta from the AD model is', trial2_AD.theta)
 
+#Trial 3
+print('The predicted theta from our volume and flow rate is', trial3_theta_hydraulic)
+print('The theta from the AD model is', trial3_AD.theta)
 
+#Trial 4
+print('The predicted theta from our volume and flow rate is', trial4_theta_hydraulic)
+print('The theta from the AD model is', trial4_AD.theta)
 
-
-
-
-
-
-
-
-
-
-# 4
-trial4_AD.theta
-trial4_theta_hydraulic
-t_star = trial4_time_data/trial4_theta_hydraulic
-E = trial4_concentration_data.to(u.mg/u.L)*trial4_V/trial4_AD.C_bar
-trial4_AD.C_bar
-
-F = integrate.cumtrapz(E,t_star, initial=0)
-plt.plot(t_star,F,'g')
-plt.show()
-
-
-
+#Trial 5
+print('The predicted theta from our volume and flow rate is', trial5_theta_hydraulic)
+print('The theta from the AD model is', trial5_AD.theta)
 
 ```

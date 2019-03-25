@@ -84,6 +84,8 @@ import pandas as pd
 from scipy import special
 from scipy.optimize import curve_fit
 import collections
+from scipy import integrate
+from sklearn import preprocessing
 
 # Number 1
 
@@ -186,19 +188,10 @@ plt.show()
 
 #Trial 3: 3 alternating CMFRs
 #Load a data file for a reactor with baffles.
-
 trial3_path = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab5-Reactor%20Characteristics/reactor%20data/trial%203.xls'
 trial3_firstrow = epa.notes(trial3_path).last_valid_index() + 1
 trial3_time_data = (epa.column_of_time(trial3_path,trial3_firstrow,-1)).to(u.s)
 trial3_concentration_data = epa.column_of_data(trial3_path,trial3_firstrow,1,-1,'mg/L')
-
-#I noticed that the initial concentration measured by the photometer wasn't
-#zero. This suggests that there may have been a small air bubble in the
-#photometer or perhaps there was some other anomoly that was causing the
-#photometer to read a concentration that was higher than was actually present in
-#the reactor. To correct for this I subtracted the initial concentration reading
-#from all of the data. This was based on the assumption that the concentration
-#measurement error persisted for the entire experiment.#
 
 trial3_concentration_data = trial3_concentration_data - trial3_concentration_data[0]
 trial3_V = (2.590-.596)*u.L
@@ -244,38 +237,6 @@ plt.legend(['Measured dye','CMFR Model', 'AD Model'])
 plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
 plt.show()
 
-
-
-
-
-x = np.linspace(0,5,1000)
-for t in range(0,10):
-    PD = (np.trapz(probability(x,t,initial_state),x))
-    print (PD)
-
-
-
-from scipy import integrate
-from sklearn import preprocessing
-
-t_star = trial3_time_data/trial3_theta_hydraulic
-E = trial3_concentration_data.to(u.mg/u.L)*trial3_V/trial3_AD.C_bar
-trial3_AD.C_bar
-
-
-F = integrate.cumtrapz(E,t_star, initial=0)
-plt.plot(t_star,F,'g')
-plt.show()
-
-
-
-10g/L*6.5367mL/1000
-
-10*6.5367/1000
-
-trial3_V
-
-65/trial3_V
 
 #Trial 4: 4 alternating CMFRs
 #Load a data file for a reactor with baffles.
@@ -337,24 +298,9 @@ plt.legend(['Measured dye','CMFR Model', 'AD Model'])
 plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/4_CMFR_alternating.png', bbox_inches = 'tight')
 plt.show()
 
-trial4_AD.theta
-trial4_theta_hydraulic
-t_star = trial4_time_data/trial4_theta_hydraulic
-E = trial4_concentration_data.to(u.mg/u.L)*trial4_V/trial4_AD.C_bar
-trial4_AD.C_bar
 
-F = integrate.cumtrapz(E,t_star, initial=0)
-plt.plot(t_star,F,'g')
-plt.show()
-
-
-
-
-
-#Trial 5: PFR suction with 1 mL of dye
-#Load a data file for a reactor with baffles.
-
-trial5_path = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab5-Reactor%20Characteristics/reactor%20data/trial%204.xls'
+#Trial 5: PFR pump with 0.35 mL of dye (last try)
+trial5_path = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab5-Reactor%20Characteristics/reactor%20data/lab%205-%20trial%205.xls'
 trial5_firstrow = epa.notes(trial5_path).last_valid_index() + 1
 trial5_time_data = (epa.column_of_time(trial5_path,trial5_firstrow,-1)).to(u.s)
 trial5_concentration_data = epa.column_of_data(trial5_path,trial5_firstrow,1,-1,'mg/L')
@@ -411,70 +357,115 @@ plt.legend(['Measured dye','CMFR Model', 'AD Model'])
 plt.show()
 
 
-#Trial 6: PFR pump with 0.35 mL of dye
-#Load a data file for a reactor with baffles.
 
-trial6_path = 'https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab5-Reactor%20Characteristics/reactor%20data/lab%205-%20trial%205.xls'
-trial6_firstrow = epa.notes(trial6_path).last_valid_index() + 1
-trial6_time_data = (epa.column_of_time(trial6_path,trial6_firstrow,-1)).to(u.s)
-trial6_concentration_data = epa.column_of_data(trial6_path,trial6_firstrow,1,-1,'mg/L')
-
-#I noticed that the initial concentration measured by the photometer wasn't
-#zero. This suggests that there may have been a small air bubble in the
-#photometer or perhaps there was some other anomoly that was causing the
-#photometer to read a concentration that was higher than was actually present in
-#the reactor. To correct for this I subtracted the initial concentration reading
-#from all of the data. This was based on the assumption that the concentration
-#measurement error persisted for the entire experiment.#
-
-trial6_concentration_data = trial6_concentration_data - trial6_concentration_data[0]
-trial6_V = (2.590-.596)*u.L
-trial6_Q = 380 * u.mL/u.min
-trial6_theta_hydraulic = (trial6_V/trial6_Q).to(u.s)
-trial6_C_bar_guess = np.max(trial6_concentration_data)/2
-#use solver to get the CMFR parameters
-trial6_CMFR = epa.Solver_CMFR_N(trial6_time_data, trial6_concentration_data, trial6_theta_hydraulic, trial6_C_bar_guess)
-trial6_CMFR.C_bar
-trial6_CMFR.N
-trial6_CMFR.theta.to(u.s)
-
-#Create the CMFR model curve based on the scipy.optimize curve_fit
-#parameters. We do this with dimensions so that we can plot both models and
-#the data on the same graph. If we did this in dimensionless space it wouldn't
-#be possible to plot everything on the same plot because the values used to
-#create dimensionless time and dimensionless concentration are different for
-#the two models.
-trial6_CMFR_model = (trial6_CMFR.C_bar*epa.E_CMFR_N(trial6_time_data/trial6_CMFR.theta, trial6_CMFR.N)).to(u.mg/u.L)
-
-#use solver to get the advection dispersion parameters
-trial6_AD = epa.Solver_AD_Pe(trial6_time_data, trial6_concentration_data, trial6_theta_hydraulic, trial6_C_bar_guess)
-trial6_AD.C_bar
-trial6_AD.Pe
-trial6_AD.theta
-
-print('The model estimated mass of tracer injected was',ut.round_sf(trial6_AD.C_bar*trial6_V ,2) )
-print('The model estimate of the Peclet number was', trial6_AD.Pe)
-print('The tracer residence time was',ut.round_sf(trial6_AD.theta ,2))
-print('The ratio of tracer to hydraulic residence time was',(trial6_AD.theta/trial6_theta_hydraulic).magnitude)
-
-#Create the advection dispersion model curve based on the solver parameters
-trial6_AD_model = (trial6_AD.C_bar*epa.E_Advective_Dispersion((trial6_time_data/trial6_AD.theta).to_base_units(), trial6_AD.Pe)).to(u.mg/u.L)
-
-#Plot the data and the two model curves.
-plt.plot(trial6_time_data.to(u.s), trial6_concentration_data.to(u.mg/u.L),'r')
-plt.plot(trial6_time_data.to(u.s), trial6_CMFR_model,'-b')
-plt.plot(trial6_time_data.to(u.s), trial6_AD_model,'g')
-plt.xlabel(r'$time (min)$')
-plt.ylabel(r'Concentration $\left ( \frac{mg}{L} \right )$')
-plt.legend(['Measured dye','CMFR Model', 'AD Model'])
-#plt.savefig('Examples/images/Dispersion.png', bbox_inches = 'tight')
-plt.show()
 
 
 #Number 3
 
+#Trial 1
+t_star1 = CMFR_time_data/CMFR_theta_hydraulic # hydraulic residence time
+E = CMFR_concentration_data.to(u.mg/u.L)*CMFR_V/CMFR_CMFR.C_bar
+F = integrate.cumtrapz(E,t_star1, initial=0)
+fig, ax1 = plt.subplots()
+ax1.plot(t_star2,E,'b')
+ax1.xlabel('hydraulic residence time')
+ax1.set_ylabel('E', color='b')
+ax1.tick_params('y', colors='b')
+ax2 = ax1.twinx()
+ax2.plot(t_star2, F, 'r.')
+ax2.set_ylabel('F', color='r')
+ax2.tick_params('y', colors='r')
+fig.tight_layout()
+#plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
+plt.show()
 
 
+fig, ax1 = plt.subplots()
+ax1.plot(t, s1, 'b-')
+ax1.set_xlabel('time (s)')
+# Make the y-axis label, ticks and tick labels match the line color.
+ax1.set_ylabel('exp', color='b')
+ax1.tick_params('y', colors='b')
+
+ax2 = ax1.twinx()
+ax2.plot(t, s2, 'r.')
+ax2.set_ylabel('sin', color='r')
+ax2.tick_params('y', colors='r')
+
+
+#Trial 2
+t_star2 = trial2_time_data/trial2_theta_hydraulic # hydraulic residence time
+E = trial2_concentration_data.to(u.mg/u.L)*trial2_V/trial2_AD.C_bar
+F = integrate.cumtrapz(E,t_star2, initial=0)
+plt.plot(t_star2,E,'r')
+plt.plot(t_star2,F,'g')
+plt.xlabel(r'hydraulic residence time (t*)')
+plt.ylabel(r'cumulative exit age')
+#plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
+plt.show()
+
+#Trial 3
+t_star3 = trial3_time_data/trial3_theta_hydraulic # hydraulic residence time
+E = trial3_concentration_data.to(u.mg/u.L)*trial3_V/trial3_AD.C_bar
+F = integrate.cumtrapz(E,t_star3, initial=0)
+plt.plot(t_star3,E,'r')
+plt.plot(t_star3,F,'g')
+plt.xlabel(r'hydraulic residence time')
+plt.ylabel(r'cumulative exit age')
+#plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
+plt.show()
+
+#Trial 4
+t_star4 = trial4_time_data/trial4_theta_hydraulic # hydraulic residence time
+E = trial4_concentration_data.to(u.mg/u.L)*trial4_V/trial4_AD.C_bar
+F = integrate.cumtrapz(E,t_star4, initial=0)
+plt.plot(t_star4,F,'g')
+plt.xlabel(r'hydraulic residence time')
+plt.ylabel(r'cumulative exit age')
+#plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
+plt.show()
+
+#Trial 5
+t_star5 = trial5_time_data/trial5_theta_hydraulic # hydraulic residence time
+E = trial5_concentration_data.to(u.mg/u.L)*trial5_V/trial5_AD.C_bar
+F = integrate.cumtrapz(E,t_star5, initial=0)
+plt.plot(t_star5,F,'g')
+plt.xlabel(r'hydraulic residence time')
+plt.ylabel(r'cumulative exit age')
+#plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
+plt.show()
+
+#Trial 6
+t_star6 = trial6_time_data/trial6_theta_hydraulic # hydraulic residence time
+E = trial6_concentration_data.to(u.mg/u.L)*trial6_V/trial6_AD.C_bar
+F = integrate.cumtrapz(E,t_star6, initial=0)
+plt.plot(t_star6,F,'g')
+plt.xlabel(r'hydraulic residence time')
+plt.ylabel(r'cumulative exit age')
+#plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+# 4
+trial4_AD.theta
+trial4_theta_hydraulic
+t_star = trial4_time_data/trial4_theta_hydraulic
+E = trial4_concentration_data.to(u.mg/u.L)*trial4_V/trial4_AD.C_bar
+trial4_AD.C_bar
+
+F = integrate.cumtrapz(E,t_star, initial=0)
+plt.plot(t_star,F,'g')
+plt.show()
 
 
 

@@ -50,6 +50,9 @@ Trial 4: The model estimate of the number of reactors in series was 3.6698865144
 
 4. Report the values of t⋆ at F = 0.1 for each of your experiments. Do they meet your expectations?
 
+
+
+
 graph E curve -> integrate to get F curve (numpy cumulative sum; numpy trapz)
 write a function to find F = 0.1
   looks through array and find values
@@ -92,8 +95,8 @@ CMFR_firstrow
 #eliminate the beginning of the data file
 CMFR_firstrow = CMFR_firstrow + 10
 
-CMFR_time_data = (epa.column_of_time(CMFR_path,CMFR_firstrow,-1)).to(u.s)
-CMFR_concentration_data = epa.column_of_data(CMFR_path,CMFR_firstrow,1,-1,'mg/L')
+CMFR_time_data = (epa.column_of_time(CMFR_path,CMFR_firstrow,180)).to(u.s)
+CMFR_concentration_data = epa.column_of_data(CMFR_path,CMFR_firstrow,1,180,'mg/L')
 
 #CMFR volume and flowrate
 CMFR_V = (2.590-.596)*u.L
@@ -238,6 +241,42 @@ plt.legend(['Measured dye','CMFR Model', 'AD Model'])
 plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/3_CMFR_alternating.png', bbox_inches = 'tight')
 plt.show()
 
+
+
+
+
+x = np.linspace(0,5,1000)
+for t in range(0,10):
+    PD = (np.trapz(probability(x,t,initial_state),x))
+    print (PD)
+
+
+
+from scipy import integrate
+from sklearn import preprocessing
+
+t_star = trial3_time_data/trial3_theta_hydraulic
+E = trial3_concentration_data.to(u.mg/u.L)*trial3_V/trial3_AD.C_bar
+
+F = integrate.cumtrapz(E,t_star, initial=0)
+F
+plt.plot(t_star,F,'g')
+plt.show()
+
+# making series from list
+series = pd.Series(EOFError)
+
+# calling method
+cumsum = series.cumsum()
+
+# display
+cumsum
+
+
+
+
+
+
 #Trial 4: 4 alternating CMFRs
 #Load a data file for a reactor with baffles.
 
@@ -297,31 +336,6 @@ plt.ylabel(r'Concentration $\left ( \frac{mg}{L} \right )$')
 plt.legend(['Measured dye','CMFR Model', 'AD Model'])
 plt.savefig('/Users/Rosie/github/CEE4530/Lab5-Reactor Characteristics/4_CMFR_alternating.png', bbox_inches = 'tight')
 plt.show()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #Trial 5: PFR suction with 1 mL of dye
@@ -442,4 +456,14 @@ plt.ylabel(r'Concentration $\left ( \frac{mg}{L} \right )$')
 plt.legend(['Measured dye','CMFR Model', 'AD Model'])
 #plt.savefig('Examples/images/Dispersion.png', bbox_inches = 'tight')
 plt.show()
+
+
+#Number 3
+
+
+
+
+
+
+
 ```

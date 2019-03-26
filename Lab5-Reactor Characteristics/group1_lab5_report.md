@@ -18,7 +18,7 @@ This equation gave us the F (cumulative exit age) curve.
 
 ## Procedures
 
-In the Reactor Characteristics lab, we performed multiple tests with different reactors to measure the reactor volume, residual reactor red dye concentration, and the flow rate. We set up the reactor system to pump distilled water from a 20 L Jerry can to the influent of the reactor, which is placed on a stir plate, and drained out with a straight short tube. Then, we proceeded to add a volume of red dye #40 stock that will give a maximum concentration of approximately 30 mg/L near the influent of the reactor and collected data until the majority of the tracer has exited. Finally, we repeated these steps for various types of reactors, including alternating CMFRs as well as a PFR. For a more detail procedure, refer to the [textbook](https://monroews.github.io/EnvEngLabTextbook/Reactor_Characteristics/Reactor_Characteristics.html).
+In the Reactor Characteristics lab, we performed multiple tests with different reactors to measure the reactor volume, residual reactor red dye concentration, and the flow rate. We set up the reactor system to pump distilled water from a 20 L Jerry can to the influent of the reactor, which is placed on a stir plate, and drained out with a straight short tube. Then, we proceeded to add a volume of red dye #40 stock that will give a maximum concentration of approximately 30 mg/L near the influent of the reactor and collected data until the majority of the tracer has exited. Finally, we repeated these steps for various types of reactors, including alternating CMFRs in series as well as a PFR. For a more detail procedure, refer to the [textbook](https://monroews.github.io/EnvEngLabTextbook/Reactor_Characteristics/Reactor_Characteristics.html).
 
 
 ## Results and Discussion
@@ -26,93 +26,100 @@ In the Reactor Characteristics lab, we performed multiple tests with different r
 
 We used multivariable nonlinear regression to obtain the best fit between the experimental data and the two models by minimizing the sum of the squared errors. Using epa.Solver_AD_Pe and epa.Solver_CMFR_N, we minimized the error by varying the values of average residence time, (mass of tracer/reactor volume), and either the number of CMFR in series or the Peclet number.
 
-2. Generate a plot showing the experimental data as points and the model results as thin lines for each of your experiments. Explain which model fits best and discuss those results based on your expectations.
+For the first test, we just looked at a simple CMFR, with a pulse input of dye. The concentration of the red dye over time followed the expected path, and matched fairly well with the model (Figure 1). The model estimate of the number of reactors in series was 1, which is clearly correct and a good check that this model is working.
 
 ![trial 1](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/CMFR.png?raw=true)
 
 Figure 1. Plot showing the simple CMFR experimental data and the CMFR model.
 
+For the second test, we modeled 4 CMFRs in series, using three baffles with 24 holes. The concentration of red dye followed the CMFR model, as expected, for the most part except the small dip in the beginning, presumably due to an air bubble near the photometer (Figure 2). Both the models are a close fit, the CMFR model is slightly more successful in capturing the shape of the curve after the peak better than the AD model in this case. The model estimate of the number of reactors in series was 1.61 and the estimate of the Peclet number was 1.22. The estimate for the number of reactors is pretty low, the estimate being under 2 when the actual system had 4, but this was likely due to the fact that there were "short cuts" through the holes in the baffles and around the edges that meant the reactor was a lot more mixed than 4 separate CMFRs would be.
+
 ![trial 2](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/4_CMFR_with_holes.png?raw=true)
 
-Figure 2. Plot showing the 4 CMFR experimental data and the CMFR model.
+Figure 2. Plot showing the 4 CMFR experimental data and the CMFR and AD model.
 
-In trial 2, the CMFR model fits better and discuss those results based on your expectations.
+For the third test, we modeled 3 CMFRs in series, using two baffles with gaps on alternating sides. The concentration of red dye followed the AD model pretty closely by accurately modeling the initial increase in dye concentration with the addition of the pulse input (Figure 3). The model estimate of the number of reactors in series was 3.01 and the estimate of the Peclet number was 4.04. In this experiment we were more careful about closing up leaks to prevent mixing between baffles other than in the gaps that were left on purpose. Thus, our data was much closer to an ideal system of 3 CMFRs and the model was able to very accurately predict the number of reactors in series.
 
 ![trial 3](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/3_CMFR_alternating.png?raw=true)
 
-Figure 3. Plot showing the 3 alternating CMFR experimental data and the CMFR model.
+Figure 3. Plot showing the 3 alternating CMFR experimental data and the CMFR and AD model.
 
-In trial 3, the CMFR model fits better and discuss those results based on your expectations.
+Similarly, for the fourth test, we modeled 4 CMFRs in series, using three baffles with gaps on alternating sides (Image 1). The concentration of red dye followed the AD model better as it captures the initial increase in concentration more accurately (Figure 4). The model estimate of the number of reactors in series was 3.67 and estimate of the Peclet number was 5.48. Although 3.67 is a pretty good approximation for this reactor, the data may have suffered from potential "dead volumes" or leaks along the system.
+
+
+<img src="https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/Pictures/4%20CMFR.JPG?raw=true" width = 800/>
+
+Image 1. Well-mixed 4 CMFRs with alternating baffles.
 
 ![trial 4](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/4_CMFR_alternating.png?raw=true)
 
-Figure 4. Plot showing the 4 alternating CMFR experimental data and the CMFR model.
+Figure 4. Plot showing the 4 alternating CMFR experimental data and the CMFR and AD model.
+
+Lastly, we modeled a plug flow reactor using a ~100ft long , 1/4 in tubing (Image 2). Both models reflect the measured dye concentration to the same degree of accuracy as they follow the exact same curves (Figure 5). The model estimate of the number of reactors in series was 70.71 and the estimate of the Peclet number was 139.17. Since PFRs are ideally equivalent to an infinite number of CMFRs in series, 70 was along the lines of what we expected for this test.
+
+
+
+
+<img src="https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/Pictures/PFR%20running.JPG?raw=true" width = 300/>
+
+Image 2. PFR reactor as well-mixed fluid runs through.
 
 ![trial 5](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/PFR.png?raw=true)
 
-In trial 5, the CMFR model fits better and discuss those results based on your expectations.
+Figure 5. Plot showing the PFR experimental data and the CMFR and AD model.
 
-3. The estimated values of N and Pe across our set of experiments:
+Comparing the trends in the estimated values of N and Pe across the experiments, our reactor modifications decreased dispersion in our reactors. As we increased the number of reactors in series by either adding additional baffles or modeling a plug flow, the Peclet number increased as expected. As the Peclet number increases the dispersion decreases and the response becomes closer to plug flow. This matches with our model estimate of the Peclet number for PFR since it was the highest of all 5 trials.
 
-Trial 1: The model estimate of the number of reactors in series was 1.0.
+To find the length of time before dye started coming out in the effluent, we made E and F graphs for each of the five trials. With these graphs one can visualize both the concentrations of red dye in the reactor and the amount of time in takes for all the dye to travel throughout the reactor.
 
-Trial 2: The model estimate of the number of reactors in series was 1.6087605429907506. The model estimate of the Peclet number was 1.2178282957059587.
-
-Trial 3: The model estimate of the number of reactors in series was 3.0132831433153338. The model estimate of the Peclet number was 4.044518749000499.
-
-Trial 4: The model estimate of the number of reactors in series was 3.669886514421101. The model estimate of the Peclet number was 5.479660899821685.
-
-Trial 5: The model estimate of the number of reactors in series was 70.71324985847279. The model estimate of the Peclet number was 139.17179167794515.
-
-Comparing the trends in the estimated values of N and Pe across your set of experiments, our reactor modifications decreased dispersion in our reactors. As we increased the number of reactors in series by either adding additional baffles or modeling a plug flow, the Peclet number increased as expected. As the Peclet number increases the dispersion decreases and the response becomes closer to plug flow. This matches with our model estimate of the Peclet number for PFR since it was the highest of all 5 trials.
-
-4. The values of t⋆ at F = 0.1 for each of your experiments:
+For the first test, the t* when F=0.1, which is how long it takes for 10% of the dye to leave, was 0.06352.
 
 ![trial 1](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/1-E_and_F.png?raw=true)
 
 Figure 6. Exit age (E) and Cumulative exit age (F) curves for a simple CMFR.
 
-The t* when F=0.1, which is how long it takes for 10% of the dye to leave, is 0.06352.
+For the second test, the t* when F=0.1 was 0.2066.
 
 ![trial 2](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/2-E_and_F.png?raw=true)
 
 Figure 7. Exit age (E) and Cumulative exit age (F) curves for 4 CMFRs with 24 holes.
 
-The t* when F=0.1, which is how long it takes for 10% of the dye to leave, is 0.2066.
+For the third test, the t* when F=0.1 was 0.3051.
 
 ![trial 3](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/3-E_and_F.png?raw=true)
 
 Figure 8. Exit age (E) and Cumulative exit age (F) curves for 3 alternating CMFRs.
 
-The t* when F=0.1, which is how long it takes for 10% of the dye to leave, is 0.3051.
+For the fourth test, the t* when F=0.1 was 0.3426.
 
 ![trial 4](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/4-E_and_F.png?raw=true)
 
 Figure 9. Exit age (E) and Cumulative exit age (F) curves for 4 alternating CMFRs.
 
-The t* when F=0.1, which is how long it takes for 10% of the dye to leave, is 0.3426.
+For the last test, the t* when F=0.1 was 0.9414.
 
 ![trial 5](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab5-Reactor%20Characteristics/5-E_and_F.png?raw=true)
 
 Figure 10. Exit age (E) and Cumulative exit age (F) curves for a PFR.
 
-The t* when F=0.1, which is how long it takes for 10% of the dye to leave, is 0.9414.
+The normalized time increases as we improved our reactor, which is what we would expect. The t* was 0.06352 for a simple CMFR, 0.2066 for 4 CMFRs with 24 holes, 0.3051 for 3 alternating CMFRs, 0.3426 for 4 alternating CMFRs, and 0.9414 for a PFR. This makes sense because with each improvement (added or alternating baffles), the dye spends a longer time in the reactor. However, it's important to note that F should approach 1.0 - it's an indication that all the dye has left the reactor - but all of our models have failed to do so since the graphs show our F curves either less than or greater than 1.0. There are lots of calculations and approximations that go into finding F, so there are many places that this error may arise from. E is calculated using the hydraulic retention time, which is calculated from our measured volume and the approximate flow rate. The flow rate was just approximated, not measured, so there could certainly be error from that. Also, there are two calculations from theta, the method just mentioned and also the estimate from the model, so those two different estimates give different F plots.
 
-The normalized time increases as we improved our reactor, which is what we would expect. The t* was 0.06352 for a simple CMFR, 0.2066 for 4 CMFRs with 24 holes, 0.3051 for 3 alternating CMFRs, 0.3426 for 4 alternating CMFRs, and 0.9414 for a PFR. This makes sense because with each improvement (added or alternating baffles), the dye spends a longer time in the reactor.
-
-5. There was definitely evidence of "dead volumes" in our reactors. In both of the alternating CMFR models, there were areas - specifically near the edges of the baffles - that never had any contact time with the red dye.
+There were definitely evidences of "dead volumes" in our reactors. In both of the alternating CMFR models, there were areas - specifically near the edges of the baffles - that never had any contact time with the red dye.
 
 For the 4 CMFRs with 24 holes, the predicted theta from our volume and flow rate is 314.7 seconds and the theta from the AD model is 142.2 seconds. This means that the dye left the reactor much quicker than was expected based just on the flow rate and volume. This is because there were flow paths possible through the reactor that allowed the dye to "short circuit" and not actually get mixed in the reactor. Thus, some of the dye was able to leave the reactor much sooner than predicted. This same phenomenon occurred in the next two trials as well:
-For the 3 alternating CMFRs, the predicted theta from our volume and flow rate is 327.6 second and the theta from the AD model is 202.2 seconds
-For the 4 alternating CMFRs, the predicted theta from our volume and flow rate is 306.5 seconds and the theta from the AD model is 213.8 seconds.
+- For the 3 alternating CMFRs, the predicted theta from our volume and flow rate is 327.6 second and the theta from the AD model is 202.2 seconds
+- For the 4 alternating CMFRs, the predicted theta from our volume and flow rate is 306.5 seconds and the theta from the AD model is 213.8 seconds.
 
 For the PFR, we would expect very little dead volume, because the dye is moving through the tube and dye comes out faster than we though it would. This somewhat lines up with our output that the predicted theta from our volume and flow rate is 80 seconds and the theta from the AD model is 64.79 seconds; however, we do not actually know the volume of the PFR and used a rough estimate, so it is possible that these values would actually be closer if we knew the exact length of the tubing and could calculate the exact volume.
 
-6. Make a recommendation for the design of a full scale chlorine contact tank. As part of your recommendation discuss the parameter you chose to vary as part of your experimentation and what the optimal value was determined to be.
+### Recommendation
+From our five trials, we would conclude that the plug flow reactor allowed the most optimal contact time between the water and the red dye. We varied how long and/or direct the path to the exit from the influent was. The longer the path, the better the reactor. An ideal chlorine contact tank would maximize the residence time of water in the tank to optimize the contact time between chlorine and pathogens. In an ideal world, we would want to have a really long pipe as a chlorine contact chamber. Obviously, this is not realistic because that requires a lot of space and dosage is complicated in a closed system without an opening. Thus, we would turn to our next best option - CMFRs in series with alternating baffles. The idea would be to use many walls within a large tank to create a long snaking channel for the water to travel through. The system should maximize the time the chlorine spends in the reactor by making the path to the effluent winding.
 
 ## Conclusion
+In the Reactor Characteristics lab, we compared different reactor models to test what the most ideal system would be to optimize the hydraulic residence time of red dye in contact with the water in the reactor. First, we observed that both the CMFR and the advective dispersion model were quite good matches for the data that we recorded. We were also able to observe that the CMFR did a reasonably good job at computing the number of CMFRs we had if the system was designed well and didn't have leaks or shortcut flows. We found that as we increased the number of reactors in series by either adding more baffles, alternating them by adding gaps, or using a tube, the Peclet number increased as expected. This makes sense because as the Peclet number increases, the response becomes closer to plug flow and dispersion decreases as a result. Lastly, the normalized time spent in the reactor increases as we improved our reactor. Thus, we can conclude that the contact time increased as the reactors had longer paths from the influent to the effluent. Due to physical and monetary constraints, we recommend using many baffles in a large tank when building a chlorine contact chamber to create a long, snaking path.
 
 ## Suggestions/Comments
+The lab manual asked us to pump **tap water** from a 20 L Jerrican to the influent of your reactor. However, this was not the case. **Distilled water** was actually needed for the experiment and we had to redo our trial because we started to pump tap water into our reactor. Other than that, this lab was easy to follow! After being successful with our plug flow reactor model, we would recommend that more students should experiment with it! It would be useful to do more development of the PFR and figure out how to get dye in without getting air bubbles, which we certainly struggled with.
 
 # Appendix
 ``` python

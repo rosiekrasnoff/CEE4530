@@ -1,5 +1,5 @@
 # Reactor Characteristics
-#### Group 1- Jiwon Lee and Rosie Krasnoff ( hours each)
+#### Group 1- Jiwon Lee and Rosie Krasnoff (12 hours each)
 ##### Due March 27
 
 ## Introduction and Objectives
@@ -14,8 +14,7 @@ This equation allowed us to solve for E, the exit age distribution, by multiplyi
 
 $$F_{\left(t^{\star} \right)} =\int _{0}^{t^{\star} }E_{\left(t^{\star} \right)} dt^{\star}$$
 
-This equation gave us the F curve.
-
+This equation gave us the F (cumulative exit age) curve.
 
 ## Procedures
 
@@ -99,7 +98,7 @@ Figure 10. Exit age (E) and Cumulative exit age (F) curves for a PFR.
 
 The t* when F=0.1, which is how long it takes for 10% of the dye to leave, is 0.9414.
 
-The normalized time increases as we improved our reactor, which is what we would expect. The t* was 0.06352 for a simple CMFR, 0.2066 for 4 CMFRs with 24 holes, 0.3051 for 3 alternating CMFRs, 0.3426 for 4 alternating CMFRs, and 0.9414 for a PFR. This makes sense because with each improvement (added or alternating baffle), the dye spends a longer time in the reactor.
+The normalized time increases as we improved our reactor, which is what we would expect. The t* was 0.06352 for a simple CMFR, 0.2066 for 4 CMFRs with 24 holes, 0.3051 for 3 alternating CMFRs, 0.3426 for 4 alternating CMFRs, and 0.9414 for a PFR. This makes sense because with each improvement (added or alternating baffles), the dye spends a longer time in the reactor.
 
 5. There was definitely evidence of "dead volumes" in our reactors. In both of the alternating CMFR models, there were areas - specifically near the edges of the baffles - that never had any contact time with the red dye.
 

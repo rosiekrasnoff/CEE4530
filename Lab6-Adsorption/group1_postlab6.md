@@ -25,8 +25,6 @@ import os
 from pathlib import Path
 import pandas as pd
 
-
-
 def adsorption_data(C_column, dirpath):
     """This function extracts the data from folder containing tab delimited
     files of adsorption data. The file must be the original tab delimited file.
@@ -64,10 +62,9 @@ def adsorption_data(C_column, dirpath):
     adsorption_results = adsorption_collection(metadata, filenames, C_data, time_data)
     return adsorption_results
 
-
+# Trial 1
 C_column = 1
-dirpath = "https://raw.githubusercontent.com/monroews/CEE4530/master/Examples/data/Adsorption"
-
+dirpath = "http://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab6-Adsorption/lab%206%20first%20trial.xls"
 
 
 metadata, filenames, C_data, time_data = adsorption_data(C_column,dirpath)

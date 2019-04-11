@@ -4,7 +4,7 @@
 
 
 ### Contactor Results and Analysis
-1. Plot the breakthrough curves showing CC0 versus time.
+1. Plot the breakthrough curves showing C/C_0 versus time.
 2. Find the time when the effluent concentration was 50% of the influent concentration and plot that as a function of the mass of activated carbon used.
 3. Calculate the retardation coefficient (Radsorption) based on the time to breakthrough for the columns with and without activated carbon.
 4. Calculate the q0 for each of the columns based on equation (97). Plot this as a function of the mass of activated carbon used.
@@ -64,7 +64,7 @@ def adsorption_data(C_column, dirpath):
 
 # Trial 1
 C_column = 1
-dirpath = "http://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab6-Adsorption/lab%206%20first%20trial.xls"
+dirpath = "https://raw.githubusercontent.com/monroews/CEE4530/master/Examples/data/Adsorption"
 
 
 metadata, filenames, C_data, time_data = adsorption_data(C_column,dirpath)

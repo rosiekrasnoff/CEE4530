@@ -25,6 +25,8 @@ import os
 from pathlib import Path
 import pandas as pd
 
+
+
 def adsorption_data(C_column, dirpath):
     """This function extracts the data from folder containing tab delimited
     files of adsorption data. The file must be the original tab delimited file.
@@ -62,9 +64,10 @@ def adsorption_data(C_column, dirpath):
     adsorption_results = adsorption_collection(metadata, filenames, C_data, time_data)
     return adsorption_results
 
-# Trial 1
+
 C_column = 1
 dirpath = "https://raw.githubusercontent.com/monroews/CEE4530/master/Examples/data/Adsorption"
+
 
 
 metadata, filenames, C_data, time_data = adsorption_data(C_column,dirpath)
@@ -101,7 +104,7 @@ plt.xlabel(r'$\frac{t}{\theta}$');
 plt.xlim(right=3,left=0);
 plt.ylabel(r'Red dye concentration $\left ( \frac{mg}{L} \right )$');
 plt.legend(mylegend);
-#plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/E_peclet_graph.png')
+#plt.savefig('Examples/images/Sand_column')
 plt.show()
 
 # create a graph of the columns that had different masses of activated carbon. Note that this includes systems with different flow rates!
@@ -115,8 +118,16 @@ plt.xlabel(r'$\frac{t}{\theta}$');
 plt.xlim(right=100,left=0);
 plt.ylabel(r'Red dye concentration $\left ( \frac{mg}{L} \right )$');
 plt.legend(mylegend);
-#plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/E_peclet_graph.png')
+#plt.savefig('Examples/images/Activated_carbon')
 plt.show()
+
+
+
+
+# Number 1
+for i in range(np.size(filenames)):
+    plt.plot(time_data[i], C_data[i]/C_0,'-')
+
 
 
 

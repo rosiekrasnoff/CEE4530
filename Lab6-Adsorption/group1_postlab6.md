@@ -121,13 +121,12 @@ plt.legend(mylegend);
 #plt.savefig('Examples/images/Activated_carbon')
 plt.show()
 
-
-
-
 # Number 1
 for i in range(np.size(filenames)):
-    plt.plot(time_data[i], C_data[i]/C_0,'-')
-
+    plt.plot(time_data[i], C_data[i]/C_0,'-');
+plt.xlabel('time (s)');
+plt.ylabel(r'$\frac{C}{C_0}$');
+plt.show()
 
 
 

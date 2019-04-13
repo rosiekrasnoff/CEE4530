@@ -1,12 +1,10 @@
-# Adsorption
+# Adsorption Lab
 ## Group 1 - Jiwon Lee and Rosie Krasnoff (10 hours each)
 ##### April 17th
 
 
 ### Contactor Results and Analysis
-1. Plot the breakthrough curves showing C/C_0 versus time.
-
-We created plots for the breakthrough curves for the trials with no activated carbon (Figure 1), for the trials with some activated carbon (Figure 2), and then we replotted Figure 2 with a restricted range to be able to make clearer comparisons with Figure 1 (Figure 3.)
+1. We created plots for the breakthrough curves showing C/C_0 versus time for the trials with no activated carbon (Figure 1), for the trials with some activated carbon (Figure 2), and then we replotted Figure 2 with a restricted range to be able to make clearer comparisons with Figure 1 (Figure 3.)
 
 
 ![No activated carbon](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab6-Adsorption/No_Activated_Carbon.png?raw=true)
@@ -24,14 +22,36 @@ Figure 2. Graph showing the dimensionless value of $ \frac {concentration}{stock
 Figure 3. Graph is simply Figure 2 with the range restricted in the x-axis for an easier comparison with the no activated carbon graph. It shows the dimensionless value of $ \frac {concentration}{stock \space concentration}$ as a function of the dimensionless value of $ \frac {time}{HRT}$ for the systems with activated carbon, the amount of AC is indicated in the legend, along with the flow rate.
 
 
+2. We found the time when the effluent concentration was 50% of the influent concentration and then plotted those time values as a function of the activated carbon used (Figure 4). Because the various experiments were not all conducted at the small flow rate, this representation of the data is not all that meaningful because there are other factors at play that are not illustrated. In a second graph, we restricted the data to that which had been collected when using a flow rate of around 0.5 mL/s (Figure 5). This graph has a much clearer trend: as the mass of activated carbon used increases, the time until the effluent concentration was 50% of the influent concentration also increases. Because of a lack of data at high levels of activated carbon, it is too difficult to ascertain the nature of that relationship, it could be linear, it also looks at if it has the potential to be exponential.
 
+![time to 50%, all](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab6-Adsorption/All_Flow_Rates.png?raw=true)
 
-2. Find the time when the effluent concentration was 50% of the influent concentration and plot that as a function of the mass of activated carbon used.
+Figure 4. For every experiment, the time to takes for the effluent concentration to reach 50% of the influent concentration is plotted at a function of the mass of activated carbon in the column. Some points correspond to flow rates of 0.5 mL/s, others to flow rates of over 2 mL/s.
+
+![time to 50%, 5 mL/s](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab6-Adsorption/Same_Flow_Rates.png?raw=true)
+
+Figure 5. The graph shows the time to takes for the effluent concentration to reach 50% of the influent concentration is plotted at a function of the mass of activated carbon in the column for only the experiments where a flow rate of about 0.5 mL/s was used.
+
 3. Calculate the retardation coefficient (Radsorption) based on the time to breakthrough for the columns with and without activated carbon.
+
+$$ R_{adsorption} = \frac{t_{mtz}}{t_{water}} $$
+The retardation factor is defined as the ratio of the time for the mass transfer zone to travel through the bed divided by the time for water to travel through the bed.
+
 4. Calculate the q0 for each of the columns based on equation (97). Plot this as a function of the mass of activated carbon used.
 
+$$ q_0 = \left(R_{adsorption} - 1\right) \frac{C_0 \phi V_{column}}{M_{adsorbent}} $$
 
-What did you learn from this analysis? How can you explain the results that you have obtained? What changes to the experimental method do you recommend for next year (or for a project)?
+
+
+### Conclusion
+What did you learn from this analysis? How can you explain the results that you have obtained?
+
+### Suggestions/Comments
+What changes to the experimental method do you recommend for next year (or for a project)
+
+Make the experiments more uniform across the class.
+
+
 
 ### Appendix
 ``` python
@@ -45,7 +65,6 @@ import collections
 import os
 from pathlib import Path
 import pandas as pd
-
 
 
 def adsorption_data(C_column, dirpath):
@@ -142,6 +161,20 @@ plt.legend(mylegend);
 plt.show()
 
 
+mylegend =[]
+for i in range(np.size(filenames)):
+  if (metadata['carbon (g)'][i] != 0):
+    plt.plot(time_data[i], C_data[i]/C_0,'-');
+    mylegend.append(str(ut.round_sf(metadata['carbon (g)'][i],3)) + ' g, ' + str(ut.round_sf(metadata['flow (mL/s)'][i],2)) + ' mL/s')
+
+plt.xlabel(r'time (secs)');
+plt.xlim(right=1000,left=0);
+plt.ylabel(r'$\frac{C}{C_0}$');
+plt.legend(mylegend);
+#plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/Activated_Carbon.png')
+plt.show()
+
+
 
 mylegend =[]
 for i in range(np.size(filenames)):
@@ -166,9 +199,9 @@ for j in range(np.size(filenames)):
 
 
 # Create a graph of the time when the effluent concentration was 50% of the influent concentration and the mass of activated carbon used
-plt.plot(desired_t, Mass_carbon, 'o')
-plt.xlabel('time (s)')
-plt.ylabel('activated carbon (g)');
+plt.plot(Mass_carbon, desired_t, 'o')
+plt.xlabel('activated carbon (g)');
+plt.ylabel('time to reach 50% of influent concentration (s)')
 plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/All_Flow_Rates.png')
 plt.show()
 
@@ -183,12 +216,42 @@ for j in range(np.size(filenames)):
         desired_t2[j] = float('nan')
 
 #new plot, using only data with flow rate of ~0.5mL/s
-plt.plot(desired_t2, Mass_carbon, 'o')
-plt.xlabel('time (s)')
-plt.ylabel('activated carbon (g)');
+plt.plot(Mass_carbon, desired_t2, 'o')
+plt.xlabel('activated carbon (g)');
+plt.ylabel('time to reach 50% of influent concentration (s)')
 plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/Same_Flow_Rates.png')
 plt.show()
 
 
+#Number 3
+#Time for water to travel through the bed
+t_water = [0]*np.size(filenames)
+for j in range(np.size(filenames)):
+  for i in range(1,time_data[j].size):
+    if (metadata['carbon (g)'][i] == 0):
+      t_water[j] = max(time_data[j][i]).magnitude
+      t_water
+
+
+#Time for the mass transfer zone to travel through the bed
+for i in range(np.size(filenames)):
+  if (metadata['carbon (g)'][i] != 0):
+    t_mtz = max(time_data[i])
+    t_mtz
+
+#Calculate retardation factor
+R = t_mtz/t_water
+
+
+
+#Number 4
+q_0 = (R-1)*(C_0*bed_porosity*Column_V)/M_adsorbent
+
+#Create a graph of q_0 and mass of activated carbon used for each column
+plt.plot(Mass_carbon, q_0, 'o')
+plt.xlabel('activated carbon (g)');
+plt.ylabel('mass of adsorbate per mass of adsorbent')
+#plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/q_0.png')
+plt.show()
 
 ```

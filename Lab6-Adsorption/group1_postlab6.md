@@ -68,8 +68,6 @@ def adsorption_data(C_column, dirpath):
 C_column = 1
 dirpath = "https://raw.githubusercontent.com/monroews/CEE4530/master/Examples/data/Adsorption"
 
-
-
 metadata, filenames, C_data, time_data = adsorption_data(C_column,dirpath)
 metadata
 Column_D = 1 * u.inch
@@ -92,6 +90,7 @@ HRT = (porosity * Column_V/Flow_rate).to(u.s)
 for i in range(np.size(filenames)):
   C_data[i]=C_data[i]-C_data[i][0]
 
+#Number 1
 
 #Create a graph of the columns that didn't have any activated carbon
 mylegend = []
@@ -102,9 +101,9 @@ for i in range(np.size(filenames)):
 
 plt.xlabel(r'$\frac{t}{\theta}$');
 plt.xlim(right=3,left=0);
-plt.ylabel(r'Red dye concentration $\left ( \frac{mg}{L} \right )$');
+plt.ylabel(r'$\frac{C}{C_0}$');
 plt.legend(mylegend);
-#plt.savefig('Examples/images/Sand_column')
+plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/No_Activated_Carbon.png')
 plt.show()
 
 # create a graph of the columns that had different masses of activated carbon. Note that this includes systems with different flow rates!
@@ -116,17 +115,32 @@ for i in range(np.size(filenames)):
 
 plt.xlabel(r'$\frac{t}{\theta}$');
 plt.xlim(right=100,left=0);
-plt.ylabel(r'Red dye concentration $\left ( \frac{mg}{L} \right )$');
+plt.ylabel(r'$\frac{C}{C_0}$');
 plt.legend(mylegend);
-#plt.savefig('Examples/images/Activated_carbon')
+plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/Activated_Carbon.png')
 plt.show()
 
-# Number 1
+
+
+mylegend =[]
 for i in range(np.size(filenames)):
-    plt.plot(time_data[i], C_data[i]/C_0,'-');
-plt.xlabel('time (s)');
+  if (metadata['carbon (g)'][i] != 0):
+    plt.plot(time_data[i]/HRT[i] - Tubing_HRT[i]/HRT[i], C_data[i]/C_0,'-');
+    mylegend.append(str(ut.round_sf(metadata['carbon (g)'][i],3)) + ' g, ' + str(ut.round_sf(metadata['flow (mL/s)'][i],2)) + ' mL/s')
+
+plt.xlabel(r'$\frac{t}{\theta}$');
+plt.xlim(right=3,left=0);
 plt.ylabel(r'$\frac{C}{C_0}$');
+plt.legend(mylegend);
+plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/Activated_Carbon_range.png')
 plt.show()
+
+#Number 2
+desired_F = 0.1
+for i in range(CMFR_concentration_data.size):
+    if F1[i-1] < desired_F and F1[i] > desired_F:
+      desired_t_star1 = t_star1[i]
+
 
 
 

@@ -5,6 +5,27 @@
 
 ### Contactor Results and Analysis
 1. Plot the breakthrough curves showing C/C_0 versus time.
+
+We created plots for the breakthrough curves for the trials with no activated carbon (Figure 1), for the trials with some activated carbon (Figure 2), and then we replotted Figure 2 with a restricted range to be able to make clearer comparisons with Figure 1 (Figure 3.)
+
+
+![No activated carbon](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab6-Adsorption/No_Activated_Carbon.png?raw=true)
+
+Figure 1. Graph showing the dimensionless value of $ \frac {concentration}{stock \space concentration}$ as a function of the dimensionless value of $ \frac {time}{HRT}$ for the systems without activated carbon. The legend shows the different flow rates at which the experiment was run.
+
+
+![Activated C](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab6-Adsorption/Activated_Carbon.png?raw=true)
+
+Figure 2. Graph showing the dimensionless value of $ \frac {concentration}{stock \space concentration}$ as a function of the dimensionless value of $ \frac {time}{HRT}$ for the systems with activated carbon, the amount of AC is indicated in the legend, along with the flow rate.
+
+
+![Activated C range](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab6-Adsorption/Activated_Carbon_range.png?raw=true)
+
+Figure 3. Graph is simply Figure 2 with the range restricted in the x-axis for an easier comparison with the no activated carbon graph. It shows the dimensionless value of $ \frac {concentration}{stock \space concentration}$ as a function of the dimensionless value of $ \frac {time}{HRT}$ for the systems with activated carbon, the amount of AC is indicated in the legend, along with the flow rate.
+
+
+
+
 2. Find the time when the effluent concentration was 50% of the influent concentration and plot that as a function of the mass of activated carbon used.
 3. Calculate the retardation coefficient (Radsorption) based on the time to breakthrough for the columns with and without activated carbon.
 4. Calculate the q0 for each of the columns based on equation (97). Plot this as a function of the mass of activated carbon used.
@@ -103,7 +124,7 @@ plt.xlabel(r'$\frac{t}{\theta}$');
 plt.xlim(right=3,left=0);
 plt.ylabel(r'$\frac{C}{C_0}$');
 plt.legend(mylegend);
-plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/No_Activated_Carbon.png')
+#plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/No_Activated_Carbon.png')
 plt.show()
 
 # create a graph of the columns that had different masses of activated carbon. Note that this includes systems with different flow rates!
@@ -117,7 +138,7 @@ plt.xlabel(r'$\frac{t}{\theta}$');
 plt.xlim(right=100,left=0);
 plt.ylabel(r'$\frac{C}{C_0}$');
 plt.legend(mylegend);
-plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/Activated_Carbon.png')
+#plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/Activated_Carbon.png')
 plt.show()
 
 
@@ -132,16 +153,41 @@ plt.xlabel(r'$\frac{t}{\theta}$');
 plt.xlim(right=3,left=0);
 plt.ylabel(r'$\frac{C}{C_0}$');
 plt.legend(mylegend);
-plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/Activated_Carbon_range.png')
+#plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/Activated_Carbon_range.png')
 plt.show()
 
 #Number 2
-desired_F = 0.1
-for i in range(CMFR_concentration_data.size):
-    if F1[i-1] < desired_F and F1[i] > desired_F:
-      desired_t_star1 = t_star1[i]
+desired_t=[0]*np.size(filenames)
+desired_C = 0.5*C_0
+for j in range(np.size(filenames)):
+  for i in range(1,C_data[j].size):
+    if (C_data[j][i-1] < desired_C) and (C_data[j][i] > desired_C):
+      desired_t[j] = (time_data[j][i]).magnitude
 
 
+# Create a graph of the time when the effluent concentration was 50% of the influent concentration and the mass of activated carbon used
+plt.plot(desired_t, Mass_carbon, 'o')
+plt.xlabel('time (s)')
+plt.ylabel('activated carbon (g)');
+plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/All_Flow_Rates.png')
+plt.show()
+
+desired_t2=[0]*np.size(filenames)
+desired_C = 0.5*C_0
+for j in range(np.size(filenames)):
+  for i in range(1,C_data[j].size):
+    if (C_data[j][i-1] < desired_C) and (C_data[j][i] > desired_C):
+      if (Flow_rate[j]).magnitude < 1:
+        desired_t2[j] = (time_data[j][i]).magnitude
+      else:
+        desired_t2[j] = float('nan')
+
+#new plot, using only data with flow rate of ~0.5mL/s
+plt.plot(desired_t2, Mass_carbon, 'o')
+plt.xlabel('time (s)')
+plt.ylabel('activated carbon (g)');
+plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/Same_Flow_Rates.png')
+plt.show()
 
 
 

@@ -4,7 +4,7 @@
 
 
 ### Contactor Results and Analysis
-1. We created plots for the breakthrough curves showing C/C_0 versus time for the trials with no activated carbon (Figure 1), for the trials with some activated carbon (Figure 2), and then we replotted Figure 2 with a restricted range to be able to make clearer comparisons with Figure 1 (Figure 3.)
+We created plots for the breakthrough curves showing C/C_0 versus time for the trials with no activated carbon (Figure 1), for the trials with some activated carbon (Figure 2), and then we replotted Figure 2 with a restricted range to be able to make clearer comparisons with Figure 1 (Figure 3.)
 
 
 ![No activated carbon](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab6-Adsorption/No_Activated_Carbon.png?raw=true)
@@ -21,8 +21,7 @@ Figure 2. Graph showing the dimensionless value of $ \frac {concentration}{stock
 
 Figure 3. Graph is simply Figure 2 with the range restricted in the x-axis for an easier comparison with the no activated carbon graph. It shows the dimensionless value of $ \frac {concentration}{stock \space concentration}$ as a function of the dimensionless value of $ \frac {time}{HRT}$ for the systems with activated carbon, the amount of AC is indicated in the legend, along with the flow rate.
 
-
-2. We found the time when the effluent concentration was 50% of the influent concentration and then plotted those time values as a function of the activated carbon used (Figure 4). Because the various experiments were not all conducted at the small flow rate, this representation of the data is not all that meaningful because there are other factors at play that are not illustrated. In a second graph, we restricted the data to that which had been collected when using a flow rate of around 0.5 mL/s (Figure 5). This graph has a much clearer trend: as the mass of activated carbon used increases, the time until the effluent concentration was 50% of the influent concentration also increases. Because of a lack of data at high levels of activated carbon, it is too difficult to ascertain the nature of that relationship; it could be linear, it also looks at if it has the potential to be exponential.
+We found the time when the effluent concentration was 50% of the influent concentration and then plotted those time values as a function of the activated carbon used (Figure 4). Because the various experiments were not all conducted at the small flow rate, this representation of the data is not all that meaningful because there are other factors at play that are not illustrated. In a second graph, we restricted the data to that which had been collected when using a flow rate of around 0.5 mL/s (Figure 5). This graph has a much clearer trend: as the mass of activated carbon used increases, the time until the effluent concentration was 50% of the influent concentration also increases. Because of a lack of data at high levels of activated carbon, it is too difficult to ascertain the nature of that relationship; it could be linear, it also looks at if it has the potential to be exponential.
 
 ![time to 50%, all](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab6-Adsorption/All_Flow_Rates.png?raw=true)
 
@@ -32,37 +31,45 @@ Figure 4. For every experiment, the time to takes for the effluent concentration
 
 Figure 5. The graph shows the time to takes for the effluent concentration to reach 50% of the influent concentration is plotted at a function of the mass of activated carbon in the column for only the experiments where a flow rate of about 0.5 mL/s was used.
 
-3. Calculate the retardation coefficient (Radsorption) based on the time to breakthrough for the columns with and without activated carbon.
+We found the retardation factor using equation (95) and the q_0 value using equation (97) for each of the trials run with some mass of activated carbon. The results are reported in table 1 below. We also graphed q_0 as a function of activated carbon (Figure 6).
 
-$$ R_{adsorption} = \frac{t_{mtz}}{t_{water}} $$
-The retardation factor is defined as the ratio of the time for the mass transfer zone to travel through the bed divided by the time for water to travel through the bed.
-
-(<Quantity(0.8958542094669213, 'dimensionless')>,
- <Quantity(0.7838842564662991, 'dimensionless')>,
- <Quantity(2.4860266669198916, 'dimensionless')>,
- <Quantity(3.8745716348157133, 'dimensionless')>,
- <Quantity(0.515118465418036, 'dimensionless')>,
- <Quantity(3.9598749195499345, 'dimensionless')>,
- <Quantity(17.088551724525924, 'dimensionless')>,
- <Quantity(4.774993718377956, 'dimensionless')>,
- <Quantity(662.318602580929, 'dimensionless')>)
+$$ (95) \ R_{adsorption} = \frac{t_{mtz}}{t_{water}} $$
 
 
+$$ (97) \ q_0 = \left(R_{adsorption} - 1\right) \frac{C_0 \phi V_{column}}{M_{adsorbent}} $$
 
-4. Calculate the q0 for each of the columns based on equation (97). Plot this as a function of the mass of activated carbon used.
 
-$$ q_0 = \left(R_{adsorption} - 1\right) \frac{C_0 \phi V_{column}}{M_{adsorbent}} $$
+Table 1. Retardation factor and q_0 for all experiments.
+| Mass of AC (grams)| Flow rate (mL/s)| retardation factor | q_0 |
+| ---- | ---- | ---- | ---- |
+| 0.5 | 0.5 | 0.8959 | -0.0003209 |
+| 0.601 | 0.5 | 0.7839 | -0.0005539  |
+| 1.66 | 0.5 | 2.486 | 0.001379 |
+| 2 | 0.466 | 3.875 | 0.002214 |
+| 4 | 0.466 | 0.5151 | -0.0001867 |
+| 13.8 | 2.6 | 3.96 | 0.0003304 |
+| 15 | 0.5 | 17.09 | 0.001652 |
+| 15.63 | 2.6 | 4.775 | 0.000372 |
+| 29.34 | 0.467 | 662.3 | 0.03472 |
 
+
+![q0](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab6-Adsorption/q_0.png?raw=true)
+
+Figure 6. This graph shows the mass of absorbate per mass of absorbent, $q_0$, as a function of the mass of activated carbon used for a concentration of $50\frac{mg}{L}$. We can observe an upwards trend as $q_0$ increases as more activated carbon is used.
+
+As the mass of activated carbon used increases at a constant flow rate, the retardation factor, for the most part, increased as well. This makes sense since activated carbon slows down the water traveling through the bed, increasing the time necessary for the mass transfer zone to travel through. Likewise, we can observe a similar trend between $q_0$ and the mass of activated carbon used (Figure 6). However, all the assumptions we made (reactor volume, time for water to travel through the bed, and deriving t_mtz from the time that it takes for the concentration at the effluent to reach 50% of the influent concentration) has resulted in some unrealistic, or impossible, $q_0$ values (i.e. negative).
 
 
 ### Conclusion
-What did you learn from this analysis? How can you explain the results that you have obtained?
+In this lab, we investigated the removal of dissolved species through adsorption to a solid phase by looking into the breakthrough characteristics of red dye #40 on activated carbon in a continuous-flow carbon contactor at a concentration of $50\frac{mg}{L}$. Using a set up with a carbon column connected to a peristaltic pump, red dye, and reverse osmosis water, we modeled the adsorption process used commonly in water treatment plants. From the experiment, we were able to collect data regarding the breakthrough time of the column with and without activated carbon, time when the effluent concentration was 50% of the influent concentration, and the retardation factor.
 
 ### Suggestions/Comments
-What changes to the experimental method do you recommend for next year (or for a project)
 
-Make the experiments more uniform across the class.
+To make the analysis more simple, we would suggest considering making the experiments more uniform across the class. This would include requiring all the lab groups to perform the experiment both with and without activated carbon as well asking them to use the same flow rates. Also it would be better to find a trend if there were different masses assigned to different lab groups so that we could get a good range of mass values instead of a lot at low masses and a couple high ones.
 
+Also, we suggest a modification of the set-up diagram in the lab manual with regards to the 3 way valves to be more clear about which are the two ways the valve should alternate between.
+
+Keep thinking about a way to avoid getting air bubbles in the tubes, it was definitely something we struggled to deal with and was a time consuming thing to fix.
 
 
 ### Appendix
@@ -274,9 +281,14 @@ q_0 = [0]*9
 i=4
 for j in range(0,len(R)):  
   q_0[j] = (R[j]-1)*(C_0).to(u.g/u.L)*bed_porosity*(Column_V).to(u.L)/Mass_carbon[i]
+
+  print('When the mass of carbon is',Mass_carbon[i])
+  print('and the flow rate is',Flow_rate[i])
+  print('then the retardation factor is',R[j])
+  print('and q_0 is',q_0[j])
+  print('')
   i=i+1
-  print(For )
-q_0
+
 #Create a graph of q_0 and mass of activated carbon used for each column
 plt.plot(Mass_carbon[4:13], q_0, 'o')
 plt.xlabel('activated carbon (g)');

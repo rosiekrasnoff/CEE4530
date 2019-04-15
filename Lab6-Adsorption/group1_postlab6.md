@@ -22,7 +22,7 @@ Figure 2. Graph showing the dimensionless value of $ \frac {concentration}{stock
 Figure 3. Graph is simply Figure 2 with the range restricted in the x-axis for an easier comparison with the no activated carbon graph. It shows the dimensionless value of $ \frac {concentration}{stock \space concentration}$ as a function of the dimensionless value of $ \frac {time}{HRT}$ for the systems with activated carbon, the amount of AC is indicated in the legend, along with the flow rate.
 
 
-2. We found the time when the effluent concentration was 50% of the influent concentration and then plotted those time values as a function of the activated carbon used (Figure 4). Because the various experiments were not all conducted at the small flow rate, this representation of the data is not all that meaningful because there are other factors at play that are not illustrated. In a second graph, we restricted the data to that which had been collected when using a flow rate of around 0.5 mL/s (Figure 5). This graph has a much clearer trend: as the mass of activated carbon used increases, the time until the effluent concentration was 50% of the influent concentration also increases. Because of a lack of data at high levels of activated carbon, it is too difficult to ascertain the nature of that relationship, it could be linear, it also looks at if it has the potential to be exponential.
+2. We found the time when the effluent concentration was 50% of the influent concentration and then plotted those time values as a function of the activated carbon used (Figure 4). Because the various experiments were not all conducted at the small flow rate, this representation of the data is not all that meaningful because there are other factors at play that are not illustrated. In a second graph, we restricted the data to that which had been collected when using a flow rate of around 0.5 mL/s (Figure 5). This graph has a much clearer trend: as the mass of activated carbon used increases, the time until the effluent concentration was 50% of the influent concentration also increases. Because of a lack of data at high levels of activated carbon, it is too difficult to ascertain the nature of that relationship; it could be linear, it also looks at if it has the potential to be exponential.
 
 ![time to 50%, all](https://github.com/rosiekrasnoff/CEE4530/blob/master/Lab6-Adsorption/All_Flow_Rates.png?raw=true)
 
@@ -36,6 +36,18 @@ Figure 5. The graph shows the time to takes for the effluent concentration to re
 
 $$ R_{adsorption} = \frac{t_{mtz}}{t_{water}} $$
 The retardation factor is defined as the ratio of the time for the mass transfer zone to travel through the bed divided by the time for water to travel through the bed.
+
+(<Quantity(0.8958542094669213, 'dimensionless')>,
+ <Quantity(0.7838842564662991, 'dimensionless')>,
+ <Quantity(2.4860266669198916, 'dimensionless')>,
+ <Quantity(3.8745716348157133, 'dimensionless')>,
+ <Quantity(0.515118465418036, 'dimensionless')>,
+ <Quantity(3.9598749195499345, 'dimensionless')>,
+ <Quantity(17.088551724525924, 'dimensionless')>,
+ <Quantity(4.774993718377956, 'dimensionless')>,
+ <Quantity(662.318602580929, 'dimensionless')>)
+
+
 
 4. Calculate the q0 for each of the columns based on equation (97). Plot this as a function of the mass of activated carbon used.
 
@@ -65,7 +77,7 @@ import collections
 import os
 from pathlib import Path
 import pandas as pd
-
+import statistics
 
 def adsorption_data(C_column, dirpath):
     """This function extracts the data from folder containing tab delimited
@@ -202,7 +214,7 @@ for j in range(np.size(filenames)):
 plt.plot(Mass_carbon, desired_t, 'o')
 plt.xlabel('activated carbon (g)');
 plt.ylabel('time to reach 50% of influent concentration (s)')
-plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/All_Flow_Rates.png')
+#plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/All_Flow_Rates.png')
 plt.show()
 
 desired_t2=[0]*np.size(filenames)
@@ -219,39 +231,62 @@ for j in range(np.size(filenames)):
 plt.plot(Mass_carbon, desired_t2, 'o')
 plt.xlabel('activated carbon (g)');
 plt.ylabel('time to reach 50% of influent concentration (s)')
-plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/Same_Flow_Rates.png')
+#plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/Same_Flow_Rates.png')
 plt.show()
 
 
 #Number 3
 #Time for water to travel through the bed
-t_water = [0]*np.size(filenames)
-for j in range(np.size(filenames)):
-  for i in range(1,time_data[j].size):
-    if (metadata['carbon (g)'][i] == 0):
-      t_water[j] = max(time_data[j][i]).magnitude
-      t_water
+
+V1=desired_t[0]*u.second*Flow_rate[0]
+V2=desired_t[1]*u.second*Flow_rate[1]
+V3=desired_t[2]*u.second*Flow_rate[2]
+V4=desired_t[3]*u.second*Flow_rate[3]
+avg_V= (V1+V2+V3+V4)/4
 
 
-#Time for the mass transfer zone to travel through the bed
-for i in range(np.size(filenames)):
-  if (metadata['carbon (g)'][i] != 0):
-    t_mtz = max(time_data[i])
-    t_mtz
-
-#Calculate retardation factor
-R = t_mtz/t_water
+t_w_0_5mL = avg_V/Flow_rate[0]
+t_w_2_6mL = avg_V/Flow_rate[2]
 
 
+#Time for the mass transfer zone to travel through the bed is the time that it takes for the concentration at the effluent to reach 50% of the influent concentration
 
+t_mtz = desired_t*u.sec
+#Calculate retardation factor for the experiements that had AC in them (5-13)
+#R = t_mtz/t_water
+
+R5 = t_mtz[4]/t_w_0_5mL
+R6 = t_mtz[5]/t_w_0_5mL
+R7 = t_mtz[6]/t_w_0_5mL
+R8 = t_mtz[7]/t_w_0_5mL
+R9 = t_mtz[8]/t_w_0_5mL
+R10 = t_mtz[9]/t_w_2_6mL
+R11 = t_mtz[10]/t_w_0_5mL
+R12 = t_mtz[11]/t_w_2_6mL
+R13 = t_mtz[12]/t_w_2_6mL
+
+R = (R5, R6, R7, R8, R9, R10, R11, R12, R13)
+
+R
 #Number 4
-q_0 = (R-1)*(C_0*bed_porosity*Column_V)/M_adsorbent
-
+bed_porosity = 0.4
+q_0 = [0]*9
+i=4
+for j in range(0,len(R)):  
+  q_0[j] = (R[j]-1)*(C_0).to(u.g/u.L)*bed_porosity*(Column_V).to(u.L)/Mass_carbon[i]
+  i=i+1
+  print(For )
+q_0
 #Create a graph of q_0 and mass of activated carbon used for each column
-plt.plot(Mass_carbon, q_0, 'o')
+plt.plot(Mass_carbon[4:13], q_0, 'o')
 plt.xlabel('activated carbon (g)');
-plt.ylabel('mass of adsorbate per mass of adsorbent')
-#plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/q_0.png')
+plt.ylabel(r'$q_0$')
+plt.savefig('C:/Users/Jiwon Lee/github/rosie/Lab6-Adsorption/q_0.png')
 plt.show()
+
+
+Mass_carbon[4:13]
+
+
 
 ```

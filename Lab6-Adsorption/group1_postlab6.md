@@ -61,7 +61,7 @@ As the mass of activated carbon used increases at a constant flow rate, the reta
 
 
 ### Conclusion
-In this lab, we investigated the removal of dissolved species through adsorption to a solid phase by looking into the breakthrough characteristics of red dye #40 on activated carbon in a continuous-flow carbon contactor at a concentration of $50\frac{mg}{L}$. Using a set up with a carbon column connected to a peristaltic pump, red dye, and reverse osmosis water, we modeled the adsorption process used commonly in water treatment plants. From the experiment, we were able to collect data regarding the breakthrough time of the column with and without activated carbon, time when the effluent concentration was 50% of the influent concentration, and the retardation factor.
+In this lab, we investigated the removal of dissolved species through adsorption to a solid phase by looking into the breakthrough characteristics of red dye #40 on activated carbon in a continuous-flow carbon contactor at a concentration of $50\frac{mg}{L}$. Using a set up with a carbon column connected to a peristaltic pump, red dye, and reverse osmosis water, we modeled the adsorption process used commonly in water treatment plants. From the experiment, we were able to collect data regarding the breakthrough time of the column with and without activated carbon, time when the effluent concentration was 50% of the influent concentration, and the retardation factor. We were able to observe a couple significant trends from the experiment: as more activated carbon is used, both the time until the effluent concentration was 50% of the influent concentration as well as the $q_0$ increases.
 
 ### Suggestions/Comments
 

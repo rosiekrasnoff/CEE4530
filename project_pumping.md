@@ -17,4 +17,32 @@ FR=.064*u.mL/u.min
 
 (2*u.ml/FR).to(u.min)
 
+
+
+#calculate amount of Na2SO3 to add
+from aguaclara.core.units import unit_registry as u
+import aguaclara.research.environmental_processes_analysis as epa
+import aguaclara.core.utility as ut
+from scipy import optimize
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from scipy import stats
+
+
+desired_COD=500*u.mg/u.liter
+#convert from mg O2 to mg NA2SO3
+conv=7.897
+
+mass_NA2SO3=desired_COD*conv
+
+print('Mass to add to 100 mL:',mass_NA2SO3.to(u.g/u.mL)*100*u.mL)
+
+
+
+
+
+
+
+
 ```

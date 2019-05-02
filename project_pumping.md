@@ -30,7 +30,7 @@ import pandas as pd
 from scipy import stats
 
 
-desired_COD=500*u.mg/u.liter
+desired_COD=20*u.mg/u.liter
 #convert from mg O2 to mg NA2SO3
 conv=7.897
 

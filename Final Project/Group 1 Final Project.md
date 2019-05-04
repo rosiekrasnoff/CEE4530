@@ -60,6 +60,17 @@ plt.savefig('C:/Users/Jiwon Lee/github/rosie/Final Project/yarn_at_5rpm.png')
 plt.show()
 
 
+# Combine both plots
+plt.plot(Na2SO3_string_5rpm, DO_string_5rpm, 'og', label='string')
+plt.plot(Na2SO3_string_5rpm, intercept1 + slope1*Na2SO3_string_5rpm, 'g', label='string fit')
+plt.plot(Na2SO3_yarn_5rpm, DO_yarn_5rpm, 'ob', label='yarn')
+plt.plot(Na2SO3_yarn_5rpm, intercept2 + slope2*Na2SO3_yarn_5rpm, 'b', label='yarn fit')
+plt.xlabel(r'$Na_{2}SO_{3}$ (mg)');
+plt.ylabel(r'DO ($\frac{mg}{L}$)');
+plt.legend()
+plt.savefig('C:/Users/Jiwon Lee/github/rosie/Final Project/both_at_5rpm.png')
+plt.show()
+
 
 # Constant Na2SO3
 # Data for flat string
@@ -82,8 +93,8 @@ plt.show()
 # 3.3 point m
 
 # DO data for loopy yarn
-Flowrate_yarn = np.array([5,5,5,20,20,20,20,50,50,50,50])*u.revolution/u.min
-DO_yarn = np.array([3.3,5.8,6.7,5.6,5.01,4.9,4.5,0.5,1.2,1,0])*u.mg/u.L
+Flowrate_yarn = np.array([5,5,20,20,20,20,50,50,50,50])*u.revolution/u.min
+DO_yarn = np.array([5.8,6.7,5.6,5.01,4.9,4.5,0.5,1.2,1,0])*u.mg/u.L
 
 slope4, intercept4, r_value, p_value, std_err = stats.linregress(Flowrate_yarn, DO_yarn)
 slope4 = slope4/Flowrate_yarn.units
@@ -95,6 +106,20 @@ plt.ylabel(r'DO ($\frac{mg}{L}$)');
 plt.legend()
 plt.savefig('C:/Users/Jiwon Lee/github/rosie/Final Project/yarn_at_rpms.png')
 plt.show()
+
+# Combine both plots
+plt.plot(Flowrate_string, DO_string, 'og', label='string')
+plt.plot(Flowrate_string, intercept3 + slope3*Flowrate_string, 'g', label='string fit')
+plt.plot(Flowrate_yarn, DO_yarn, 'ob', label='yarn')
+plt.plot(Flowrate_yarn, intercept4 + slope4*Flowrate_yarn, 'b', label='yarn fit')
+plt.xlabel(r'Flow Rate $\frac{rev}{min}$');
+plt.ylabel(r'DO ($\frac{mg}{L}$)');
+plt.legend()
+plt.savefig('C:/Users/Jiwon Lee/github/rosie/Final Project/both_at_rpms.png')
+plt.show()
+
+
+
 
 
 

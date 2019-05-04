@@ -121,12 +121,7 @@ plt.show()
 
 
 
-
-
 ```
-
-
-
 
 
 ## Conclusion

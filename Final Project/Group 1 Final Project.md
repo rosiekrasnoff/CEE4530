@@ -32,13 +32,13 @@ from scipy import stats
 Na2SO3_string_5rpm = (np.array([0.016,0.016,0.159,0.159,0.159,0.397])*u.g).to(u.mg)
 DO_string_5rpm = np.array([7.2,6.7,2.1,5,4.1,0.3])*u.mg/u.L
 
-slope, intercept, r_value, p_value, std_err = stats.linregress(Na2SO3_string_5rpm, DO_string_5rpm)
-slope = slope/u.mg
+slope1, intercept1, r_value, p_value, std_err = stats.linregress(Na2SO3_string_5rpm, DO_string_5rpm)
+slope1 = slope1/u.mg
 
 plt.plot(Na2SO3_string_5rpm, DO_string_5rpm, 'o', label='measured DO using string at 5rpm')
-plt.plot(Na2SO3_string_5rpm, intercept + slope*Na2SO3_string_5rpm, 'r', label='fitted line')
+plt.plot(Na2SO3_string_5rpm, intercept1 + slope1*Na2SO3_string_5rpm, 'r', label='fitted line')
 plt.xlabel(r'$Na_{2}SO_{3}$ (mg)');
-plt.ylabel('DO');
+plt.ylabel(r'DO ($\frac{mg}{L}$)');
 plt.legend()
 plt.savefig('C:/Users/Jiwon Lee/github/rosie/Final Project/string_at_5rpm.png')
 plt.show()
@@ -48,13 +48,13 @@ plt.show()
 Na2SO3_yarn_5rpm = (np.array([0.016,0.016,0.016,0.158,0.158,0.158,0.397,0.397])*u.g).to(u.mg)
 DO_yarn_5rpm = np.array([5.7,7,7,3.3,5.8,6.7,.15,1])*u.mg/u.L
 
-slope, intercept, r_value, p_value, std_err = stats.linregress(Na2SO3_yarn_5rpm, DO_yarn_5rpm)
-slope = slope/u.mg
+slope2, intercept2, r_value, p_value, std_err = stats.linregress(Na2SO3_yarn_5rpm, DO_yarn_5rpm)
+slope2 = slope2/u.mg
 
 plt.plot(Na2SO3_yarn_5rpm, DO_yarn_5rpm, 'o', label='measured DO using yarn at 5 rpm')
-plt.plot(Na2SO3_yarn_5rpm, intercept + slope*Na2SO3_yarn_5rpm, 'r', label='fitted line')
+plt.plot(Na2SO3_yarn_5rpm, intercept2 + slope2*Na2SO3_yarn_5rpm, 'r', label='fitted line')
 plt.xlabel(r'$Na_{2}SO_{3}$ (mg)');
-plt.ylabel('DO');
+plt.ylabel(r'DO ($\frac{mg}{L}$)');
 plt.legend()
 plt.savefig('C:/Users/Jiwon Lee/github/rosie/Final Project/yarn_at_5rpm.png')
 plt.show()
@@ -67,13 +67,13 @@ Flowrate_string = np.array([5,5,5,20,20,20,50,50])*u.revolution/u.min
 DO_string = np.array([2.1,5,4.1,2.1,2,0.3,0.2,0.3])*u.mg/u.L
 
 
-slope, intercept, r_value, p_value, std_err = stats.linregress(Flowrate_string, DO_string)
-slope = slope/Flowrate_string.units
+slope3, intercept3, r_value, p_value, std_err = stats.linregress(Flowrate_string, DO_string)
+slope3 = slope3/Flowrate_string.units
 
 plt.plot(Flowrate_string, DO_string, 'o', label='measured DO using string at various flow rates')
-plt.plot(Flowrate_string, intercept + slope*Flowrate_string, 'r', label='fitted line')
+plt.plot(Flowrate_string, intercept3 + slope3*Flowrate_string, 'r', label='fitted line')
 plt.xlabel(r'Flow Rate $\frac{rev}{min}$');
-plt.ylabel('DO');
+plt.ylabel(r'DO ($\frac{mg}{L}$)');
 plt.legend()
 plt.savefig('C:/Users/Jiwon Lee/github/rosie/Final Project/string_at_rpms.png')
 plt.show()
@@ -85,13 +85,13 @@ plt.show()
 Flowrate_yarn = np.array([5,5,5,20,20,20,20,50,50,50,50])*u.revolution/u.min
 DO_yarn = np.array([3.3,5.8,6.7,5.6,5.01,4.9,4.5,0.5,1.2,1,0])*u.mg/u.L
 
-slope, intercept, r_value, p_value, std_err = stats.linregress(Flowrate_yarn, DO_yarn)
-slope = slope/Flowrate_yarn.units
+slope4, intercept4, r_value, p_value, std_err = stats.linregress(Flowrate_yarn, DO_yarn)
+slope4 = slope4/Flowrate_yarn.units
 
 plt.plot(Flowrate_yarn, DO_yarn, 'o', label='measured DO using yarn at various flow rates')
-plt.plot(Flowrate_yarn, intercept + slope*Flowrate_yarn, 'r', label='fitted line')
+plt.plot(Flowrate_yarn, intercept4 + slope4*Flowrate_yarn, 'r', label='fitted line')
 plt.xlabel(r'Flow Rate $\frac{rev}{min}$');
-plt.ylabel('DO');
+plt.ylabel(r'DO ($\frac{mg}{L}$)');
 plt.legend()
 plt.savefig('C:/Users/Jiwon Lee/github/rosie/Final Project/yarn_at_rpms.png')
 plt.show()

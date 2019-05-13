@@ -50,6 +50,7 @@ In order to look at the relationships between aeration and a couple other variab
 For the first set of trials, we tested the aeration potential for both the flat string and loopy yarn at three different levels of COD (from $Na_{2}SO_{3}$ added) while holding the flow rate constant at 1.75 $\frac{uL}{s}$. Because  wastewater typically has a BOD concentration of about 200 $\frac{mg}{L}$, we tested at an equivalent COD level as well as one lower and another higher. We were pleased to see that the effluent was essentially back to saturated levels after trickling down a solution with 20 $\frac{mg}{L}$ of COD (a very small amount). Additionally, the DO readings from testing 200 $\frac{mg}{L}$ showed that aeration was occurring to a level that there was oxygen present in the effluent. Lastly, testing with 503 $\frac{mg}{L}$ served as a sanity check as the effluent was basically deoxygenated after trickling down the string (Table 1). This makes sense since we were running the trial with very high levels of $Na_{2}SO_{3}$ and it would presumably take a lot of time/length of string before having significant levels of dissolved oxygen.
 
 Table 1. Constant flow rate of 1.75 (uL/s)
+
 |COD (from Na2SO3 in 100 mL water) | DO for flat string (mg/L) | DO for loopy yarn (mg/L)|
 | ----- | ------------ | ---------- |
 |**20 (mg/L)** (from 0.016 g  $Na_{2}SO_{3}$)| 7.2 6.7 | 5.7, 7.0, 7.0  |

@@ -9,6 +9,7 @@ Strings could provide an alternative "filter media" for a modified trickling fil
 The development of this project is still a work in progress, and key components of the design have yet to be verified. One aspect of the design that required experimentation to confirm proof of concept was the question of whether there would be enough oxygen available to the wastewater on the string to allow for proper treatment. This lab experiment was designed with the objective of determining whether aeration occurs as the water trickles down the string and how variables like the type of string and flow rate might impact the degree of aeration. The availability of oxygen is necessary in order for treatment to occur, so we needed to verify that aeration occurs for the current design of a string digester to be possible.
 
 
+
 ## Procedures
 #### Apparatus
 The experimental apparatus consists of a metal rod, microtubing, string (or yarn), small effluent collector, peristaltic pump, and deoxygenated solution (Fig. 1).

@@ -138,6 +138,9 @@ plt.show()
 # Constant Na2SO3
 # Data for flat string
 Flowrate_string = np.array([5,5,5,20,20,20,50,50])*u.revolution/u.min
+
+
+Flowrate_string = np.array([.105,.105,.105,,0.413,0.413,0.414,1.0315,1.0315)
 DO_string = np.array([2.1,5,4.1,2.1,2,0.3,0.2,0.3])*u.mg/u.L
 
 

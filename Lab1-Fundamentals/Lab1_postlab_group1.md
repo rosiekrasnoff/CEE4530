@@ -21,7 +21,8 @@ import pandas as pd
 from scipy import stats
 
 # Load data from file
-data_file_path = "https://raw.githubusercontent.com/rosiekrasnoff/CEE4530/master/Lab1_concentration_voltage_data.tsv"
+data_file_path = "/Users/Rosie/github/CEE4530/Lab1-Fundamentals/Lab1_concentration_voltage_data.tsv"
+
 
 df = pd.read_csv(data_file_path,delimiter='\t')
 print(df)
